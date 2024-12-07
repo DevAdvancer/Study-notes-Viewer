@@ -552,23 +552,20 @@ pip freeze > requirements.txt  # Save project dependencies
 - Explore type hints for better code documentation
 - Be cautious with memory when using comprehensions on large datasets
 
-# Unit 02 - Data handling With Python
-
-
-# Pandas Notes: Detailed Explanation and Examples
+# Unit 02 - Data handling With Pandas
 
 ## Table of Contents
-1. [Introduction to Pandas](#introduction-to-pandas)
-2. [DataFrames](#dataframes)
-3. [Series](#series)
-4. [Loading and Saving Data](#loading-and-saving-data)
-5. [Data Alignment](#data-alignment)
-6. [Handling Missing Data](#handling-missing-data)
-7. [Reshaping and Pivoting](#reshaping-and-pivoting)
-8. [Slicing, Indexing, and Subsetting](#slicing-indexing-and-subsetting)
-9. [Insertion and Deletion](#insertion-and-deletion)
-10. [Merge and Join](#merge-and-join)
-11. [Working with Time Data](#working-with-time-data)
+1. Introduction to Pandas
+2. DataFrames
+3. Series
+4. Loading and Saving Data
+5. Data Alignment
+6. Handling Missing Data
+7. Reshaping and Pivoting
+8. Slicing, Indexing, and Subsetting
+9. Insertion and Deletion
+10. Merge and Join
+11. Working with Time Data
 
 ---
 
