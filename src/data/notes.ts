@@ -552,6 +552,220 @@ pip freeze > requirements.txt  # Save project dependencies
 - Explore type hints for better code documentation
 - Be cautious with memory when using comprehensions on large datasets
 
+# Unit 02 - Data handling With Python
+
+
+# Pandas Notes: Detailed Explanation and Examples
+
+## Table of Contents
+1. [Introduction to Pandas](#introduction-to-pandas)
+2. [DataFrames](#dataframes)
+3. [Series](#series)
+4. [Loading and Saving Data](#loading-and-saving-data)
+5. [Data Alignment](#data-alignment)
+6. [Handling Missing Data](#handling-missing-data)
+7. [Reshaping and Pivoting](#reshaping-and-pivoting)
+8. [Slicing, Indexing, and Subsetting](#slicing-indexing-and-subsetting)
+9. [Insertion and Deletion](#insertion-and-deletion)
+10. [Merge and Join](#merge-and-join)
+11. [Working with Time Data](#working-with-time-data)
+
+---
+
+## 1. Introduction to Pandas
+
+Pandas is a powerful Python library for data manipulation and analysis. It provides two primary data structures:
+- **Series**: One-dimensional labeled array.
+- **DataFrame**: Two-dimensional labeled array.
+
+### Importing Pandas
+\`\`\`python
+import pandas as pd
+\`\`\`
+
+---
+
+## 2. DataFrames
+
+A **DataFrame** is a two-dimensional, size-mutable, and heterogeneous data structure.
+
+### Creating a DataFrame
+\`\`\`python
+data = {'Name': ['Alice', 'Bob', 'Charlie'], 'Age': [25, 30, 35]}
+df = pd.DataFrame(data)
+print(df)
+\`\`\`
+
+### Accessing Data in a DataFrame
+- **Columns**: \`df['column_name']\`
+- **Rows**: \`df.loc[row_label]\` or \`df.iloc[row_index]\`
+
+### Adding/Removing Columns
+\`\`\`python
+df['Salary'] = [50000, 60000, 70000]  # Add column
+df.drop('Age', axis=1, inplace=True)  # Remove column
+\`\`\`
+
+---
+
+## 3. Series
+
+A **Series** is a one-dimensional array with labels.
+
+### Creating a Series
+\`\`\`python
+s = pd.Series([1, 2, 3], index=['a', 'b', 'c'])
+print(s)
+\`\`\`
+
+### Accessing Data in a Series
+\`\`\`python
+print(s['a'])  # Access by label
+print(s[0])    # Access by position
+\`\`\`
+
+---
+
+## 4. Loading and Saving Data
+
+### Loading Data
+\`\`\`python
+df = pd.read_csv('data.csv')  # CSV file
+df = pd.read_excel('data.xlsx')  # Excel file
+df = pd.read_json('data.json')  # JSON file
+\`\`\`
+
+### Saving Data
+\`\`\`python
+df.to_csv('data.csv', index=False)
+df.to_excel('data.xlsx', index=False)
+df.to_json('data.json')
+\`\`\`
+
+---
+
+## 5. Data Alignment
+
+Alignment ensures operations between Series or DataFrames align based on their indices.
+
+### Example
+\`\`\`python
+s1 = pd.Series([1, 2], index=['a', 'b'])
+s2 = pd.Series([3, 4], index=['b', 'c'])
+result = s1 + s2  # Aligns on index
+print(result)
+\`\`\`
+
+---
+
+## 6. Handling Missing Data
+
+### Identifying Missing Data
+\`\`\`python
+df.isnull()  # Returns a DataFrame of True/False
+df.notnull()
+\`\`\`
+
+### Filling Missing Data
+\`\`\`python
+df.fillna(value=0, inplace=True)
+\`\`\`
+
+### Dropping Missing Data
+\`\`\`python
+df.dropna(axis=0, inplace=True)  # Drop rows with NaN
+\`\`\`
+
+---
+
+## 7. Reshaping and Pivoting
+
+### Reshaping with \`melt\`
+\`\`\`python
+pd.melt(df, id_vars=['Name'], value_vars=['Age', 'Salary'])
+\`\`\`
+
+### Pivoting
+\`\`\`python
+df.pivot(index='Name', columns='Variable', values='Value')
+\`\`\`
+
+---
+
+## 8. Slicing, Indexing, and Subsetting
+
+### Slicing
+\`\`\`python
+subset = df[1:3]  # Rows 1 to 2
+\`\`\`
+
+### Indexing
+\`\`\`python
+df.set_index('Name', inplace=True)
+print(df.loc['Alice'])  # Access row by index
+\`\`\`
+
+### Subsetting
+\`\`\`python
+df[['Age', 'Salary']]  # Select multiple columns
+\`\`\`
+
+---
+
+## 9. Insertion and Deletion
+
+### Insertion
+\`\`\`python
+df.insert(2, 'Department', ['HR', 'IT', 'Finance'])
+\`\`\`
+
+### Deletion
+\`\`\`python
+df.drop('Department', axis=1, inplace=True)
+\`\`\`
+
+---
+
+## 10. Merge and Join
+
+### Merge
+\`\`\`python
+df1 = pd.DataFrame({'ID': [1, 2], 'Name': ['Alice', 'Bob']})
+df2 = pd.DataFrame({'ID': [1, 2], 'Salary': [50000, 60000]})
+merged = pd.merge(df1, df2, on='ID')
+\`\`\`
+
+### Join
+\`\`\`python
+df1.set_index('ID', inplace=True)
+df2.set_index('ID', inplace=True)
+joined = df1.join(df2)
+\`\`\`
+
+---
+
+## 11. Working with Time Data
+
+### Date Range
+\`\`\`python
+dates = pd.date_range(start='2023-01-01', periods=5, freq='D')
+\`\`\`
+
+### Converting to Datetime
+\`\`\`python
+df['date'] = pd.to_datetime(df['date'])
+\`\`\`
+
+### Resampling
+\`\`\`python
+df.resample('M').sum()  # Monthly aggregation
+\`\`\`
+
+---
+
+**End of Notes**
+
+
 ##### Contributor Name - Abhirup Kumar
 `,
 progress: 'in-progress'
