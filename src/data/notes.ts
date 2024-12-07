@@ -5,7 +5,7 @@ export const notes: Note[] = [
     id: '1',
     subject: 'Intro to Python',
     subjectCode: 'CSE11118',
-    content: `# Introducion UNIT - 01
+    content: `# Introducion to Python UNIT - 01
 
 ## 1 Introduction
 Python is a high-level, interpreted programming language known for its simplicity and readability. It has a large user community and a wide range of libraries that make it versatile and powerful. This cheatsheet provides a quick reference for Python programming concepts.
@@ -329,8 +329,232 @@ finally:
 raise ExceptionType("Error message")
 \`\`\`
 
-##### Contributor Name - Abhirup Kumar`,
-    progress: 'in-progress'
+## Data Structures and Comprehensions
+
+### 1. Lists
+- Mutable, ordered collection of items
+- Can contain mixed data types
+- Created using square brackets \`[]\`
+
+\`\`\`python
+# List creation and operations
+my_list = [1, 2, 3, 'hello']
+my_list.append(4)  # Add element
+my_list.insert(1, 'inserted')  # Insert at specific index
+my_list.remove('hello')  # Remove specific element
+
+# List methods
+print(len(my_list))  # Length of list
+my_list.sort()  # Sort the list
+my_list.reverse()  # Reverse the list
+\`\`\`
+
+### 2. List Comprehensions
+- Concise way to create lists
+- Combines mapping and filtering in a single line
+- More memory-efficient and often more readable than traditional loops
+
+\`\`\`python
+# Basic list comprehension
+squares = [x**2 for x in range(10)]  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# List comprehension with conditional
+even_squares = [x**2 for x in range(10) if x % 2 == 0]  # [0, 4, 16, 36, 64]
+
+# Nested list comprehension
+matrix = [[j for j in range(3)] for i in range(3)]
+# [[0, 1, 2], [0, 1, 2], [0, 1, 2]]
+
+# Complex examples
+names = ['Alice', 'Bob', 'Charlie']
+name_lengths = [len(name) for name in names]  # [5, 3, 7]
+uppercase_words = [word.upper() for word in names]
+# ['ALICE', 'BOB', 'CHARLIE']
+\`\`\`
+
+### 3. Tuples
+- Immutable, ordered collection
+- Created using parentheses \`()\`
+- Faster than lists for iteration
+- Useful for returning multiple values from functions
+
+\`\`\`python
+# Tuple creation and unpacking
+my_tuple = (1, 2, 3)
+x, y, z = my_tuple  # Unpacking
+coordinates = (10, 20)
+x, y = coordinates  # Multiple assignment
+
+# Named tuples for more structured data
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(1, 2)
+print(p.x, p.y)  # 1, 2
+\`\`\`
+
+### 4. Dictionaries
+- Key-value pairs
+- Mutable and unordered
+- Created using curly braces \`{}\`
+
+\`\`\`python
+# Dictionary operations
+my_dict = {'name': 'John', 'age': 30}
+my_dict['city'] = 'New York'  # Add new key-value pair
+value = my_dict.get('name', 'Not found')  # Safe retrieval
+
+# Dictionary methods
+print(my_dict.keys())  # Dict keys
+print(my_dict.values())  # Dict values
+my_dict.update({'country': 'USA'})  # Update multiple key-values
+\`\`\`
+
+### 5. Dictionary Comprehensions
+\`\`\`python
+# Dictionary comprehension
+squares_dict = {x: x**2 for x in range(6)}
+# {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Conditional dictionary comprehension
+even_squares = {x: x**2 for x in range(10) if x % 2 == 0}
+# {0: 0, 2: 4, 4: 16, 6: 36, 8: 64}
+
+# Transforming existing dictionary
+original_dict = {'a': 1, 'b': 2, 'c': 3}
+doubled_dict = {k: v*2 for k, v in original_dict.items()}
+# {'a': 2, 'b': 4, 'c': 6}
+\`\`\`
+
+### 6. Sets
+- Unordered collection of unique elements
+- Created using \`set()\`
+- Useful for removing duplicates and set operations
+
+\`\`\`python
+# Set operations
+my_set = {1, 2, 3}
+another_set = {3, 4, 5}
+union_set = my_set.union(another_set)
+intersection_set = my_set.intersection(another_set)
+
+# Set methods
+my_set.add(4)  # Add element
+my_set.remove(3)  # Remove specific element
+\`\`\`
+
+### 7. Set Comprehensions
+\`\`\`python
+# Set comprehension
+unique_squares = {x**2 for x in range(10)}
+# {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
+
+# Set comprehension with filtering
+even_squares = {x**2 for x in range(10) if x % 2 == 0}
+# {0, 4, 16, 36, 64}
+\`\`\`
+
+## I/O Operations
+
+### 1. File Reading
+\`\`\`python
+# Reading files
+with open('file.txt', 'r') as file:
+    content = file.read()  # Read entire file
+    lines = file.readlines()  # Read lines into a list
+
+# Reading line by line
+with open('file.txt', 'r') as file:
+    for line in file:
+        print(line.strip())  # Process each line
+\`\`\`
+
+### 2. File Writing
+\`\`\`python
+# Writing to files
+with open('output.txt', 'w') as file:
+    file.write('Hello, World!')
+    file.writelines(['Line 1\n', 'Line 2\n'])
+
+# Appending to files
+with open('log.txt', 'a') as file:
+    file.write('New log entry\n')
+\`\`\`
+
+### 3. Working with CSV
+\`\`\`python
+import csv
+
+# Reading CSV
+with open('data.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        print(row)
+
+# Writing CSV
+with open('output.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['Name', 'Age'])
+    writer.writerow(['John', 30])
+\`\`\`
+
+## Packages and Modules
+
+### 1. Importing Modules
+\`\`\`python
+# Different import styles
+import math  # Import entire module
+from math import sqrt  # Import specific function
+import numpy as np  # Common alias for NumPy
+
+# Conditional imports
+try:
+    import pandas as pd
+except ImportError:
+    print("Pandas not installed")
+\`\`\`
+
+### 2. Creating Your Own Package
+\`\`\`
+my_package/
+│
+├── __init__.py
+├── module1.py
+└── module2.py
+\`\`\`
+
+### 3. Popular Python Packages
+- NumPy: Numerical computing
+- Pandas: Data manipulation
+- Matplotlib: Data visualization
+- Requests: HTTP library
+- scikit-learn: Machine learning
+
+### 4. Package Management
+\`\`\`bash
+# Using pip (Python package installer)
+pip install package_name
+pip list  # List installed packages
+pip uninstall package_name
+pip freeze > requirements.txt  # Save project dependencies
+\`\`\`
+
+## Best Practices
+1. Use appropriate data structures for your use case
+2. Always use context managers (\`with\`) for file operations
+3. Import only what you need
+4. Use virtual environments for project dependencies
+5. Keep packages updated
+6. Prefer list/dict/set comprehensions over traditional loops when possible
+
+## Advanced Tips
+- Use \`collections\` module for advanced data structures
+- Leverage \`pathlib\` for cross-platform file path handling
+- Explore type hints for better code documentation
+- Be cautious with memory when using comprehensions on large datasets
+
+##### Contributor Name - Abhirup Kumar
+`,
+progress: 'in-progress'
   },
   {
     id: '2',
