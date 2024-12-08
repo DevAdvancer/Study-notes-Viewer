@@ -70,7 +70,20 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
           <div className={`overflow-auto ${isFullscreen ? 'h-[calc(100vh-97px)]' : 'max-h-[calc(90vh-97px)]'}`}>
             <div className="p-6">
               <div className="prose prose-invert max-w-none">
-                <ReactMarkdown>{note.content}</ReactMarkdown>
+                <ReactMarkdown
+                  components={{
+                    img: ({ src, alt }) => {
+                      if (!src) return null;
+                      // Remove ./ and join with the base path
+                      const imagePath = src.startsWith('./')
+                        ? '/src/data/markdown/' + src.slice(2)
+                        : src;
+                      return <img src={imagePath} alt={alt || ''} className="max-w-full" />;
+                    },
+                  }}
+                >
+                  {note.content}
+                </ReactMarkdown>
               </div>
             </div>
           </div>

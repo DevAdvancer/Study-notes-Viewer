@@ -15,6 +15,6 @@ export const notes: Note[] = [
       subject: 'Full Stack SD',
       subjectCode: 'CSE11123',
       content: fullStack,
-      progress: 'not-started'
+      progress: 'in-progress'
   }
 ];
