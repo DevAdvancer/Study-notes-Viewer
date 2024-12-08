@@ -26,8 +26,8 @@
 
 ## Tags and Element in HTML
 
-`<p>` - This is a paragraph tag <br>
-`<h1>,<h2>` - This are the heading tags they can be the rage from 1-6.<br>
+`<p>` - This is a paragraph tag <br></br>
+`<h1>,<h2>` - This are the heading tags they can be the rage from 1-6.<br></br>
 
 There are many more tags that you can get in mdn web docs. [MDN DOCS](https://developer.mozilla.org/en-US/docs/Web/HTML})
 
@@ -67,7 +67,7 @@ Attributes are used to add more information to an element. For example, the `hre
 <html lang="en">
 ```
 
-This line says that the language of the html is in English. And the `lang` here is the attributs. <br>
+This line says that the language of the html is in English. And the `lang` here is the attributs. <br></br>
 
 For more information about attributs you can check the [MDN DOCS](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept)
 
@@ -87,14 +87,14 @@ This is used to add image to our page.
 <img src="/images/image.png" alt="Random Image">
 ```
 ## Some Extra Tags
-`<br>` - This is used to add a line break in our page. <br>
-`<b>` - This is used to add bold text in our page. <br>
-`<i>` - This is used to add italic text in our page. <br>
-`<u>` - This is used to add underline text in our page. <br>
-`<s>` - This is used to add strikethrough text in our page. <br>
-`<sup>` - This is used to add superscript text in our page. <br>
-`<sub>` - This is used to add subscript text in our page. <br>
-`<hr>` - This is used to add a horizontal line in our page. <br>
+`<br>` - This is used to add a line break in our page. <br></br>
+`<b>` - This is used to add bold text in our page. <br></br>
+`<i>` - This is used to add italic text in our page. <br></br>
+`<u>` - This is used to add underline text in our page. <br></br>
+`<s>` - This is used to add strikethrough text in our page. <br></br>
+`<sup>` - This is used to add superscript text in our page. <br></br>
+`<sub>` - This is used to add subscript text in our page. <br></br>
+`<hr>` - This is used to add a horizontal line in our page. <br></br>
 
 > Notes- For more Information about HTML you can check the [MDN DOCS](https://developer.mozilla.org/en-US/docs)
 
@@ -115,7 +115,7 @@ This is used to add image to our page.
 ## Inline vs Block Elements
 
 ### Block
-Block Elements - This Takes up the full Width available(whole Block) <br>
+Block Elements - This Takes up the full Width available(whole Block) <br></br>
 Start from New Line
 
 Example - `h1`, `p`, `div`
@@ -123,7 +123,7 @@ Example - `h1`, `p`, `div`
 ![Block](/images/BlockImage.png)
 
 ### Inline
-Inline Elements - This takes up only the necessary width <br>
+Inline Elements - This takes up only the necessary width <br></br>
 Don't Start From New Line
 
 Example - `span`, `a`, `img`
@@ -171,7 +171,7 @@ Semantic Markup
 ├── Non-semantic
 ```
 Example:
-Semantic - `header`, `nav`, `main` <br>
+Semantic - `header`, `nav`, `main` <br></br>
 Non-Semantic - `div`, `span`
 
 ## HTML entities
@@ -201,8 +201,8 @@ Tables are used to represent real life table data.
 ```
 `<caption>` - This is used to give Caption is a table. Like - Food Menu according to the above table
 
-`<tr>` - This is for the table row. This is used to define how many rows are present in the table. <br>
-`<td>` - This is for the table data. This is used to enter the table data. <br>
+`<tr>` - This is for the table row. This is used to define how many rows are present in the table. <br></br>
+`<td>` - This is for the table data. This is used to enter the table data. <br></br>
 `<th>` - This is the table header. This is used to define the table header.
 
 Example of Food Menu
@@ -242,9 +242,9 @@ Output:
 
 ## Sematics in Tables
 
-`<thead>` - to wrap table header <br>
-`<tbody>` - to wrap table body <br>
-`<tfoot>` - to wrap table footer <br>
+`<thead>` - to wrap table header <br></br>
+`<tbody>` - to wrap table body <br></br>
+`<tfoot>` - to wrap table footer <br></br>
 
 ```html
 <!DOCTYPE html>
@@ -434,10 +434,10 @@ Some Elements are
   <form action="#">
     <label for="username">Username: </label>
     <input type="text" id="username" placeholder="Enter the username">
-    <br>
+    <br></br>
     <label for="age">Age: </label>
     <input type="number" id="age" placeholder="age">
-    <br>
+    <br></br>
     <label for="password">Password: </label>
     <input type="password" id="password" placeholder="Enter the password">
   </form>
@@ -456,7 +456,7 @@ output:
 ```
 >Default behavior of button is submit inside a form
 
-There are 3 types of submit: <br>
+There are 3 types of submit: <br></br>
 1. `<button type="submit"> submit </button>`
 2. `<button type="button"> submit </button>`
 3. `<button type="reset"> submit </button>`
@@ -472,13 +472,13 @@ There are 3 types of submit: <br>
   <form action="#">
     <label for="username">Username: </label>
     <input type="text" id="username" placeholder="Enter the username">
-    <br>
+    <br></br>
     <label for="age">Age: </label>
     <input type="number" id="age" placeholder="age">
-    <br>
+    <br></br>
     <label for="password">Password: </label>
     <input type="password" id="password" placeholder="Enter the password">
-    <br>
+    <br></br>
     <button type="submit">Submit</button>
     <button type="reset">Reset</button>
     <button type="button">Button</button>
@@ -489,7 +489,7 @@ There are 3 types of submit: <br>
 
 ### Name attribute
 
-Name of the form control. Submitted with the form as part of a name/value pair <br>
+Name of the form control. Submitted with the form as part of a name/value pair <br></br>
 Syntax
 `<input type="text" id="name" placeholder="Enter Name" name="name">`
 
@@ -504,10 +504,10 @@ Syntax
   <form action="/server">
     <label for="username">Username</label>
     <input type="text" id="username" name="name" placeholder="Enter Username">
-    <br>
+    <br></br>
     <label for="password">Password</label>
     <input type="password" id="password" name="password" placeholder="Enter password">
-    <br>
+    <br></br>
     <button type="submit">Submit</button>
   </form>
 </body>
@@ -553,19 +553,19 @@ Output:
   <form action="#">
     <label for="name">Name: </label>
     <input type="text" id="name">
-    <br>
+    <br></br>
     <label for="sex">Sex: </label>
     <input type="radio" name="sex" id="male" value="male">
     <label for="male">Male</label>
     <input type="radio" name="sex" id="female" value="female">
     <label for="female">Female</label>
-    <br>
-    <label for="message">Message</label><br>
+    <br></br>
+    <label for="message">Message</label><br></br>
     <textarea name="message" id="message"></textarea>
-    <br>
+    <br></br>
     <input type="checkbox" id="subscribe" name="subscribe">
     <label for="subscribe">Subscribe?</label>
-    <br>
+    <br></br>
     <button>Submit</button>
   </form>
 </body>
