@@ -3,7 +3,7 @@
 # HTML Level 1
 ## HTML5 vs HTML4
 
-![html4vshtml5](./Picture/html4vshtml5.png)
+![html4vshtml5](/images/html4vshtml5.png)
 
 ## Boilerplate Code
 
@@ -57,7 +57,7 @@ There are many more tags that you can get in mdn web docs. [MDN DOCS](https://de
 Here the `ul` is the Unordered List. And `ol` is the orderd list. The `li` is the list item.
 
 Output :
-![Output Example](./Picture/ListOutput.png)
+![Output Example](/images/ListOutput.png)
 
 ## Attributs in HTML
 
@@ -84,7 +84,7 @@ This can be used for to navigate through page and websites :)
 ## Image Element
 This is used to add image to our page.
 ```html
-<img src="image.png" alt="Random Image">
+<img src="/images/image.png" alt="Random Image">
 ```
 ## Some Extra Tags
 `<br>` - This is used to add a line break in our page.
@@ -120,7 +120,7 @@ Start from New Line
 
 Example - `h1`, `p`, `div`
 
-![Block](./Picture/BlockImage.png)
+![Block](/images/BlockImage.png)
 
 ### Inline
 Inline Elements - This takes up only the necessary width <br>
@@ -128,7 +128,7 @@ Don't Start From New Line
 
 Example - `span`, `a`, `img`
 
-![Inline](./Picture/InlineImage.png)
+![Inline](/images/InlineImage.png)
 
 ## Div Element
 
@@ -151,7 +151,7 @@ Div is a `container` used to hold other HTML elements. It is a `block`-level ele
 ```
 output
 
-![DivImage](./Picture/divImage.png)
+![DivImage](/images/divImage.png)
 
 ## Span Element
 
@@ -184,14 +184,14 @@ HTML entities are used to represent special characters in HTML.
 - Can also use in place of charecters that are difficult to type with a standerd keyboard.
 - Browser interprets them & renders correct character.
 
-![Entities](./Picture/EntitiesHTML.png)
+![Entities](/images/EntitiesHTML.png)
 
 # HTML Level - 03 (tables/forms)
 
 ## Tables
 Tables are used to represent real life table data.
 
-![Table Example](./Picture/tableExample.png)
+![Table Example](/images/tableExample.png)
 
 `<Table>` - This is used to create a table but it will not show anything as nothing is present.
 ```html
@@ -238,7 +238,7 @@ Example of Food Menu
 
 Output:
 
-![output](./Picture/fooditem.png)
+![output](/images/fooditem.png)
 
 ## Sematics in Tables
 
@@ -290,7 +290,7 @@ This is used to create cells Which spans over multiple rows or columns.
 `<th colspan="2">` - This attribute is used to merge two or more columns into a single column.
 `<td rowspan="2">` - This attribute is used to merge two or more rows into a single row.
 
-![foodmenu2](./Picture/Foodmenu2.png)
+![foodmenu2](/images/Foodmenu2.png)
 
 ```html
 <!DOCTYPE html>
@@ -335,11 +335,11 @@ This is used to create cells Which spans over multiple rows or columns.
 
 Output:
 
-![FoodMenu2](./Picture/Foodmenu2.png)
+![FoodMenu2](/images/Foodmenu2.png)
 
 ### Pratice Problem
 Recreate the following table using rowspan and colspan
-![praticeproblem](./Picture/TablePraticeProblem.png)
+![praticeproblem](/images/TablePraticeProblem.png)
 ```html
 <!DOCTYPE html>
 <html>
@@ -380,7 +380,7 @@ Recreate the following table using rowspan and colspan
 ```
 Output:
 
-![output](./Picture/OutputPraticeProblem.png)
+![output](/images/OutputPraticeProblem.png)
 
 ## Forms in HTML
 
@@ -404,7 +404,7 @@ Example:
 
 Some Elements are
 
-![formelement](./Picture/FormElements.png)
+![formelement](/images/FormElements.png)
 
 ### Place holder
 
@@ -447,7 +447,7 @@ Some Elements are
 
 output:
 
-![implementation](./Picture/formlabelplaceholder.png)
+![implementation](/images/formlabelplaceholder.png)
 
 ### Button
 
@@ -515,7 +515,7 @@ Syntax
 ```
 
 Ouput:
-![nameattri](./Picture/nameattribute.png)
+![nameattri](/images/nameattribute.png)
 
 ## Implementing the name tag and the action tag
 
@@ -536,10 +536,10 @@ Ouput:
 ```
 
 Output:
-![youtubesearch](./Picture/youtubesearch.png)
+![youtubesearch](/images/youtubesearch.png)
 
 ## Example Pratice
-![SampleProblem](./Picture/SampleFormPratice.png)
+![SampleProblem](/images/SampleFormPratice.png)
 
 ### Solution:
 
@@ -570,5 +570,3 @@ Output:
   </form>
 </body>
 </html>
-```
-

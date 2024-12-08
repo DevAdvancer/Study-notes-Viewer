@@ -3,5 +3,14 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  assetsInclude: ['**/*.md']
+  assetsInclude: ['**/*.md'],
+  build: {
+    assetsDir: 'assets',
+    rollupOptions: {
+      input: {
+        main: '/index.html'
+      }
+    }
+  },
+  publicDir: 'public'
 });
