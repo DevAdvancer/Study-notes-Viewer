@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Note } from '../types';
 import { X, Maximize2, Minimize2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 interface NoteViewerProps {
   note: Note;
@@ -71,6 +72,7 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
             <div className="p-6">
               <div className="prose prose-invert max-w-none">
                 <ReactMarkdown
+                  rehypePlugins={[rehypeRaw]}
                   components={{
                     img: ({ src, alt }) => {
                       if (!src) return null;
@@ -84,6 +86,7 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
                       // Use public directory for images
                       return <img src={imagePath} alt={alt || ''} className="max-w-full" loading="lazy" />;
                     },
+                    br: () => <br className="my-2" />,
                   }}
                 >
                   {note.content}
