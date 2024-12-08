@@ -74,11 +74,15 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
                   components={{
                     img: ({ src, alt }) => {
                       if (!src) return null;
-                      // Remove ./ and join with the base path
-                      const imagePath = src.startsWith('./')
-                        ? '/src/data/markdown/' + src.slice(2)
-                        : src;
-                      return <img src={imagePath} alt={alt || ''} className="max-w-full" />;
+                      // Handle both absolute and relative paths
+                      const imagePath = src.startsWith('/')
+                        ? src // Keep absolute paths as is
+                        : src.startsWith('./')
+                          ? src.slice(2) // Remove ./ from relative paths
+                          : src;
+                      
+                      // Use public directory for images
+                      return <img src={imagePath} alt={alt || ''} className="max-w-full" loading="lazy" />;
                     },
                   }}
                 >
