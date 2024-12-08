@@ -750,10 +750,140 @@ df['date'] = pd.to_datetime(df['date'])
 ```python
 df.resample('M').sum()  # Monthly aggregation
 ```
-
 ---
+## Some Important Questions and Answers
 
-**End of Notes**
+## 1. DataFrames and Series
+### Q1: What is the difference between a Pandas Series and a DataFrame?
+**Answer:**
+- A **Series** is a one-dimensional labeled array capable of holding any data type (e.g., integers, strings, floating-point numbers).
+- A **DataFrame** is a two-dimensional labeled data structure with columns of potentially different data types. It can be thought of as a dictionary of Series objects.
 
+### Q2: How can you create a DataFrame in Pandas?
+**Answer:**
+You can create a DataFrame using:
+- A dictionary of lists/arrays
+- A list of dictionaries
+- A NumPy array
+- Reading data from external files (e.g., CSV, Excel)
+
+Example:
+```python
+import pandas as pd
+data = {'Name': ['Alice', 'Bob'], 'Age': [25, 30]}
+df = pd.DataFrame(data)
+```
+
+## 2. Loading and Saving Data
+### Q3: How do you read a CSV file into a Pandas DataFrame?
+**Answer:**
+Use the `pd.read_csv()` function.
+Example:
+```python
+df = pd.read_csv('filename.csv')
+```
+
+### Q4: How can you save a DataFrame to an Excel file?
+**Answer:**
+Use the `to_excel()` function.
+Example:
+```python
+df.to_excel('filename.xlsx', index=False)
+```
+
+## 3. Data Alignment and Missing Data
+### Q5: How does data alignment work in Pandas?
+**Answer:**
+When performing operations, Pandas automatically aligns data on their labels, ensuring calculations are accurate even if the data isn't aligned manually.
+
+### Q6: What methods can be used to handle missing data?
+**Answer:**
+- `fillna()` to replace missing values.
+- `dropna()` to remove rows/columns with missing values.
+- `isna()` to detect missing values.
+
+## 4. Reshaping and Pivoting
+### Q7: What is the purpose of the `pivot_table()` function?
+**Answer:**
+The `pivot_table()` function is used to summarize data, similar to Excel's pivot table feature. It allows grouping and aggregation.
+Example:
+```python
+df.pivot_table(values='Sales', index='Region', columns='Product', aggfunc='sum')
+```
+
+### Q8: How can you reshape data using `melt()`?
+**Answer:**
+The `melt()` function is used to unpivot a DataFrame from wide to long format.
+Example:
+```python
+pd.melt(df, id_vars=['Category'], value_vars=['2019', '2020'])
+```
+
+## 5. Slicing, Indexing, and Subsetting
+### Q9: What is the difference between `loc` and `iloc` in Pandas?
+**Answer:**
+- `loc` is label-based indexing.
+- `iloc` is integer-based indexing.
+Example:
+```python
+df.loc[0:2, 'Column1']  # Using labels
+df.iloc[0:2, 1]         # Using integers
+```
+
+### Q10: How do you subset rows based on a condition?
+**Answer:**
+You can use boolean indexing.
+Example:
+```python
+df[df['Age'] > 25]
+```
+
+## 6. Insertion and Deletion
+### Q11: How do you add a new column to a DataFrame?
+**Answer:**
+Assign a value to a new column name.
+Example:
+```python
+df['NewColumn'] = [1, 2, 3]
+```
+
+### Q12: How can you delete a row or column from a DataFrame?
+**Answer:**
+Use the `drop()` method.
+Example:
+```python
+df.drop('ColumnName', axis=1, inplace=True)  # Deleting a column
+df.drop(0, axis=0, inplace=True)            # Deleting a row
+```
+
+## 7. Merge and Join
+### Q13: What is the difference between `merge()` and `join()` in Pandas?
+**Answer:**
+- `merge()` is used to combine DataFrames based on common columns or indices.
+- `join()` is primarily used for index-based joining.
+
+### Q14: How do you perform an inner join using `merge()`?
+**Answer:**
+```python
+result = pd.merge(df1, df2, on='Key', how='inner')
+```
+
+## 8. Time Series
+### Q15: How can you convert a column to a datetime object?
+**Answer:**
+Use the `pd.to_datetime()` function.
+Example:
+```python
+df['Date'] = pd.to_datetime(df['Date'])
+```
+
+### Q16: What is the purpose of resampling in time series data?
+**Answer:**
+Resampling is used to change the frequency of time series data, such as converting daily data to monthly data.
+Example:
+```python
+df.resample('M').sum()
+```
+---
 
 ##### Contributor Name - Abhirup Kumar
