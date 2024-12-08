@@ -87,14 +87,14 @@ This is used to add image to our page.
 <img src="/images/image.png" alt="Random Image">
 ```
 ## Some Extra Tags
-`<br>` - This is used to add a line break in our page.
-`<b>` - This is used to add bold text in our page.
-`<i>` - This is used to add italic text in our page.
-`<u>` - This is used to add underline text in our page.
-`<s>` - This is used to add strikethrough text in our page.
-`<sup>` - This is used to add superscript text in our page.
-`<sub>` - This is used to add subscript text in our page.
-`<hr>` - This is used to add a horizontal line in our page.
+`<br>` - This is used to add a line break in our page. <br>
+`<b>` - This is used to add bold text in our page. <br>
+`<i>` - This is used to add italic text in our page. <br>
+`<u>` - This is used to add underline text in our page. <br>
+`<s>` - This is used to add strikethrough text in our page. <br>
+`<sup>` - This is used to add superscript text in our page. <br>
+`<sub>` - This is used to add subscript text in our page. <br>
+`<hr>` - This is used to add a horizontal line in our page. <br>
 
 > Notes- For more Information about HTML you can check the [MDN DOCS](https://developer.mozilla.org/en-US/docs)
 
