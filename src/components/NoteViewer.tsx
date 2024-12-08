@@ -32,7 +32,7 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
           className={`bg-gray-900/95 backdrop-blur-sm w-full border border-gray-800/50 shadow-xl ${
             isFullscreen 
               ? 'fixed inset-0' 
-              : 'rounded-xl max-w-4xl max-h-[90vh]'
+              : 'rounded-xl max-w-[95%] md:max-w-2xl lg:max-w-4xl max-h-[90vh]'
           }`}
         >
           <div className="p-6 border-b border-gray-800/50">
