@@ -884,6 +884,72 @@ Example:
 ```python
 df.resample('M').sum()
 ```
----
 
+
+# Question Marks 2:
+
+1. What is Python? <br />
+Python is a high level-programming language known for it's readability, simplicity and ease of use. It supports multiple programming paradigms, including object-oriented, imperative and functional programming.
+
+2. What are the key features of python? <br />
+Key features of python include simplicity, dynamic typing, portability, extensive standered library, and support for multiple programming paradigms.
+
+3. What is the difference between `list` and `tuple` in python?<br />
+- A list is mutable (can be modified)
+- Tuple is im-mutable (cannot be changed after creation)
+
+4. What are python's inbuilt data type? <br />
+Python's inbuilt data types are `int`, `str`, `float`, `list`, `dict`, `set`, `bool`, `tuple`, and `None`.
+
+5. Explain the input() fuction in python?
+The input() fuction is used to get input from the user as a string. It reads a line of text entered by the user.
+
+6. What is the use of the len() functions in python?
+THe len() function is userd to get the number of elements in a list, tuple, dictionary, or string.
+
+7. What is the difference between == and is in python?<br />
+- `==` checks for equality of values
+- `is` it compares the identity (memory address) of two objects.
+
+8. What is python dictionary? <br />
+A dictionary is an odered collection of key-value pairs, where each key maps to specific value.
+
+9. What are the python function? <br />
+Functions in python are defined using the `def` keyword and can accept parameters and returns values.
+
+10. How do you define a variable python? <br />
+A variable is defined by simply asssigning a value to a name, such as x = 10.
+
+11. What is Python set?<br />
+A set is an unordered collection of unique elements. It is similar to a list but does not allow duplicates.
+
+12. What are list comprehensions in python?<br />
+List comprehensions provide a concise way to create lists usign a single line of code, e.g. [x ** 2 for x in range(10)].
+
+13. What does the try and except block do in python? <br />
+The try block contains code that might raise an exception, while the except block catches and handles the exception.
+
+14. What is global variable in python? <br />
+A global variable is defined outside of function and can be accessed inside any function by using the global keyword.
+
+15. What is the use of the `__init__()` method in Python classes? <br />
+The `__init__()` method is a constructor that is automatically called when an object of a class is created.
+
+16. What is slicing in Python? <br />
+Slicing is used to extract a portion of a sequence (e.g., list, tuple, or string) using a specified start, stop, and step.
+
+17. What is lambda function in python? <br />
+A lambda function is an anonymous function defined using the lambda keyword. It can take any number of arguments but only one expression.
+
+18. What is the difference between deepcopy() and copy() ? <br />
+`copy()` creates a shallow copy of the object (only references are copied), while `deepcopy()` creates a new copy whth all nested objects copied as well.
+
+19. What is the assert statements in python? <br />
+The asserts statement tests a condition and raises an AssertionError if the condition is False.
+
+20. What are decorators in Python? <br />
+Decorators are the functions that modify the behavior of another functuon or method. They are often used to add functionality to existing code without changing the structure.
+
+
+---
 ##### Contributor Name - Abhirup Kumar
