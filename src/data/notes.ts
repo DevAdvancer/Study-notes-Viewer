@@ -8,7 +8,7 @@ export const notes: Note[] = [
       subject: 'Intro to Python',
       subjectCode: 'CSE11118',
       content: pythonIntro,
-      progress: 'in-progress'
+      progress: 'completed'
   },
   {
       id: '2',
