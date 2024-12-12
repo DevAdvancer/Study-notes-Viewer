@@ -731,7 +731,7 @@ The top, right, bottom, left properties determine the final location of position
 
 ### Creating Simple Smiley Face using Position
 
-!(simplyface)[/images/smileyface.png]
+![simplyface](/images/smileyface.png)
 
 Code: <br />
 index.html (File Name)
