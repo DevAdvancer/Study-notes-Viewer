@@ -130,6 +130,8 @@ Example - `span`, `a`, `img`
 
 ![Inline](/images/InlineImage.png)
 
+> for more information go to [Google Drive](https://drive.google.com/file/d/1PVhjnfQyz_QsE4WO3-tILUaIjdRgW9C1/view?usp=sharing)
+
 ## Div Element
 
 Div is a `container` used to hold other HTML elements. It is a `block`-level element.
@@ -571,6 +573,220 @@ Output:
 </body>
 </html>
 ```
+# CSS
+
+## Part - 1 (Basics)
+### Units in CSS
+
+Absolute: <br />
+px, pt, pc, cm, mm, in
+<br />
+
+Relative: <br />
+%, em, rem, vw, vh, ch
+
+<br />
+
+### Font Family
+
+```css
+font-family: arial;
+```
+
+## Part - 2 (Level 2)
+
+### Selectors
+
+![selectors](/images/selectors.png)
+
+
+### Decendent Selector
+A descendant selector is used to select elements that are descendants of a specified element, denoted by a space between the ancestor and descendant elements in the CSS selector.
+
+### Pseudo Class
+A keyword added to a selector that specifies a special state of the selected elements.
+
+example:
+1. `:hover`
+2. `:active`
+3. `:checked`
+4. `:nth-of-type`
+
+## Part - 4 (Level 3)
+
+### Box Model
+This is a way we can give property to a box elements or be specific to a div that properties can be <br />
+
+example: <br />
+1. Height
+2. Width
+3. Border
+4. Padding
+5. Margin
+
+![boxmodel](/images/box_model.png)
+
+### Pratice Question
+Recreate the following Picture:
+![pratice1](/images/Css_pratice_1.png)
+
+Code: <br />
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="main">
+    <div id="red" class="main-child"></div>
+    <div id="yellow" class="main-child"></div>
+    <div id="green" class="main-child"></div>
+  </div>
+</body>
+</html>
+```
+Styles.css (File name)
+```css
+.main {
+  height: 200px;
+  width: 75px;
+  border: 2px solid black;
+
+  .main-child {
+    height: 30px;
+    width: 30px;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid black;
+    border-radius: 50%;
+  }
+
+  #red {
+    background-color: red;
+  }
+
+  #yellow {
+    background-color: yellow;
+  }
+
+  #green {
+    background-color: green;
+  }
+}
+```
+
+### Task - 04 (Hover Effect Using CSS)
+
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="main">
+    <h1>Abhirup Kumar</h1>
+    <p>A software Developer</p>
+  </div>
+</body>
+</html>
+```
+Styles.css (File name)
+```css
+.main {
+  height: auto;
+  width: auto;
+  display: inline-block;
+  border: 2px solid black;
+  padding: 20px;
+  margin-top: 40px;
+  margin-left: 40px;
+  transition: 0.3s;
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+.main:hover {
+  box-shadow: 2px 2px 10px red;
+}
+```
+
+### Position Property
+This position css property sets how an element is positioned in a document.
+The top, right, bottom, left properties determine the final location of positioned elements
+- Static
+- relative
+- absolute
+- fixed
+
+### Creating Simple Smiley Face using Position
+
+!(simplyface)[/images/smileyface.png]
+
+Code: <br />
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="main">
+    <div class="eyes"></div>
+    <div class="eyes"></div>
+    <div id="mouth"></div>
+  </div>
+</body>
+</html>
+```
+styles.css (File Name)
+```css
+.main {
+  height: 200px;
+  width: 200px;
+  border: 2px solid orange;
+  border-radius: 50%;
+  background-color: orange;
+
+  .eyes {
+    height: 10px;
+    width: 10px;
+    border: 2px solid black;
+    display: inline-block;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: black;
+    position: relative;
+    top: 30px;
+    left: 40px;
+  }
+
+  #mouth {
+    width: 100px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 0 0 50px 50px;
+    position: absolute;
+    top: 130px;
+    left: 55px;
+    background-color: brown;
+  }
+}
+```
+
+## Flex-box
 
 ---
 ##### Contributor Name - Abhirup Kumar
