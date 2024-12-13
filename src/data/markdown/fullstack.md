@@ -1073,7 +1073,7 @@ index.html (File Name)
 Output: <br />
 ![imageresponsive](/images/responsive.png)
 
-> End of the CSS for more refer documentation for exam enough. and also please go through the meadia queries for more information.
+> End of the CSS for more refer documentation for exam enough. and also please go through the media queries for more information.
 
 
 ---
