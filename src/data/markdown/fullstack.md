@@ -31,21 +31,21 @@
 
 There are many more tags that you can get in mdn web docs. [MDN DOCS](https://developer.mozilla.org/en-US/docs/Web/HTML)
 
-## List in HTML
+## arr in HTML
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
-  <h1>Market list</h1>
+  <h1>Market arr</h1>
   <ul>
     <li>Tomato</li>
     <li>Ginger</li>
     <li>Potato</li>
   </ul>
-  <h1>Movie List</h1>
+  <h1>Movie arr</h1>
   <ol>
     <li>Pushpa 2</li>
     <li>Iron Man 3</li>
@@ -54,10 +54,10 @@ There are many more tags that you can get in mdn web docs. [MDN DOCS](https://de
 </body>
 </html>
 ```
-Here the `ul` is the Unordered List. And `ol` is the orderd list. The `li` is the list item.
+Here the `ul` is the Unordered arr. And `ol` is the orderd arr. The `li` is the arr item.
 
 Output :
-![Output Example](/images/ListOutput.png)
+![Output Example](/images/arrOutput.png)
 
 ## Attributs in HTML
 
@@ -140,7 +140,7 @@ Div is a `container` used to hold other HTML elements. It is a `block`-level ele
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <div style="background-color: green;">
@@ -212,7 +212,7 @@ Example of Food Menu
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <table border="black">
@@ -252,7 +252,7 @@ Output:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <table border="black">
@@ -298,7 +298,7 @@ This is used to create cells Which spans over multiple rows or columns.
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <table border="2" style="text-align: center;">
@@ -346,7 +346,7 @@ Recreate the following table using rowspan and colspan
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <table border="2" style="text-align: center;">
@@ -430,7 +430,7 @@ Some Elements are
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <form action="#">
@@ -468,7 +468,7 @@ There are 3 types of submit: <br />
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <form action="#">
@@ -500,7 +500,7 @@ Syntax
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <form action="/server">
@@ -525,7 +525,7 @@ Ouput:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <form action="https://www.youtube.com/results">
@@ -549,7 +549,7 @@ Output:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>List Pratice</title>
+  <title>arr Pratice</title>
 </head>
 <body>
   <form action="#">
@@ -1178,6 +1178,128 @@ Here in this code the thing is that if we are writing a code inside a try-catch 
 
 ### Arrow Function
 
+Syntax:
+```js
+const func = (arg1, arg2) => {
+  //function defination
+}
+```
+
+example:
+```js
+const sum = (a, b) => {
+  return a + b;
+}
+
+console.log(sum(2, 3));
+```
+Here in this code we are defining a function sum which takes two arguments and return their sum.
+
+###### Implicit return of arrow functions
+The implicit return in arrow functions is a shorthand that allows you to write cleaner and more concise code. <br />
+
+Syntax:
+
+```js
+const func = (arg1, arg2) => (
+  a * b
+);
+```
+### SetTime Out
+
+Syntax:
+```js
+setTimeout(function, timeout) // Here function is the callback and timeout is in millisecond
+```
+Example:
+```js
+console.log("hi there! ");
+
+setTimeout ( () => {
+  console.log("Abhirup Kumar");
+}, 1000);
+
+console.log('Welcome to ');
+```
+### Set Interval
+
+Syntax:
+```js
+setInterval(function, timeout) // Here function is the callback and timeout is in millisecond
+```
+
+Example:
+```js
+let id = setInterval( () => {
+  console.log('Hi, DevAdvancer !')
+}, 1000)
+```
+we can stop this using `clearInterval(id)`
+
+#### this with arrow functions
+the `this` keyword in an arrow function refers to the context in which the function was defined (lexical this), not where it is called. Arrow functions do not bind their own this. <br />
+
+Example:
+```js
+const student = {
+  name: 'Abhirup',
+  marks: 92,
+  prop: this, //global scope
+  getName: function() {
+    return this.name;
+  },
+  getMarks: () => {
+    return this.marks; // parent's scope -> window
+  },
+  getInfo1: function () {
+    setTimeout( () => {
+      console.log(this)
+    }, 2000);
+  },
+  getInfo2: function () {
+    setTimeout(function() {
+      console.log(this)
+    }, 2000);
+  },
+};
+
+// console.log(student.getName());
+// console.log(student.getMarks());
+
+console.log(student.getInfo1())
+console.log(student.getInfo2())
+```
+
+##### Practice Question:
+1. Write an arrow function that returns the square of a number 'n'.
+```js
+const c = (n) => {
+  return n * n;
+};
+
+console.log(c(2));
+```
+
+2. Write a function that prints "hello world" 5 Times at the interval of 2s each.
+```js
+let id = setInterval(() => {
+  console.log("Hello World");
+}, 2000);
+
+setTimeout(() => {
+  clearInterval(id);
+}, 12000);
+```
+3. Write a arrow function named arrayAverage that accepts an array of numbers and returns the average of those numbers.
+
+```js
+let arrayAverage = (arr) => {
+  lengthOfArray = arr.length;
+  return arr.reduce((a, b) => a + b, 0) / lengthOfArray; // Just calculating the avg of the Array
+};
+
+console.log(arrayAverage([2, 3, 4, 5, 6, 7]));
+```
 
 
 ---
