@@ -1075,6 +1075,110 @@ Output: <br />
 
 > End of the CSS for more refer documentation for exam enough. and also please go through the media queries for more information.
 
+# JavaScript
+
+## let, var and const keywords
+
+- `let` - let is a keyword in JavaScript that is used to declare a variable, and the variable it declares is only accessible within the block it's declared in. <br />
+
+- `var` - var is a keyword in JavaScript that is used to declare a variable, and the variable it declares is accessible throughout the function it's declared in.
+
+- `const` - const is a keyword in JavaScript that is used to declare a constant, and the value it declares cannot be changed once it's declared.
+<br />
+Example:
+
+```
+let name = "John Doe";
+```
+> note let is used now instead of var below is the explaination why
+```js
+// The let keyword is used to declare a variable, and the variable it declares is only accessible within the block it's declared in.
+let name = "John Doe";
+
+// The var keyword is used to declare a variable, and the variable it declares is accessible throughout the function it's declared in.
+var age = 30;
+
+// The const keyword is used to declare a constant, and the value it declares cannot be changed once it's declared.
+const country = "USA";-
+```
+> other thing are same as c and java loops, if-else.
+
+### 'This' keyword in Js
+`This` keyword refers to an object that is executing the current piece of code.
+
+```js
+const student = {
+  name: 'Abhirup Kumar',
+  age: 20,
+  eng: 95,
+  math: 93,
+  phy: 97,
+  getAvg() {
+    let avg = (this.eng + this.math + this.phy) / 3
+    console.log(`${this.name} got avg marks = ${avg}`)
+  }
+}
+
+student.getAvg()
+```
+Output:
+
+```bash
+Abhirup Kumar got avg marks = 95
+```
+
+### 'function' in js
+Syntax:
+```js
+// Crateing the function
+function funcName() {
+  //do something
+}
+// Calling the Function
+funcName()
+```
+### Object literals
+It is Used to store keyed collections & complex entities. <br />
+
+property => (key, value) pair <br />
+
+objects are a collection of properties <br />
+
+### Try & Catch
+The try statements allows you to define a block of code to be tested for errors while it is being executed. <br />
+
+The catch statements allows you to define a block of code to be executed, if an error occurs in the try block. <br />
+
+Syntax :
+```js
+try {
+  consol.log(a);
+} catch {
+  console.log('error');
+}
+```
+Example:
+```js
+console.log('Hello');
+console.log('Hello');
+try {
+  console.log(a);
+} catch {
+  console.log('Error Occured');
+}
+console.log('Hello');
+console.log('Hello');
+console.log('Hello');
+console.log('Hello');
+```
+
+Here in this code the thing is that if we are writing a code inside a try-catch block then if any error occure then it will print that and continue print the other value.
+
+> Single try block cannot be writen single
+
+### Arrow Function
+
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
