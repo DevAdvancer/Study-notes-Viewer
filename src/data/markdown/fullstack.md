@@ -788,5 +788,161 @@ styles.css (File Name)
 
 ## Flex-box
 
+> For General Understanding go and refer this [Google Drive](https://drive.google.com/file/d/1UxJ5VEQQPy-dEvG4g-IqyGNN90_tOIW-/view?usp=sharing)
+
+##### Pratice Question:
+
+![FlexBox Prtice](/images/flexboxPratice.png)
+
+Answers: <br />
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="child">A</div>
+    <div class="child">B</div>
+    <div class="child">C</div>
+    <div class="child">D</div>
+    <div class="child">E</div>
+    <div class="child">F</div>
+    <div class="child">G</div>
+    <div class="child">H</div>
+    <div class="child">I</div>
+  </div>
+</body>
+</html>
+```
+styles.css (File Name)
+```css
+.container {
+  height: 400px;
+  width: 400px;
+  margin: 5px auto;
+  border: 2px solid rgb(41, 206, 232);
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .child {
+    height: 100px;
+    width: 100px;
+    font-size: 50px;
+    border: 2px solid black;
+    background-color: rgb(101, 100, 100);
+    border-radius: 10px;
+    text-align: center;
+  }
+}
+```
+## BootStrap
+
+Benifits of Bootstrap: <br />
+1. Makes Development Faster & Easier
+2. Good Choice of pre-built components
+3. Good Browser Compatibility
+
+
+### Getting Started With Boot Strap
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Bootstrap Demo</h2>
+    <p>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat voluptatum unde earum nulla maiores, aperiam perspiciatis, repellat perferendis suscipit rerum necessitatibus ad accusamus exercitationem. Temporibus saepe earum optio esse cum.
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat voluptatum unde earum nulla maiores, aperiam perspiciatis, repellat perferendis suscipit rerum necessitatibus ad accusamus exercitationem. Temporibus saepe earum optio esse cum.
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat voluptatum unde earum nulla maiores, aperiam perspiciatis, repellat perferendis suscipit rerum necessitatibus ad accusamus exercitationem. Temporibus saepe earum optio esse cum.
+    </p>
+  </div>
+  <hr>
+  <div class="container">
+    <h2>Button</h2>
+    <button class="btn btn-danger">Click Me</button>
+  </div>
+  <hr>
+  <div class="container">
+    <h2>Alert</h2>
+    <div class="alert alert-danger" role="alert">Download Failed!!</div>
+  </div>
+  <hr>
+  <div class="container">
+    <h2>Button Group</h2>
+    <div class="btn-group">
+      <button class="btn btn-primary">Click Me 1</button>
+      <button class="btn btn-outline-success">Click Me 2</button>
+      <button class="btn btn-danger">Click Me 3</button>
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <h2>Navbar</h2>
+    <nav class="navbar bg-body-tertiary navbar-expand-lg">
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand">Abhirup Kumar</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+```
+
+Here two things are important remember the class name and also how we are connecting the bootstrap with html.
+
+### card components (Using Bootstrap)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="card" style="width: 18rem; margin:50px;">
+    <img src="IMG_20240906_115854057(1).jpg" alt="" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">Abhirup Kumar</h5>
+      <p class="card-text">Software Engineer</p>
+      <a href="#" class="btn btn-primary">Hire Me</a>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+```
+
+here we have build the card using bootstrap and also remember all of this can be done using normal css also it's just for the exam point of view.
+
+### Grid System (Using Bootstrap)
+In Bootstrap grid system use 12-column system by default. 
+
+```html
+
+```
 ---
 ##### Contributor Name - Abhirup Kumar
