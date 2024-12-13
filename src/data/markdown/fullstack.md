@@ -939,10 +939,142 @@ Here two things are important remember the class name and also how we are connec
 here we have build the card using bootstrap and also remember all of this can be done using normal css also it's just for the exam point of view.
 
 ### Grid System (Using Bootstrap)
-In Bootstrap grid system use 12-column system by default. 
+In Bootstrap grid system use 12-column system by default.
 
 ```html
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container center">
+    <div class="row">
+      <div class="col-3">1</div>
+      <div class="col-2">2</div>
+      <div class="col-2">3</div>
+      <div class="col-2">4</div>
+      <div class="col-3">5</div>
+    </div>
+    <div class="row">
+      <div class="col">6, 7</div>
+      <div class="col">8</div>
+      <div class="col">9</div>
+      <div class="col">10</div>
+    </div>
+    <div class="row">
+      <div class="col">11</div>
+      <div class="col">12</div>
+      <div class="col">13</div>
+      <div class="col">14</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 ```
+
+### Form control in BootStrap
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <div class="container">
+    <h2>Form Demo</h2>
+    <form class="mb-3" action="#"> <!-- mb-3 => margin bottom 3-->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address:</label>
+        <input type="text" class="form-control" id="email" placeholder="email">
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="password" placeholder="password">
+      </div>
+
+      <div class="mb-3">
+        <label for="dropdown">Choose Dropdown</label>
+        <select class="form-select" id="dropdown">
+          <option selected>Choose...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+    </form>
+   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+```
+
+Output: <br />
+![formbootstrap](/images/formbootstrap.png)
+
+### BootStrap Pratice question
+
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Pratice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container center">
+    <h2 style="text-align: center;">Responsive Cards CSS</h2>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <div class="card" style="width: 18rem;">
+        <img src="/picture/twitter.png" alt="twitter" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">TWITTER</h5>
+          <p class="card-text" style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam corrupti eveniet, eius voluptates obcaecati consequuntur!</p>
+          <div class="d-grid">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="/picture/instagram.png" alt="instagram" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">INSTAGRAM</h5>
+          <p class="card-text" style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam corrupti eveniet, eius voluptates obcaecati consequuntur!</p>
+          <div class="d-grid">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="/picture/facebook.png" alt="facebook" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">FACEBOOK</h5>
+          <p class="card-text" style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam corrupti eveniet, eius voluptates obcaecati consequuntur!</p>
+          <div class="d-grid">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+```
+
+Output: <br />
+![imageresponsive](/images/responsive.png)
+
+> End of the CSS for more refer documentation for exam enough. and also please go through the meadia queries for more information.
+
+
 ---
 ##### Contributor Name - Abhirup Kumar
