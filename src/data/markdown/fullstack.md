@@ -1,3 +1,37 @@
+# Personal Suggestion for Exam
+> Disclaimer: This is not from any teacher or professor; it is purely a personal suggestion. There is no guarantee that it will be accurate, so please don’t blame me if it turns out to be incorrect.
+
+1. HTML
+- Basic tags
+- Basic attributs
+- tables (rowspan, colspan)
+- forms (input, label, select, ..etc)
+
+2. CSS
+- Basic selectors
+- Basic properties
+- Understanding of units
+- Postion and display property
+- Flexbox
+- Grid (Not necessarily)
+- Bootstrap (just remember the class name)
+
+3. JavaScript
+- Basic syntax
+- Variables
+- Data types
+- Conditional statements
+- Loops
+- Functions
+- Arrow Functions
+- Arrays
+- object literals
+- Collection
+- DOM (Manupulation)
+
+> Next Suggestion tomorrow after I will compelete other parts 
+
+
 # Front-End
 
 # HTML Level 1
@@ -1301,6 +1335,167 @@ let arrayAverage = (arr) => {
 console.log(arrayAverage([2, 3, 4, 5, 6, 7]));
 ```
 
+#### Recreating the min function of builtin using REST
+```js
+function min(...args) {
+  return args.reduce((min, el) => {
+    if (min > el) {
+      return el;
+    } else {
+      return min;
+    }
+  });
+}
+console.log(min(1, 2, 3, 4, 5, 6, 7));
+```
+### Destructuring
+Sorting values of array into multiple variables
+Example:
+```js
+let name = ['tony', 'bruce', 'steve', 'peter'];
+let [winner, runnerup] = name;
+console.log(winner, runnerup); // "tony" "bruce"
+```
+## DOM (Document Object Model)
+
+- The DOM represents a document with a logical tree.
+- It allows us to maipulate/change webpage content (HTML elements).
+
+![DOM](/images/DOM.png)
+
+> For started code to pratice js is [Google Drive](https://drive.google.com/drive/folders/1hpSNQMDImhkoSv42gqVue-Q7sqWoVNey?usp=sharing)
+
+### Selecting Elements
+
+#### By ID
+`document.getElementById("id")` - Returns the element as an object or null(if not found)
+
+#### By Class Name
+`document.getElementByClassName("classname")` - Returns the elements as an HTML collection or empty collection(if not found)
+
+#### By Tag Name
+`document.getElementByTagName("tag")` - Returns the elements as an HTML collection or empty collection (if not found)
+
+#### Query selectors
+This Allows us to use any CSS selector <br />
+
+`document.querySelector('p');` - Select first p element <br />
+`document.querySelector('#myId')` - Selects first element with id = myId <br />
+`document.querySelector('.myClass')` - Selects first element with class name = myClass <br />
+<br />
+
+`document.querySelectorAll("p")` - Selects all p elements <br />
+
+## Manupulating Elements
+There are mainly three things to understand here: <br />
+
+- **innerTex**t - Shows the visible text contained in a node.
+- **textContent** - Shows all the full text.
+- **innerHTML** - Shows the full markup.
+
+Example:
+```js
+let heading = document.querySelector('h1');
+heading.innerHTML = `<u>${heading.innerText}</u>`; // With this we are explicitly adding a underline in the heading which is initally not present in page
+```
+
+## Manupulaing Attributs
+There are two ways we can manupulate:
+- `obj.getAttribute(attr)`
+- `obj.setAttribute(attr, val)`
+
+## Manupulating Style
+There are few important one: <br />
+`obj.classList` <br />
+- classList.add() - to add new classes.
+- classList.remove() - to remove classes.
+- classList.contains() - to check if class exits.
+- classList.toggle() - to toggle between add & remove.
+
+## Navigation on Page
+parentElement <br />
+Children <br />
+previousElementSibling/nextElementSibling <br />
+
+## Adding Elements on page
+`document.createElement('p')`
+- appendChild(element)
+- append(element)
+- prepend(element)
+- insertAdjacent(where, element)
+
+## Removing Elements
+- removeChild(element)
+- remove(element)
+
+#### Pratice Question - DOM
+Add the following elements to the container using only Js and DOM methods: <br />
+
+1. a `<p>` with read text that says "Hey I'm red!"
+2. an `<h3>` with blue text that says "I'm a blue h3!"
+3. a `<div>` with a black border and pink backgroud color with the following elemnts inside of it: <br />
+  - another `<h1>` that says "I'm in div"
+  - a `<p>` that says "Me TOO!"
+
+index.html (File name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script src="app.js"></script>
+</body>
+</html>
+```
+styles.css (File name)
+```css
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.box {
+  border: 2px solid black;
+  background-color: pink;
+}
+```
+
+app.js (File Name)
+
+```js
+// 1st part
+let para1 = document.createElement('p');
+para1.innerText = "Hey I'm red!";
+document.querySelector('body').append(para1);
+para1.classList.add('red');
+
+// 2nd part
+let heading1 = document.createElement('h3');
+heading1.innerText = "I'm a blue h3!";
+document.querySelector('body').append(heading1);
+heading1.classList.add('blue');
+
+// 3rd part
+let div = document.createElement('div');
+let h1 = document.createElement('h1');
+let p = document.createElement('p');
+
+h1.innerText = "I'm in a div";
+p.innerText = "Me too!";
+
+div.append(h1);
+div.append(p);
+div.classList.add('box');
+document.querySelector('body').append(div);
+```
+Output:
+![Dom_manupulation](/images/DOM_querypratice.png)
 
 ---
 ##### Contributor Name - Abhirup Kumar
