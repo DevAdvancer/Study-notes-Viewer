@@ -28,8 +28,17 @@
 - object literals
 - Collection
 - DOM (Manupulation)
+- DOM Events
+- Event Listeners
+- Event bubbling
+- Event Delegation
+- Call back Hell
+- Setting Promise
+- Async & await
+- API
+- AXIOS
 
-> Next Suggestion tomorrow after I will compelete other parts
+> Next Suggestion today night after I will compelete other parts
 
 
 # Front-End
