@@ -29,7 +29,7 @@
 - Collection
 - DOM (Manupulation)
 
-> Next Suggestion tomorrow after I will compelete other parts 
+> Next Suggestion tomorrow after I will compelete other parts
 
 
 # Front-End
@@ -418,6 +418,55 @@ Output:
 
 ![output](/images/OutputPraticeProblem.png)
 
+### Pratice Problem 2
+Recreate the following table. <br />
+![tablePratice Probem 2](/images/tabelpratice2.png)
+HTML FILE:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 300px;
+      text-align: center;
+    }
+    td {
+      border: 2px solid black;
+      padding: 10px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td colspan="2">6, 7</td>
+        <td rowspan="2" style="width: 10px;">8</td>
+        <td>9</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+```
 ## Forms in HTML
 
 Forms are used to collect data from the user.
@@ -1496,6 +1545,317 @@ document.querySelector('body').append(div);
 ```
 Output:
 ![Dom_manupulation](/images/DOM_querypratice.png)
+
+#### Pratice Question 2 - DOM
+Create a new input and button element on the page using javascript only, set the text if button to 'Click Me'.
+
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <script src="app.js"></script>
+</body>
+</html>
+```
+
+style.css (File Name)
+
+```css
+/* Empty nothing here  */
+```
+app.js (File Name)
+
+```js
+let input = document.createElement('input');
+let label = document.createElement('label');
+let button = document.createElement('button');
+
+
+// Adding the attributes for input
+input.type = 'search';
+input.placeholder = 'Search for anything';
+input.id = 'search';
+
+// Adding the attributes in for label
+label.innerText = 'Search for anything';
+label.htmlFor = 'search';
+label.id = 'search-label';
+
+// Adding attributes for button
+button.type = 'button';
+button.innerText = 'Click me!';
+button.id = 'search-button';
+
+// adding the input in page
+document.querySelector('body').append(label)
+document.querySelector('body').append(input)
+document.querySelector('body').append(button)
+```
+
+## DOM Events
+Events are signals that something has occurred. (User inputs / actions) <br />
+Example:
+```html
+<button onclick="console.log('Button Was Clicked');">Click Me</button> <!-- here the onclik is a object that triggers a event -->
+```
+### Mouse/ Pointer Events
+onclick (When an element is clicked)
+
+```js
+let btn = document.querySelector('button');
+
+btn.onclick = () =>(console.log("Hello!"));
+```
+
+onmouseenter (When Mouse enters an element)
+
+```js
+let btn = document.querySelector('button');
+
+btn.onclick = () =>(console.log("Hello!"));
+btn.onmouseenter =() => (console.log("Mouse is over the button"));
+```
+
+### Event Listeners
+Syntax : <br />
+`element.addEventListener(event, callback)`
+Example:
+```js
+let btns = document.querySelectorAll('button');
+
+for (btn of btns) {
+  btn.addEventListener("click", () => (console.log('Hello!')))
+  btn.addEventListener("click", () => (console.log('DevAvancer')))
+}
+```
+## Quick Pratice
+Random Color Generator using html, css and js.
+
+index.html (File Name)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Generate a Random Color</h1>
+  <button id="random-color-btn">Generate</button>
+  <div id="random-color"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+```
+style.css (File Name)
+```css
+* {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+
+div {
+  margin: auto;
+  margin-top: 10px;
+  height: 70vh;
+  width: 70vw;
+  align-items: center;
+  border: 2px solid black;
+}
+
+button {
+  margin: auto;
+  margin-top: 10px;
+  align-items: center;
+}
+```
+app.js (File Name)
+```js
+let btn = document.getElementById('random-color-btn');
+
+btn.addEventListener('click', () => {
+  let h1 = document.querySelector('h1');
+  h1.innerText = randomColorGenerator();
+
+  let randomColor = randomColorGenerator();
+  let div = document.getElementById('random-color');
+  div.style.backgroundColor = randomColor;
+});
+
+
+
+let randomColorGenerator = () => {
+  let red = Math.floor(Math.random() * 255);
+  let green = Math.floor(Math.random() * 255);
+  let blue = Math.floor(Math.random() * 255);
+
+  let color = `rgb(${red}, ${green}, ${blue})`;
+
+  return color
+};
+```
+
+Final Output:
+![color Genarator](/images/randomColorGenerator.png)
+
+## Event Bubbling
+
+HTML
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div>
+    <ul>
+      <li>One</li>
+      <li>Two</li>
+      <li>Three</li>
+    </ul>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
+```
+
+CSS
+```css
+* {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+
+div {
+  background-color: pink;
+  height: 200px;
+  width: 400px;
+}
+
+ul {
+  background-color: blue;
+}
+
+li {
+  background-color: greenyellow;
+}
+```
+
+JS
+```js
+let div = document.querySelector('div');
+let ul = document.querySelector('ul');
+let lis = document.querySelectorAll('li');
+
+
+div.addEventListener('click', () => {
+  console.log("Div was clicked!!");
+});
+
+ul.addEventListener('click', (event) => {
+  event.stopPropagation();
+  console.log("ul was clicked!!");
+});
+
+for (li of lis) {
+  li.addEventListener('click', (event) => {
+    event.stopPropagation();
+    console.log("li was clicked!!");
+  });
+}
+```
+Output:
+![EventBubbling](/images/eventBubbleing.png)
+
+## Todo List Using Event Bubbling & Event Delegation
+HTML
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>To Do List: </h1>
+    <input type="text" id="new-task" placeholder="Enter new task">
+    <button id="add-task">Add Task</button>
+    <ul id="tasks"></ul>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
+```
+
+CSS
+```css
+* {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: auto;
+  margin-top: 20px;
+  font-size: large;
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.container {
+  height: 400px;
+  width: 400px;
+  text-align: center;
+}
+
+ul {
+  text-align: start;
+}
+```
+
+JS
+```js
+let btn = document.getElementById('add-task');
+let ul = document.getElementById('tasks')
+let input = document.getElementById('new-task')
+
+btn.addEventListener('click', () => {
+  let list = document.createElement('li');
+  list.innerText = input.value;
+
+  let delbtn = document.createElement('button');
+  delbtn.innerText = "delete";
+  delbtn.classList.add('delete');
+
+  list.appendChild(delbtn)
+  ul.appendChild(list);
+  input.value = "";
+})
+
+
+ul.addEventListener('click', (event) => {
+  if (event.target.nodeName == 'BUTTON') {
+    let listItem = event.target.parentElement;
+    listItem.remove()
+    console.log("deleted");
+  }
+})
+```
+
+Ouput:
+![todopratice](/images/todopratice.png)
 
 ---
 ##### Contributor Name - Abhirup Kumar
