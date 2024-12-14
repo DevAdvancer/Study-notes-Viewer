@@ -2172,6 +2172,211 @@ btn.addEventListener("click", async () => {
   img.setAttribute("src", link);
 })
 ```
+# Backend
+
+## Node.js
+JavaScript Runtime Environment <br />
+It is used for server side programming. <br />
+
+> Node.js is not a language, library or framework
+
+### Proces
+- `process`: This object provids information about, and control over, the current Node.js process.
+- `process.argv`: returns an array containing the command-line arguments passed when the Node.js process was launched.
+
+### module.export
+requiring files <br />
+- `require()`: A built-in function to include external modules that exist in separate files.
+- `module.exports`: It is a special object.
+
+##### Basic example.
+SERVER.js
+
+```js
+import Apple from './Fruits/apple.js'
+import Mango from './Fruits/mango.js'
+import Banana from './Fruits/banana.js'
+
+let Fruits = [Apple, Mango, Banana];
+
+console.log(Fruits);
+```
+
+Output:
+```bash
+[
+  { name: 'Apple', color: 'red' },
+  { name: 'Mango', color: 'light-yellow-orangic' },
+  { name: 'Bannana', color: 'yellow' }
+]
+```
+## NPM (Node Package Manager)
+npm is the standerd package manager for Node.js. <br />
+- library of packages
+- command line tool
+
+## Just Random pakages of Figlet
+
+First go to termianl and type:
+```bash
+npm i figlet
+```
+Then create a `index.js` file and add the following code:
+```js
+const figlet = require('figlet');
+
+figlet("Abhirup Kumar", (err, data) => {
+  if (err) {
+    console.log("Something wen wrong...");
+    console.dir(err);
+    return;
+  }
+  console.log(data);
+});
+```
+### Package.json
+The package.json file contains descriptive and fucntional `metadata` about a project, such as a name, version, and dependencies. <br />
+
+`npm init`: This is used to start project of node.
+
+## Express
+
+#### Library vs Framework
+
+- `Library`: A library is a collecetion of pre-written code that can be used to perform specific tasks.
+eg: Axios
+
+- `Framework`: A framework is a set of pre-written code that that provides a structure for developing software applications.
+eg: express
+
+###### Express
+A Node.js web application framework that helps us to make web applications. It is used for `server` side programming.
+1. It listien for incoming request
+2. Pass the request
+3. To match response with routes
+
+
+#### Getting start with express
+```js
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+app.use((req, res) => {
+  console.log("Request Recived!");
+})
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+})
+```
+### Sending a Request in Express
+Generally there are two objects:
+- Request (req)
+- Response (res)
+
+```js
+const express = require('express');
+const app = express();
+const PORT = 8080
+
+
+app.use((req, res) => {
+  console.log("Request Recievend");
+  res.send({
+    name: "Abhirup Kuamr",
+    relation: "Single"
+  })
+})
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+```
+
+### Routing
+It is a process of selecting a path for traffic in a network or between or accross multiple networks.
+```js
+const express = require('express');
+const app = express();
+const PORT = 8080
+
+app.get('/', (req, res) => {
+  res.send("<h1>This is the root path</h1>")
+});
+
+app.get('/home', (req, res) => {
+  res.send("<h1>This is the home path</h1>")
+});
+
+app.get('/about', (req, res) => {
+  res.send("<h1>This is the about path</h1>")
+});
+
+app.get('/contact', (req, res) => {
+  res.send("<h1>This is the contact path</h1>")
+});
+
+app.get("*", (req, res) => {
+  res.send("404: Erorr Page not found!!");
+});
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+```
+### Nodemon
+To `automatically` restart server with code changes
+
+```bash
+npm i nodemone
+```
+
+#### Path parameter
+```js
+const express = require('express');
+const app = express();
+const PORT = 8080
+
+app.get('/', (req, res) => {
+  res.send("<h1>This is the root path</h1>")
+});
+
+app.get('/:username/:roll', (req, res) => {
+  res.send(`<h1>Hi there ${req.params.username} with roll number: ${req.params.roll}</h1>`);
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+```
+
+### Query Selectors
+
+```js
+const express = require('express');
+const app = express();
+const PORT = 8080
+
+app.get('/', (req, res) => {
+  res.send("<h1>This is the root path</h1>")
+});
+
+app.get('/:username/:roll', (req, res) => {
+  res.send(`<h1>Hi there ${req.params.username} with roll number: ${req.params.roll}</h1>`);
+});
+
+app.get('/search', (req, res) => {
+  let {q} = req.query;
+  res.send(`Showing the result for the search query: ${q}`);
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+```
+### Ejs Templating
 
 
 ---
