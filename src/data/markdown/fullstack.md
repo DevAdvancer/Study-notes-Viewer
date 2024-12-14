@@ -1928,5 +1928,242 @@ saveToDb("Abhirup Kumar").then(() => {
 });
 ```
 
+### Promise chanining
+```js
+let saveToDb = (data) => {
+  return new Promise((resolve, reject) => {
+    let internetSpeed = Math.floor(Math.random()  * 10) + 1;
+    if (internetSpeed > 4) {
+      resolve("Sucess was saved");
+    } else {
+      reject("Weak Connection");
+    }
+  })
+};
+
+saveToDb("Abhirup Kumar")
+.then(() => {
+  console.log("Data 1: Promise was resolved");
+  saveToDb("Hello World")
+.then(() => {
+  console.log("data 2 saved");
+  })
+}).catch(() => {
+  console.log("Promise was rejected");
+});
+```
+## Async Function
+This has two keyword:
+- async
+- await
+Syntax of async:
+```js
+let hello = async () => {
+  return "hello World";
+};
+
+
+hello().then(() => {
+  console.log("Promise was resolved!");
+}).catch(() => {
+  console.log("Promise was rejected!");
+})
+```
+Await pauses the execution of its surrounding async function until the promise is settled (resolved or rejected). <br />
+Syntax of await:
+```js
+h1 = document.querySelector('h1');
+
+const changeColor = async (color) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      h1.style.color = color;
+      console.log(`color changed to ${color}`);
+      resolve();
+    }, 1000)
+  });
+};
+
+const colorChange = async () => {
+  await changeColor('red');
+  await changeColor('green');
+  changeColor('pink');
+};
+
+colorChange();
+```
+### Handleing Error in js
+```js
+h1 = document.querySelector('h1');
+
+const changeColor = async (color) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let num = Math.floor(Math.random() * 5) + 1;
+      if (num > 3) {
+        reject("Promise Rejected");
+      }
+      h1.style.color = color;
+      console.log(`color changed to ${color}`);
+      resolve();
+    }, 1000)
+  });
+};
+
+const colorChange = async () => {
+  try {
+    await changeColor('red');
+    await changeColor('green');
+    changeColor('pink');
+  } catch(err) {
+    console.log(err);
+  }
+};
+
+colorChange();
+```
+
+## API (Application Programming Interface)
+
+#### API tools
+- Postman
+- Hoppscoth
+
+## HTTP verbs
+- GET:  GET is an HTTP verb used to retrieve data from a server, typically used for reading or fetching data without modifying it.
+- POST or PUT: POST is an HTTP verb used to send data to a server to create or update a resource, typically used for creating, editing, or adding new data.
+- DELETE: DELETE is an HTTP verb used to delete a resource from a server, typically used for removing or deleting existing data.
+
+## First API request
+`using Fetch`
+Example:
+```js
+let url = "https://catfact.ninja/fact";
+
+fetch(url)
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    console.log(data.fact);
+  })
+  .catch((err) => {
+    console.log("ERROR, ", err);
+  });
+```
+> Simple API calls using async and await
+
+```js
+let url = "https://catfact.ninja/fact";
+
+let getFacts = async () => {
+  try {
+    let res = await fetch(url);
+    let data = await res.json();
+    console.log(data.fact);
+  } catch(err) {
+    console.log(err);
+  }
+};
+
+getFacts();
+```
+This will give random facts on cat 🤣
+
+## AXIOS
+Library to make HTTP requests <br />
+
+Using Axios <br />
+HTML
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <h1>Get Random cat Facts</h1>
+  <button>Show new Fact</button>
+  <p id = "output"></p>
+  <script src="app.js"></script>
+</body>
+</html>
+```
+JS
+```js
+let url = "https://catfact.ninja/fact";
+let p = document.getElementById('output')
+let btn = document.querySelector('button');
+
+let getFacts = async () => {
+  try {
+    let res = await axios.get(url);
+    return res.data.fact;
+  } catch(err) {
+    console.log("Error: ", err);
+  }
+};
+
+btn.addEventListener("click", async () => {
+  p.innerText = await getFacts();
+})
+```
+### Activity Dog API call
+
+HTML
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Pratice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <h1>Get Random Dogs Pic</h1>
+  <img id="output">
+  <button>New Pic</button>
+  <script src="app.js"></script>
+</body>
+</html>
+```
+CSS
+```css
+* {
+  display: flexbox;
+}
+#output {
+  margin-bottom: 10px;
+  display: block;
+  height: 400px;
+  width: 400px;
+}
+```
+
+JS
+```js
+let url = "https://catfact.ninja/fact";
+let url2 = "https://dog.ceo/api/breeds/image/random";
+let img = document.getElementById('output')
+let btn = document.querySelector('button');
+
+let getImage = async () => {
+  try {
+    let res = await axios.get(url2);
+    return res.data.message;
+  } catch(err) {
+    console.log("Error: ", err);
+  }
+};
+
+btn.addEventListener("click", async () => {
+  let link = await getImage()
+  img.setAttribute("src", link);
+})
+```
+
+
 ---
 ##### Contributor Name - Abhirup Kumar
