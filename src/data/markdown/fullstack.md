@@ -1857,5 +1857,76 @@ ul.addEventListener('click', (event) => {
 Ouput:
 ![todopratice](/images/todopratice.png)
 
+## Call Back Hell
+Nesting call back is known as callback hell
+```js
+h1 = document.querySelector('h1');
+
+const changeColor = (color, delay, nextColor) => {
+  setTimeout(() => {
+    h1.style.color = color;
+    if (nextColor) nextColor();
+  }, delay)
+};
+
+changeColor('red', 1000, () => {
+  changeColor('orange', 1000, () => {
+    changeColor('blue', 1000);
+  });
+});
+```
+To prevent the call back hell we use promices, async and await.
+
+### Setting of promises
+The Promise object represents the eventual completion (or faliure) of an asynchronous operation and its resulting value. <br />
+
+> Promise is a object
+
+There are two callbacks: <br />
+- Resolve
+- Reject
+
+There are generally three states:
+- Pending
+- Reject
+- fullfiled
+
+Syntax:
+```js
+let saveToDb = (data) => {
+  return new Promise((resolve, reject) => {
+    let internetSpeed = Math.floor(Math.random()  * 10) + 1;
+    if (internetSpeed > 4) {
+      resolve("Sucess was saved");
+    } else {
+      reject("Weak Connection");
+    }
+  })
+};
+```
+
+There are two methods in Promises:
+- then()
+- catch()
+Syntax:
+```js
+let saveToDb = (data) => {
+  return new Promise((resolve, reject) => {
+    let internetSpeed = Math.floor(Math.random()  * 10) + 1;
+    if (internetSpeed > 4) {
+      resolve("Sucess was saved");
+    } else {
+      reject("Weak Connection");
+    }
+  })
+};
+
+saveToDb("Abhirup Kumar").then(() => {
+  console.log("Promise was resolved");
+}).catch(() => {
+  console.log("Promise was rejected");
+});
+```
+
 ---
 ##### Contributor Name - Abhirup Kumar
