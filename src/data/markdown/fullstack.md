@@ -38,7 +38,14 @@
 - API
 - AXIOS
 
-> Next Suggestion today night after I will compelete other parts
+4. Backend
+- Node
+- Express
+- Ejs
+- Crud Operations
+- Mongodb
+
+> Complete Suggestion
 
 
 # Front-End
@@ -2377,7 +2384,120 @@ app.listen(PORT, () => {
 });
 ```
 ### Ejs Templating
+- EJS (Embedded JavaScript templates)
+- Ejs is a simple templating lanuage that lets you generate HTML markup with plain js.
 
+```js
+const express = require('express');
+const app = express();
+const path = require('path');
+
+app.set('view engine', "ejs");
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/', (req, res) => {
+  res.send("This is root");
+});
+
+app.get('/home', (req, res) => {
+  res.render('home')
+})
+
+app.listen(3000, () => {
+  console.log("Listening in port no. 3000");
+});
+```
+
+#### Interpolation Syntax
+Interpolation refers to embedding expressions into marked up text. <br />
+Famous one and Also the useful one <br />
+- `<%=` : Outputs the value into the template (HTML escaped)
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+</head>
+<body>
+  <h1>This is the home page</h1>
+  <h3> <%= 1 * 2%></h3>
+  <button>Push Me</button>
+</body>
+</html>
+```
+
+#### Passing Data to Ejs
+
+Server.js
+```js
+const expres = require('express');
+const app = expres();
+const path = require('path');
+const PORT = 3000;
+
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/', (req, res) => {
+  let data = Math.floor(Math.random() * 6) + 1;
+  res.render('rolldice', {data});
+});
+
+
+app.listen(PORT, () => {
+  console.log(`The server is running in ${PORT}`);
+});
+```
+
+rolldice.ejs
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Roll dice</title>
+</head>
+<body>
+  <h1>Dice Gave Value: <%= data %> </h1>
+</body>
+</html>
+```
+
+### Small Activity EJS
+server.js
+```js
+const expres = require('express');
+const app = expres();
+const path = require('path');
+const PORT = 3000;
+
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/ig/:username', (req, res) => {
+  let {username} = req.params;
+  res.render("instagram", {username});
+})
+
+app.listen(PORT, () => {
+  console.log(`The server is running in ${PORT}`);
+});
+```
+instagram.ejs
+```ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Instagram</title>
+</head>
+<body>
+  <h2>This page Belongs to <%=username%></h2>
+  <button>Follow</button>
+  <button>Message</button>
+</body>
+</html>
+```
 
 ---
 ##### Contributor Name - Abhirup Kumar
