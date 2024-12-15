@@ -2755,5 +2755,22 @@ app.listen(PORT, () => {
 });
 ```
 > For JS OPPS you Go to drive [Google Drive](https://drive.google.com/file/d/1zo14ufUNJWZaN4Ny00Ontg6Z2B138CnK/view?usp=sharing)
+
+## REST (Representational State Transfer)
+REST is an architectural style that defines a set of constraints to be used for creating web services.
+
+#### CRUD Operation
+- `GET`: Retrieves resources.
+- `POST`: Submits new data to the server.
+- `PUT`: Updates existing data.
+- `PATCH`: Update existing data partially.
+- `DELETE`: Removes data.
+
+![RestfulAPi](/images/creatingRestFUlApi.png)
+
+## Pratice and Understanding of RESTful by using and implementing in simple clone like quora, insta, etc
+
+> Go to this dive link for the files and folders [Google Drive](https://drive.google.com/drive/folders/1WHT8fdY6uSGmshhzam-nwXrmwMeg859t?usp=sharing)
+
 ---
 ##### Contributor Name - Abhirup Kumar
