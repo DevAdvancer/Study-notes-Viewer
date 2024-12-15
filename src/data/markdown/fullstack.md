@@ -2825,6 +2825,41 @@ main()
 ```
 > Make sure your server is running for Mongodb
 
+#### Basic CRUD Operations using Mongodb
+```js
+const mongoose = require('mongoose');
+const connectionUrl = "mongodb://localhost:27017/testPratce";
+
+let main = async () => {
+  await mongoose.connect(connectionUrl);
+};
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number
+});
+
+const User = mongoose.model("User", userSchema);
+
+User.findById('675f0651e0020bc09f9af8e3')
+  .then((res) => {
+    console.log(res);
+  }).catch((err) => {
+    console.log("Error While Fetching", err);
+  });
+
+  // Connection
+main()
+  .then(() => {
+    console.log("Succesfully Connected to Mongodb");
+  })
+  .catch((err) => {
+    console.log("Error While connecting to Mongodb");
+  });
+```
+## Using Express
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
