@@ -2498,6 +2498,262 @@ instagram.ejs
 </body>
 </html>
 ```
+### Instagram Sample
+Index.js
+```js
+const express = require('express');
+const app = express();
+const PORT = 3000;
+const path = require('path');
+const instaData = require("./data.json");
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
+
+
+app.get('/lg/:username', (req, res) => {
+    let { username } = req.params;
+    const data = instaData[username];
+    if (data) {
+      const followers = instaData[username].followers;
+      const following = instaData[username].following;
+      res.render('instagram', {data, followers, following});
+    } else {
+      return res.status(404).send('404 user Not Found');
+    }
+  })
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+})
+```
+instagram.ejs
+```ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Instagram</title>
+  <style>
+    img {
+      height: 200px;
+      width: 200px;
+      border: 2px solid black;
+      border-radius: 10%;
+    }
+  </style>
+</head>
+<body>
+  <h2>This page Belongs to @<%= data.name %></h2>
+  <button>Follow</button>
+  <button>Message</button>
+  <p>Followers: <%= followers %> &nbsp; &nbsp; &nbsp; &nbsp;Following: <%= following %>  </p>
+  <hr>
+  <% for(let post of data.posts) {%>
+    <img src="<%= post.image %>" alt="<%= data.name %>'s Image">
+    <p>
+      Likes: <%= post.likes %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Comments: <%= post.comments %>
+    </p>
+  <%} %>
+</body>
+</html>
+```
+```json
+{
+  "cats": {
+    "name": "cats",
+    "followers": 25000,
+    "following": 5,
+    "posts": [
+      {
+        "image": "https://plus.unsplash.com/premium_photo-1677545182067-26ac518ef64f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2F0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        "likes": 200,
+        "comments": 17
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        "likes": 312,
+        "comments": 19
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1577023311546-cdc07a8454d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        "likes": 1065,
+        "comments": 200
+      }
+    ]
+  },
+  "dogs": {
+    "name": "dogs",
+    "followers": 75000,
+    "following": 150,
+    "posts": [
+      {
+        "image": "https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZG9nc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        "likes": 3000,
+        "comments": 41
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGRvZ3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+        "likes": 2500,
+        "comments": 32
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRvZ3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+        "likes": 500,
+        "comments": 6
+      }
+    ]
+  }
+}
+```
+Output:
+![ejsexampleoutput](/images/ejsexample.png)
+
+## Miscellaneous
+#### Get & Post Request
+`GET` <br />
+- Used to GET some reponse
+- Data sent in query strings (limited, string data & visible in URL)
+
+`POST` <br />
+- Used to POST something (for crate/write/update)
+- Data sent via request body (any type of data)
+
+##### GET example
+index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GET & POST request Pratice</title>
+</head>
+<body>
+  <div>
+    <h1>GET Request</h1>
+    <form action="/register" method="get">
+      <input type="text" placeholder="Enter username" name="username">
+      <input type="password" placeholder="Enter password" name="password">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+```
+![get](/images/getrequestexample.png)
+
+##### POST example
+index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GET & POST request Pratice</title>
+</head>
+<body>
+  <div>
+    <h1>POST Request</h1>
+    <form action="/register" method="post">
+      <input type="text" placeholder="Enter username" name="username">
+      <input type="password" placeholder="Enter password" name="password">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+```
+![post](/images/postrequestexample.png)
+
+### HTTP Methods sending data to backend
+server side (File Name) <br />
+index.html
+```js
+const express = require('express');
+const app = express();
+const PORT = 8080;
+
+app.get('/register', (req, res) => {
+  let {username, password} = req.query;
+  res.send(`Standerd GET response for user ${username} with password ${password}`);
+});
+
+app.post('/register', (req, res) => {
+
+  res.send('Standered POST response');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+Frontend (file) <br />
+index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GET & POST request Pratice</title>
+</head>
+<body>
+  <div>
+    <h1>GET Request</h1>
+    <form action="http://localhost:8080/register" method="get">
+      <input type="text" placeholder="Enter username" name="username">
+      <input type="password" placeholder="Enter password" name="password">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div>
+    <h1>POST Request</h1>
+    <form action="http://localhost:8080/register" method="post">
+      <input type="text" placeholder="Enter username" name="username">
+      <input type="password" placeholder="Enter password" name="password">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+```
+> This is a very basic way to handle the get request from the frontend to server.
+
+### Handleing POST request
+There are generally two steps to that:
+- set up post request route to get some response.
+- Parse POST request data.
+#### For Parse we use this two lines so that it can be read correctly by express.
+- `app.use(express.urlencoded({extended: true}))`
+- `app.use(express.json())`
+
+exmaple:
+index.js
+```js
+const express = require('express');
+const app = express();
+const PORT = 8080;
+
+app.use(express.urlencoded({extended: true})); // This is a middleware
+app.use(express.json()); // This is a middleware
+
+app.get('/register', (req, res) => {
+  let {username, password} = req.query;
+  res.send(`Standerd GET response for user ${username} with password ${password}`);
+});
+
+app.post('/register', (req, res) => {
+  let {username, password} = req.body
+  res.send(`Standerd POST response for user ${username} with password ${password}`);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+> For JS OPPS you Go to drive [Google Drive](https://drive.google.com/file/d/1zo14ufUNJWZaN4Ny00Ontg6Z2B138CnK/view?usp=sharing)
 ---
 ##### Contributor Name - Abhirup Kumar
