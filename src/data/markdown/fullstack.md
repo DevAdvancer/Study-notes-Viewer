@@ -2805,6 +2805,26 @@ Here collection means `database name`.
 
 > For more information refer documentation [MongoDB Documentation](https://www.mongodb.com/docs/manual/crud/)
 # Connecting MongoDB with Node.js
+### Connecting to mongodb using mongoose
+```js
+const mongoose = require("mongoose");
+const connectionUrl = "mongodb://localhost:27017/testPratce"
+
+
+let main = async () => {
+  await mongoose.connect(connectionUrl);
+}
+
+main()
+.then(() => {
+  console.log("Succesfully Connected to Mongodb");
+})
+.catch((err) => {
+  console.log("Error While connecting to Mongodb");
+})
+```
+> Make sure your server is running for Mongodb
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
