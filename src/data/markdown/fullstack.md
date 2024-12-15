@@ -2772,5 +2772,39 @@ REST is an architectural style that defines a set of constraints to be used for 
 
 > Go to this dive link for the files and folders [Google Drive](https://drive.google.com/drive/folders/1WHT8fdY6uSGmshhzam-nwXrmwMeg859t?usp=sharing)
 
+# Database (Mongodb)
+## MongoDB
+- MongoDB is a NoSQL database.
+- MongoDB is a document-oriented database.
+- MongoDB is a schema-less database.
+- MongoDB is a distributed database.
+
+### Basic Commands
+Here collection means `database name`.
+##### Insert
+- `db.collection.insertOne({key: value})`: Here we can add only one value.
+- `db.collection.insertMany[({key: value}, {key: value}])`: Here we can add multiple values with the help of list.
+##### FIND
+- `db.collection.find({key: value})`: here we can find similar data with one conditon.
+- `db.collection.findOne({key: value})`: Here we can have only the first with the given condition.
+##### Query Operator
+- `db.collection.find({value: {$gt: value}})`: Here gt is greater than.
+- `db.collection.find({value: {$gte: value}})`: Here gte is greater than equal.
+- `db.collection.find({value: {$lt: value}})`: Here lt is less than.
+- `db.collection.find({value: {$lte: value}})`: Here lte is less than equal.
+- `db.collection.find({value: {$in [value, value]}})`: Here we can search for both Condition.
+- `db.collection.find({$or: [{key: {$gt: value}}, {key: value}]})`: Here we can search for both Condition and conditional.
+##### Update
+- `db.collection.updateOne({key: value}, {$set: {key: value}})`: Here we can update the value.
+- `db.collection.updateMany({key: value}, {$set: {key: value}})`: Here we can update many values.
+- `db.collection.replaceOne({key: value}, {$set: {key: value}})`: Here we can replace document with the new key value pair.
+##### Delete
+- `db.collection.deleteOne({key: value})`: Here we can delete one document.
+- `db.collection.deleteMany({key: {$lt: value}})`: Here we can delete many documents.
+- `db.dropdatabase()`: Here we can delete the whole database.
+
+> For more information refer documentation [MongoDB Documentation](https://www.mongodb.com/docs/manual/crud/)
+# Connecting MongoDB with Node.js
+
 ---
 ##### Contributor Name - Abhirup Kumar
