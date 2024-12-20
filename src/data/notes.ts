@@ -1,6 +1,7 @@
 import { Note } from '../types'
 import pythonIntro from './markdown/python-intro.md?raw'
 import fullStack from './markdown/fullstack.md?raw'
+import compilerDesign from './markdown/compiler-design.md?raw'
 
 export const notes: Note[] = [
   {
@@ -16,5 +17,12 @@ export const notes: Note[] = [
       subjectCode: 'CSE11123',
       content: fullStack,
       progress: 'completed'
+  },
+  {
+      id: '3',
+      subject: 'Compiler Design',
+      subjectCode: 'CSE11132',
+      content: compilerDesign,
+      progress: 'not-started'
   }
 ];
