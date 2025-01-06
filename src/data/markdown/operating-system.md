@@ -1,3 +1,4 @@
+> Book: Operating System Concepts by: Galvin and Silver Scerd 
 # Syllabus
 ### 1. Basics
 - As a resource allocator
@@ -22,3 +23,8 @@
 ### 5. Production and security
 - Production
 - Security
+
+
+# Function of OS
+1. Resource Allocator
+2. Process Management
