@@ -5,6 +5,7 @@ import operatingSystem from './markdown/operating-system.md?raw'
 import machineLearning from './markdown/machine-learning.md?raw'
 import unstructuredDatabase from './markdown/unstructured-database.md?raw'
 import operatingSystemLab from './markdown/operating-system-lab.md?raw'
+import iot from './markdown/iot.md?raw'
 
 export const notes: Note[] = [
   {
@@ -47,6 +48,13 @@ export const notes: Note[] = [
     subject: 'Operating System Lab',
     subjectCode: 'CSE12156',
     content: operatingSystemLab,
+    progress: 'not-started'
+  },
+  {
+    id: '7',
+    subject: 'IOT',
+    subjectCode: 'ECE11028',
+    content: iot,
     progress: 'in-progress'
   }
 ];
