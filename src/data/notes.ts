@@ -4,6 +4,7 @@ import fullStack from './markdown/fullstack.md?raw'
 import operatingSystem from './markdown/operating-system.md?raw'
 import machineLearning from './markdown/machine-learning.md?raw'
 import unstructuredDatabase from './markdown/unstructured-database.md?raw'
+import operatingSystemLab from './markdown/operating-system-lab.md?raw'
 
 export const notes: Note[] = [
   {
@@ -25,7 +26,7 @@ export const notes: Note[] = [
       subject: 'Operating System',
       subjectCode: 'CSE11150',
       content: operatingSystem,
-      progress: 'not-started'
+      progress: 'in-progress'
   },
   {
     id: '4',
@@ -40,5 +41,12 @@ export const notes: Note[] = [
     subjectCode: 'CSE11202',
     content: unstructuredDatabase,
     progress: 'not-started'
+  },
+  {
+    id: '6',
+    subject: 'Operating System Lab',
+    subjectCode: 'CSE12156',
+    content: operatingSystemLab,
+    progress: 'in-progress'
   }
 ];

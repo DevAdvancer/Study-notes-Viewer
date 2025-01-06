@@ -12,14 +12,14 @@ export default function App() {
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [filter, setFilter] = useState<Progress | 'all'>('all');
 
-  const filteredNotes = notes.filter(note => 
+  const filteredNotes = notes.filter(note =>
     filter === 'all' ? true : note.progress === filter
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white font-sans">
       <div className="max-w-6xl mx-auto p-8 pb-24">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-3 mb-8"
@@ -29,10 +29,10 @@ export default function App() {
           </div>
           <h1 className="text-3xl font-bold">Study Notes</h1>
         </motion.div>
-        
+
         <SortControls onSortChange={setFilter} currentFilter={filter} />
 
-        <motion.div 
+        <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
