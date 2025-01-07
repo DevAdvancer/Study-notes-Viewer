@@ -6,6 +6,7 @@ import machineLearning from './markdown/machine-learning.md?raw'
 import unstructuredDatabase from './markdown/unstructured-database.md?raw'
 import operatingSystemLab from './markdown/operating-system-lab.md?raw'
 import iot from './markdown/iot.md?raw'
+import unstructuredDatabaseLab from './markdown/unstructured-database-lab.md?raw'
 
 export const notes: Note[] = [
   {
@@ -34,27 +35,34 @@ export const notes: Note[] = [
     subject: 'Machine Learning',
     subjectCode: 'CSE11206',
     content: machineLearning,
-    progress: 'not-started'
+    progress: 'in-progress'
   },
   {
     id: '5',
-    subject: 'Unstructured Database',
+    subject: 'Unstructured DB',
     subjectCode: 'CSE11202',
     content: unstructuredDatabase,
-    progress: 'not-started'
+    progress: 'in-progress'
   },
   {
     id: '6',
-    subject: 'Operating System Lab',
+    subject: 'IOT',
+    subjectCode: 'ECE11028',
+    content: iot,
+    progress: 'in-progress'
+  },
+  {
+    id: '7',
+    subject: 'OS Lab',
     subjectCode: 'CSE12156',
     content: operatingSystemLab,
     progress: 'not-started'
   },
   {
-    id: '7',
-    subject: 'IOT',
-    subjectCode: 'ECE11028',
+    id: '8',
+    subject: 'UDB Lab',
+    subjectCode: 'CSE12203',
     content: iot,
-    progress: 'in-progress'
+    progress: 'not-started'
   }
 ];
