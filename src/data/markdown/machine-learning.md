@@ -55,3 +55,30 @@ The interquartile range IQR tells us the range where the bulk of the values lie.
 ###### Feature Selection
 ###### Feature Scaling
 ###### Normalisation Standerdisation
+
+
+# Supervised Learning
+### 1. Linear Regression
+> y = mx + c
+
+m = Slope <br />
+y = Dependent Variable<br />
+x = Independent Variable<br />
+c = Intercept<br />
+
+We have to find the best fit line by changing the `m` and `c`.
+
+### 2. Multiple Linear Regression
+> y = m<sub>1</sub>x<sub>1</sub>+m<sub>2</sub>x<sub>2</sub>+.....+m<sub>n</sub>x<sub>n</sub> + c
+
+This is Dynamic and used for multiple dependent variable in realtime issues.
+
+## Algorithm
+1. Gradient-Decent. (Optimisation-Based) [OLS]
+2. Distance Based.
+3. Probability Based.
+4. Pre Based.
+
+
+---
+##### Contributor Name - Abhirup Kumar
