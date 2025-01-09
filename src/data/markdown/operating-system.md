@@ -64,6 +64,90 @@ It is a type of Multiprogramming system with every process running in round robi
 Time Sharing and Multiprogramming systems are also called multitasking sometimes as multiple tasks run in interleaving manner.
 ![multitasking](/images/multitasking.webp)
 
+### 3. Multi-Processing Operating System
+![multiprocessingos](/images/multiprocessingos.webp)
+Multi-Processing is an approach to improving the efficiency and responsiveness of computing systems by dividing a single core CPU into multiple processes. This approach enables each process to execute its own code, parallelize its computation, and perform tasks concurrently instead of sequentially. <br />
+
+###### **Advantages:**
+- Reduced Wait Times
+- Parallel Execution
+- Cost Effective
+- Better System Reliability
+- Increased Scalability
+
+###### **Dis-Advantages:**
+- Complexity
+- Hardware Overhead
+- Memory Management
+- Interprocess Communication
+- Synchronization Issues
+
+### Types of Multi-Processing System
+#### 1. **Parallel Operating System**
+- **Symetric-Multi Processor (SMP)**: In an SMP system, all processors in the system share a common memory space and clock cycle, allowing them to compete for access to this shared resources as if they were all located on a single processor. This is called parallel system.
+- **Asymetric-Multi Processor (RMA)**: An RMA system is similar to an SMP system but with one or more of its processors having no direct access to the same common memory space and clock cycle as the others, thus allowing them to compete for access to shared resources while limiting each other's performance. The main difference between these two types is that in an RMA system, there can be multiple `rival` CPUs in the system (compared to only one in an SMP).
+#### 2. Distributed Operating System
+
+##### Definition:
+A Distributed Operating System (OS) is an operating system that allows multiple computers to share resources and work together as a single system. It consists of multiple nodes or machines that are interconnected through a network, and each node runs the same OS instance.
+###### Characteristics:
+1. **Decentralization**: Each node in the distributed system operates independently, making decisions based on local information.
+2. **Autonomy**: Nodes can join or leave the system at any time without affecting other nodes.
+3. **Redundancy**: Data and resources are replicated across multiple nodes to ensure availability and fault tolerance.
+4. **Communication**: Nodes communicate with each other using standardized protocols.
+###### Types of Distributed Operating Systems:
+1. **Client-Server Architecture**: A client node requests services from a server node, which provides access to shared resources.
+2. **Peer-to-Peer Architecture**: All nodes in the system are equal and can request services from any other node.
+3. **Cluster Architecture**: Multiple nodes work together to provide high availability and scalability.
+###### Advantages:
+1. **Scalability**: Distributed systems can scale horizontally by adding more nodes, making them ideal for large-scale applications.
+2. **High Availability**: With multiple nodes, failures are less likely to bring the system down, ensuring high availability.
+3. **Fault Tolerance**: Replicated data and resources ensure that the system remains operational even in case of node failure.
+4. **Improved Security**: Distributed systems can implement redundancy and failover mechanisms to prevent data loss and unauthorized access.
+###### Disadvantages:
+1. **Complexity**: Distributed systems are more complex to manage, maintain, and troubleshoot than centralized systems.
+2. **Latency**: Communication between nodes can introduce latency, affecting system responsiveness.
+3. **Security Risks**: With multiple nodes, there is a higher risk of security breaches and unauthorized access.
+4. **Data Consistency**: Ensuring data consistency across all nodes can be challenging in distributed systems.
+###### Real-World Examples:
+1. **Google's Compute Engine**: A cloud-based infrastructure that uses a distributed operating system to manage resources and ensure high availability.
+2. **Apache Hadoop**: An open-source distributed computing framework used for big data processing and storage.
+3. **Amazon Web Services (AWS)**: A cloud-based platform that uses a distributed operating system to provide scalability, high availability, and fault tolerance.
+
+
+## Master-Slave Relationship Notes
+
+###### Definition
+A configuration where one device (master) controls and manages data and resources, while other devices (slaves) replicate and provide backup functionality.
+###### Components
+1. **Master**:
+- Primary controller
+- Manages data and resources
+- Replicates data to slave(s)
+2. **Slave(s)**:
+- Secondary controllers
+- Replicate master's data
+- Provide backup functionality
+
+###### How it Works
+1. **Data Replication**: Master device replicates data to one or more slave devices.
+2. **Master-Slave Communication**: Master device sends requests to slave device(s) for processing and response.
+3. **Slave Device Control**: Slave devices can control specific resources or services.
+###### Advantages
+- High Availability: Data is protected by replication on multiple slave devices.
+- Scalability: Adding new slave devices increases overall system capacity.
+- Data Protection: Data is replicated across multiple devices, ensuring high availability.
+###### Challenges
+- Synchronization: Synchronizing data between master and slave devices can be challenging.
+- Conflict Resolution: Conflicts may arise when updating data on one device while another is accessing it.
+- Maintenance and Upgrade: Master-slave relationships require regular maintenance and upgrades.
+
+###### Real-World Examples
+- Google's Bigtable
+- Amazon Web Services (AWS)
+- Microsoft Azure
+
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
