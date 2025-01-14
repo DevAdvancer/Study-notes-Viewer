@@ -62,7 +62,7 @@ export const notes: Note[] = [
     id: '8',
     subject: 'UDB Lab',
     subjectCode: 'CSE12203',
-    content: iot,
+    content: unstructuredDatabaseLab,
     progress: 'not-started'
   }
 ];
