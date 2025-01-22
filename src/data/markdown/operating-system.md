@@ -146,8 +146,48 @@ A configuration where one device (master) controls and manages data and resource
 - Google's Bigtable
 - Amazon Web Services (AWS)
 - Microsoft Azure
+#### 4. Hand-Help System
 
+A hand-help system is an artificial intelligence (AI) solution that uses machine learning algorithms to assist humans in performing tasks or making decisions, especially when the tasks are repetitive and require little-to-no judgment. It can be applied across various fields like healthcare, manufacturing, customer service, financial services, and more.
 
+Advantages of Hand-Help Systems include:
+
+1. **Efficiency**: These systems automate tedious tasks, reducing human error and increasing productivity.
+2. **Cost-effectiveness**: They often cost less than hiring additional staff for similar tasks.
+3. **Scalability**: As the workload increases or teams expand, the system can adapt to handle more users.
+
+4. **Accuracy**: AI-driven systems are capable of making decisions based on data, thus enhancing their accuracy compared to human decision-making processes.
+
+Disadvantages of Hand-Help Systems include:
+
+1. **Training**: Implementing and maintaining an AI system can be complex, requiring specialized training.
+2. **Privacy Concerns**: The use of personal health data or other sensitive information may raise concerns regarding privacy and security.
+3. **Adaptation**: As technology evolves, new systems need to be trained regularly, which can become costly.
+
+4. **Bias**: AI models are subject to bias due to the data used for training, hence creating an ethical dilemma in decision-making scenarios where fairness is crucial.
+#### 5. Real-Time System
+
+A real-time system is a computer system or software that processes input information at the same rate it receives new input from external sources such as data streams, sensors, and network traffic without waiting for its output to be completed.
+
+Advantages of Real-Time Systems include:
+
+1. **High Performance**: Since real-time systems have to process events occurring in real time, they must respond quickly, often under pressure or emergency conditions.
+2. **Reliability**: In case of critical errors, data loss is not a risk since the system processes information as it arrives.
+
+3. **Real-Time Applications**: They are used for applications that require immediate response from users, such as video streaming services, online trading platforms, and real-time operational systems in industries like healthcare or manufacturing.
+
+Disadvantages of Real-Time Systems include:
+
+1. **Complexity**: Designing and implementing a real-time system can be challenging due to the high demands on performance.
+2. **Resource Management**: Real-time systems require efficient use of resources, including CPU time, memory, and I/O operations, to ensure they can handle additional data or commands as needed.
+
+3. **Costs**: Implementing and maintaining real-time systems might incur significant costs in terms of hardware, software, training personnel, and ongoing monitoring services.
+4. **Accuracy**: Real-time systems have to meet stringent timing requirements for their response times, which can lead to delays if not properly managed or monitored.
+
+5. **Complexity**: The complexity associated with handling time-sensitive data could lead to more complex system architectures that require additional software or hardware resources.
+
+## Memory Hirerchy
+![MemoryHirerchy](/images/memoryHirerchy.png)
 
 ---
 ##### Contributor Name - Abhirup Kumar

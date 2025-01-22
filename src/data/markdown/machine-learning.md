@@ -146,5 +146,91 @@ Distance = 4, 5, 3, 3.6 <br />
 
 > Feature Selection
 
+# Multiple Linear Regression
+## **2. Multicoliniarity**
+1. Person Corelation Coefficient
+Formula: <br />
+r = Σ[(xi - x̄)(yi - ȳ)] / sqrt(Σ(xi - x̄)² * Σ(yi - ȳ)²)
+**where:**
+- x and y are the two variables
+- xi and yi are individual data points in the dataset
+- x̄ and ȳ are the means of the datasets
+- Σ denotes summation (sum)
+- r is the Pearson correlation coefficient
+
+(x)CNS - 9, 8, 5, 1, 4, 2, 6, 7 = Sum = 45 <br />
+(y)Hardness - 126, 130, 90, 150, 160, 100, 190, 80, 200 = Sum = 1170
+
+- xy = 1080, 1090, 950, 150, 690, 200, 420, 480, 1900 = Sum = 5840
+`Complete After SomeDays..`
+
+### Feature Selection
+1. **Filter Methods**
+
+These methods evaluate the features of a dataset without considering their interactions. They are typically used for smaller datasets.
+
+* **Correlation-based filters**: Select features based on their correlation with the target variable.
+* **Information Gain**: Calculate the information gain of each feature by splitting the data into subsets.
+* **Mutual Information**: Measure the mutual information between each feature and the target variable.
+* **Recursive Feature Elimination (RFE)**: Recursively eliminate features that contribute least to the model's performance.
+
+2. **Wrapper Methods**
+
+These methods evaluate the features of a dataset while considering their interactions with other variables. They are typically used for larger datasets.
+
+* **Forward Selection**: Start by selecting the most informative feature and then recursively add more features.
+* **Backward Elimination**: Start by including all features and then remove the least important ones.
+* **Wrapper Methods with RFE**: Use recursive feature elimination to eliminate features that contribute least to the model's performance.
+* **Lasso Regression**: Penalize large coefficients to select a subset of relevant features.
+
+3. **Embedded Methods**
+
+These methods combine feature selection and model estimation into a single step. They are typically used for larger datasets.
+
+* **Regularization-based methods**: Regularization techniques like L1, L2, or Elastic Net can automatically select relevant features.
+* **Shrinkage-based methods**: Techniques like least angle regression (LAR) and thresholded recursive least squares (TRLS) can also be used.
+* **Gradient Boosting**: Gradient boosting machines have a built-in feature selection mechanism.
+
+4. **Hybrid Methods**
+
+These methods combine multiple feature selection techniques to improve performance.
+
+* **Stacking**: Use an ensemble method like stacking to combine the predictions of multiple models, each trained on different subsets of features.
+* **Random Forests with Feature Selection**: Use random forests to select a subset of relevant features and then use those features for hyperparameter tuning.
+
+5. **Other Methods**
+
+* **Feature Importance**: Calculate feature importance using techniques like permutation importance or SHAP (SHapley Additive exPlanations).
+* **Clustering-based methods**: Clustering algorithms can be used to group similar features together.
+* **Evolutionary algorithms**: Evolutionary algorithms like genetic programming and genetic drift can be used for feature selection.
+
+# Variance of Regression
+- Ridge Regression
+- Lasso Regression
+Regularization techniques are used to address overfitting, especially when dealing with large datasets. Ridge and Lasso regression modify the standard regression approach by adding penalty terms to the loss function, helping to control the complexity of the model.
+### Understanding Regularization
+Regularization penalizes the magnitude of coefficients of features while minimizing the error between predicted and actual observations. When the size of coefficients increases exponentially, the model becomes increasingly complex and prone to overfitting.
+
+### What Does a Large Coefficient Signify?
+A large coefficient indicates that a particular feature is given significant importance in predicting the outcome. While this feature may be a strong predictor, excessively large coefficients can lead to overfitting, where the model captures noise rather than underlying patterns.
+### Properties of LASSO and RIDGE Regression
+1. Ridge Regression
+- Ridge Regression introduces a penalty term to shrink coefficient values.
+- It employs an L2 penalty, which adds the sum of squared coefficient values multiplied by a tuning parameter (alpha).
+- The L2 penalty discourages large coefficient values, pushing them toward zero but never exactly reaching zero, thereby reducing the impact of less important features.
+- Feature Selection: Ridge regression retains all features in the model while shrinking the impact of less important ones.
+- Use Case: Useful when the objective is to minimize the impact of less important features while preserving all variables.
+- Bias-Variance Tradeoff: Ridge regression reduces variance but may introduce slight bias, leading to better generalization.
+- Interpretability: Since Ridge does not eliminate features, all coefficients remain in the model, making interpretation slightly more challenging.
+- Sensitivity: Less sensitive to outliers compared to standard regression methods.
+
+2. Lasso Regression
+- Lasso Regression (Least Absolute Shrinkage and Selection Operator) introduces an L1 penalty, which adds the absolute values of coefficients multiplied by a tuning parameter.
+- The L1 penalty encourages sparsity, meaning it can shrink some coefficients to zero, effectively performing feature selection.
+- Feature Selection: Lasso regression can eliminate less important features by setting their coefficients to zero, making the model more interpretable.
+- Use Case: Useful when there are many features, but only a few are expected to have significant predictive power.
+- Bias-Variance Tradeoff: Lasso regression introduces more bias than Ridge but results in a simpler, more interpretable model.
+- Interpretability: Since Lasso can remove features entirely, it provides a more interpretable model by highlighting only the most significant predictors.
+- Sensitivity: More sensitive to outliers compared to Ridge regression due to its reliance on absolute values.
 ---
 ##### Contributor Name - Abhirup Kumar
