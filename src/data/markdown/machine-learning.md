@@ -193,6 +193,7 @@ These methods combine feature selection and model estimation into a single step.
 
 4. **Hybrid Methods**
 
+
 These methods combine multiple feature selection techniques to improve performance.
 
 * **Stacking**: Use an ensemble method like stacking to combine the predictions of multiple models, each trained on different subsets of features.
@@ -232,5 +233,11 @@ A large coefficient indicates that a particular feature is given significant imp
 - Bias-Variance Tradeoff: Lasso regression introduces more bias than Ridge but results in a simpler, more interpretable model.
 - Interpretability: Since Lasso can remove features entirely, it provides a more interpretable model by highlighting only the most significant predictors.
 - Sensitivity: More sensitive to outliers compared to Ridge regression due to its reliance on absolute values.
+
+## Logistic Regression
+1. Supervised
+2. Classification
+
+> All mathematical expression with respect to this Logistic Regression
 ---
 ##### Contributor Name - Abhirup Kumar

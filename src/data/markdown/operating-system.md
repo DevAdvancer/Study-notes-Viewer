@@ -189,5 +189,16 @@ Disadvantages of Real-Time Systems include:
 ## Memory Hirerchy
 ![MemoryHirerchy](/images/memoryHirerchy.png)
 
+# Process Management
+A program at the time of execution
+
+## Process Control Block
+## States of a Process
+There are five states of a process 
+
+# Types of Process
+- Independent
+- Co-Operating: (IPC) Inter-process Communication.
+
 ---
 ##### Contributor Name - Abhirup Kumar
