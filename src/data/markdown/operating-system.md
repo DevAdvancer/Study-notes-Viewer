@@ -194,11 +194,63 @@ A program at the time of execution
 
 ## Process Control Block
 ## States of a Process
-There are five states of a process 
+There are five states of a process
 
 # Types of Process
 - Independent
 - Co-Operating: (IPC) Inter-process Communication.
+
+### CPU SCHEDULING
+1. First come first serve (QUEUE TECHNIQUE)
+2. Shortest job first.
+3. Shortest remaining time first.
+4. Round robin scheduling.
+5. priority scheduling.
+
+### Non - Premitive
+1. First come first serve (QUEUE TECHNIQUE)
+2. Shortest job first.
+
+### premitive
+1. Shortest remaining time first.
+2. Round robin scheduling.
+3. priority scheduling.
+
+### 1. First come first serve (QUEUE TECHNIQUE)
+##### Given the table below find out the average waiting time, response time, and turn-around time for 5 process and also show the GNADD chart. Assume all the processes have arrived in the system at time 0.
+![FCFS](/images/FCFS.png)
+=> <br />
+The GANDD chart is as follows:
+![GANNDCHART](/images/GANDDchartfcfs.png)
+Response time calculation:
+1. Response time of P1 = 0 - 0 = 0 mS
+2. Response time of P2 = 10 - 0 = 10 mS
+3. Response time of P3 = 23 - 0 = 23 mS
+4. Response time of P4 = 28 - 0 = 28 mS
+5. Response time of P5 = 42 - 0 = 42 mS
+
+Therefore, Avg response time = 69.4 <br />
+Average waiting time - Since, it's non-premitive scheduling algorithm, waiting time will be same as response time = 69.4 <br />
+Average Turn around time: (Waiting time + Response time + Brust time)
+1. Turn around time of P1 = 0 + 0 + 10 = 10
+2. Turn around time of P2 = 10 + 13 = 23
+3. Turn around time of P3 = 23 + 5 = 28
+4. Turn around time of P4 = 28 + 14 = 42
+5. Turn around time of P5 = 42 + 7 = 49
+
+### 2. Shortest Job First
+
+### 3. Round robin scheduling
+Turnaround time = brust time + waiting time + response time
+
+### 4. Priority Algortihm
+
+
+### 5. Shortest remaining time first
+
+
+## Multilevel Queue Scheduling
+---
 
 ---
 ##### Contributor Name - Abhirup Kumar

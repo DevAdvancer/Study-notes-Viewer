@@ -238,6 +238,15 @@ A large coefficient indicates that a particular feature is given significant imp
 1. Supervised
 2. Classification
 
+## Classification Model
+1. Accuracy <br />
+**Formula**: Number of Correct prediction / Total number of Prediction.
+2. Confusion Matrix
+
 > All mathematical expression with respect to this Logistic Regression
+
+
+# Clusturing.
+
 ---
 ##### Contributor Name - Abhirup Kumar

@@ -1,80 +1,70 @@
-# Introduction
-- what is data? anything can be data
-- database - a platform where we store data
-- There are two kinds of database - structured database and unstructured database
-- why unstructured database?
-    - Faster
-    - Easier to scale
-    - Not rigid
-- why not unstructred database (disadvantages)?
-    - need to define some structure later on to be consumed properly by programs
-    - not the best with join like queries
-- Types of unstructured database
-    - graph DB - neo4j
-    - columnar DB - cassandra
-    - document based DB - mongoDB (The one we will talk about mostly)
-    - key value pair - Redis
-    - time series data - InfluxDB
-- Use of unstructred database
-    - huge amount of read writes of data is there
-    - data is distributed
-    - sensor data
+# Syllabus
+## Unit-I: Introduction to Unstructured Database
+1. Overview of Unstructured Data
+2. Introduction to Unstructured Databases
+3. Use Cases and Benefits of Unstructured DBMS
+4. Data Models for Unstructured Databases
+5. Choosing the Appropriate Data Model
+## Unit-II: Data Ingestion, Extraction & Querying Unstructured Data
+1. Data Ingestion Techniques
+2. Extracting Structured Information from Unstructured Data
+3. Pre-processing and Cleaning Unstructured Data
+4. Handling Multimedia and Binary Data
+5. Query Languages for Unstructured Databases
+## Unit-III: Introduction to MongoDB
+1. Overview of MongoDB
+2. Comparison with Relational Databases
+3. Installing and Setting Up MongoDB
+4. MongoDB Data Model
+5. CRUD Operations
+6. Indexing, Aggregation, and Replication
+## Unit-IV: Advanced MongoDB
+1. Relationships and Database References
+2. Advanced Indexing
+3. MapReduce
+4. Text Search and Regular Expressions
+5. MongoDB Atlas
+6. MongoDB-Python Integration
+## Unit-V: Backup, Recovery, Disaster Planning, and Emerging Trends
+1. Backup and Recovery Procedures
+2. Disaster Recovery Planning
+3. MongoDB in Production
+4. Integration with Other Database Systems
+5. Handling Streaming and Real-time Data
+6. Exploring Cloud-based Unstructured Databases
 
 
-### Honorable mentions in class
+# Unit-I: Introduction to Unstructured Database
+## 1. What is Unstructured Data?
+=> Unstructured data refers to information that does not follow a predefined format or schema, making it more difficult to store, search, and analyze using traditional database systems.
+## 2. Examples of Unstructured Data
+![Example of Unstructured Data](/images/examplesofunstructureddata.png)
+## 3. Characteristics of Unstructured Data
+1. No Fixed Format → Unlike structured data in tables, unstructured data can be free-flowing (text, images, videos). <br />
+**Example**: A news article has paragraphs and headlines but no rigid structure. <br />
+2. Large Volume → It makes up 80-90% of global data and is growing rapidly. <br />
+**Example**: Millions of images are uploaded to Instagram daily. <br />
+3. Variety of Formats → Includes text, images, videos, sensor logs, etc. <br />
+**Example**: A single customer interaction can have emails, chat messages, and call recordings. <br />
+4. Difficult to Analyze → Requires advanced tools like AI and NLP to extract insights. <br />
+**Example**: Google uses AI to analyze millions of search queries and web pages. <br />
+## 4. Challenges of Unstructured Data
+#### (1) Volume – Too Much Data to Handle
+- Huge amounts of unstructured data are generated every second.
+- Example: YouTube receives 500+ hours of video uploads per minute.
+#### (2) Variety – Many Different Formats
+- Data comes in different types (text, images, audio, video, etc.).
+- Example: A self-driving car collects sensor data, video footage, and GPS logs.
+#### (3) Velocity – Data is Generated in Real-Time
+- Data needs to be processed quickly, often in real-time.
+- Example: Stock market trading systems process millions of transactions per second.
+#### (4) Complexity – Hard to Analyze and Search
+- Extracting useful information is difficult.
+- Example: AI is needed to analyze customer sentiment from social media comments.
 
-[Discord switching from cassandra to scylla db](https://www.scylladb.com/tech-talk/how-discord-migrated-trillions-of-messages-from-cassandra-to-scylladb/)
+## 5. How to Manage and Process Unstructured Data?
+#### (1) Storage Solutions
+![Sorage Solution](/images/storagesolution.png)
+#### (2) Processing Techniques
 
-[Facebook Tao - graph database](https://engineering.fb.com/2013/06/25/core-infra/tao-the-power-of-the-graph/)
-
-## How it works:-
-- Key value pair database - redis
-    - Uses key value pair like dictionaries and hash maps
-    - extremely fast cause mostly in memory
-    - redis
-    - localstorage in web works similar
-
-- Document based
-    - mainly two kinds of documents - JSON and XML - JSON is predominantly used for Document based database
-- Javascript deep copy vs shallow copy
-    - Normal copy/reference
-    ```js
-    let obj1 = { name: "John", age: 30 };
-    let obj2 = obj1;  // obj2 is a reference to obj1
-    obj2.age = 31;
-    console.log(obj1.age); // 31
-    console.log(obj2.age); // 31
-    ```
-    - Shallow copy
-    ```js
-    let obj1 = { name: "John", age: 30, address: { city: "New York" } };
-    let obj2 = Object.assign({}, obj1);  // Shallow copy
-
-    obj2.age = 31;
-    obj2.address.city = "Los Angeles";
-
-    console.log(obj1.age);               // 30
-    console.log(obj1.address.city);      // "Los Angeles"
-    console.log(obj2.age);               // 31
-    console.log(obj2.address.city);      // "Los Angeles"
-    ```
-    - deep copy
-    ```js
-    let obj1 = { name: "John", age: 30, address: { city: "New York" } };
-    let obj2 = JSON.parse(JSON.stringify(obj1));  // Deep copy
-
-    obj2.age = 31;
-    obj2.address.city = "San Francisco";
-
-    console.log(obj1.age);               // 30
-    console.log(obj1.address.city);      // "New York"
-    console.log(obj2.age);               // 31
-    console.log(obj2.address.city);      // "San Francisco"
-    ```
-## Disadvantage of Unstructured Database
-- **Unstructured data has no predefined structure** : In an unstructured database, there are no specific rules defining the way data is structured within tables or fields. This means it's difficult to create a consistent format for each individual document in the database, leading to variations in information.
-- **Lack of uniformity and consistency** : With unstructured databases, different documents may not have the same level of detail or be formatted exactly as required by the exam. This lack of uniformity can affect the quality of the data used for analysis and interpretation.
-- **Interpretation challenges** : If questions in an examination are based on a variety of unstructured documents, it's challenging to ensure that all students have access to the same source materials or use the right level of detail in their responses.
-- **Time-consuming for reviewers** : For reviewers, sorting through potentially hundreds or thousands of individual documents to find relevant data can be time-consuming and confusing. This process may lead to errors or misinterpretations if not done carefully.
-- **Increased administrative burden** : Managing and maintaining a large database with unstructured information requires additional effort in terms of cataloging, indexing, searching, and updating. This can increase the workload for exam organizers and administrators responsible for the examination.
-- **Lack of standardized format** : Without an organized structure, it's harder to standardize marking rubrics or grading criteria, which is crucial for consistency across different students' scores.
+![Processing Techniques](/images/)
