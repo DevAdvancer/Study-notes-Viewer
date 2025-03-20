@@ -248,5 +248,15 @@ A large coefficient indicates that a particular feature is given significant imp
 
 # Clusturing.
 
+## SVM (Support vector Machine)
+A SVM is a machine learning algorithm used for classification and regression. It finds the best fir line or hyper plane, to separate data into groups.
+### Linear SVM
+A linear SVM is a type of SVM that uses a linear kernel to separate data into groups. It is useful when the data is linearly separable.
+#### Non-linear SVM
+A non-linear SVM is a type of SVM that uses a non-linear kernel to separate data into groups. It is useful when the data is not linearly separable. Which means when the data points cannot be separated into two classes by using a straight line. Then, we use some advance techniques like kernel tricks to classify them. In Most Real world applications, We Donot Find Lineraly separable data points. Hence, we use kernel tricks to solve them in higher dimensions.
+
+
+## Logistic Regression vs SVM
+w
 ---
 ##### Contributor Name - Abhirup Kumar
