@@ -33,6 +33,10 @@ const STUDY_QUOTES = [
 
 // Component for study enhancing features
 export const StudyFeatures: React.FC = () => {
+  // Constants for SVG circle calculations - EXTRA LARGE RADIUS
+  const CIRCLE_RADIUS = 85;
+  const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
+  
   // State for pomodoro timer
   const [pomodoro, setPomodoro] = useState<PomodoroState>(() => {
     // Try to load saved timer settings from localStorage
@@ -92,9 +96,15 @@ export const StudyFeatures: React.FC = () => {
   // State for panel visibility
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
   
-  // Calculate progress percentage for timer circle
-  const timerProgress = ((pomodoro.minutes * 60 + pomodoro.seconds) / 
-    (pomodoro.mode === 'focus' ? pomodoro.focusDuration * 60 : pomodoro.breakDuration * 60)) * 100;
+  // Calculate remaining time in seconds
+  const totalDurationSeconds = pomodoro.mode === 'focus' 
+    ? pomodoro.focusDuration * 60 
+    : pomodoro.breakDuration * 60;
+  const remainingSeconds = pomodoro.minutes * 60 + pomodoro.seconds;
+  const elapsedSeconds = totalDurationSeconds - remainingSeconds;
+
+  // Calculate progress percentage (how much time has elapsed)
+  const timerProgress = (elapsedSeconds / totalDurationSeconds) * 100;
   
   // Update streak when starting a new study session
   const updateStreak = useCallback(() => {
@@ -393,36 +403,52 @@ export const StudyFeatures: React.FC = () => {
               </AnimatePresence>
               
               <div className="flex justify-between items-center">
-                <div className="relative w-16 h-16">
+                {/* INCREASED CIRCLE SIZE - change from w-16 h-16 to w-20 h-20 */}
+                <div className="relative w-20 h-20">
                   {/* Progress circle */}
-                  <svg className="w-full h-full" viewBox="0 0 100 100">
+                  <svg className="w-full h-full" viewBox="0 0 150 150">
                     <circle
-                      cx="50"
-                      cy="50"
-                      r="45"
+                      cx="75"
+                      cy="75"
+                      r={CIRCLE_RADIUS}
                       fill="none"
                       stroke="#1e293b"
-                      strokeWidth="8"
+                      strokeWidth="10"
                     />
                     <motion.circle
-                      cx="50"
-                      cy="50"
-                      r="45"
+                      cx="75"
+                      cy="75"
+                      r={CIRCLE_RADIUS}
                       fill="none"
                       stroke={pomodoro.mode === 'focus' ? "#3b82f6" : "#10b981"}
-                      strokeWidth="8"
+                      strokeWidth="10"
                       strokeLinecap="round"
-                      strokeDasharray="283"
-                      initial={{ strokeDashoffset: 283 }}
+                      strokeDasharray={`${CIRCLE_CIRCUMFERENCE}`}
+                      // Real-time update with each second
                       animate={{ 
-                        strokeDashoffset: 283 - (283 * timerProgress) / 100
+                        strokeDashoffset: CIRCLE_CIRCUMFERENCE * (1 - timerProgress / 100) 
                       }}
-                      transition={{ duration: 0.5 }}
+                      // Added smooth transition for countdown
+                      transition={{
+                        duration: 1,
+                        ease: "linear"
+                      }}
                     />
                   </svg>
-                  <div className="absolute inset-0 flex items-center justify-center font-mono font-bold text-lg text-white">
+                  <motion.div 
+                    className="absolute inset-0 flex items-center justify-center font-mono font-bold text-lg text-white"
+                    // Added subtle pulse animation when timer is active
+                    animate={pomodoro.isActive && !pomodoro.isPaused ? {
+                      scale: [1, 1.05, 1],
+                    } : {}}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
                     {String(pomodoro.minutes).padStart(2, '0')}:{String(pomodoro.seconds).padStart(2, '0')}
-                  </div>
+                  </motion.div>
                 </div>
                 
                 <div className="flex gap-2">
@@ -583,38 +609,53 @@ export const StudyFeatures: React.FC = () => {
               <Minimize className="w-5 h-5" />
             </motion.button>
             
-            {/* Large timer display */}
-            <div className="relative">
-              <svg className="w-64 h-64" viewBox="0 0 100 100">
+            {/* EXTRA LARGE TIMER DISPLAY */}
+            <div className="relative w-[500px] h-[500px]">
+              <svg className="w-full h-full" viewBox="0 0 200 200">
+                {/* Background circle */}
                 <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
+                  cx="100"
+                  cy="100"
+                  r={CIRCLE_RADIUS}
                   fill="none"
                   stroke="#1e293b"
-                  strokeWidth="4"
+                  strokeWidth="8"
                 />
-                <motion.circle
-                  cx="50"
-                  cy="50"
-                  r="45"
+                
+                {/* Timer progress indicator - FILLS as time passes */}
+                <circle
+                  cx="100"
+                  cy="100"
+                  r={CIRCLE_RADIUS}
                   fill="none"
                   stroke={pomodoro.mode === 'focus' ? "#3b82f6" : "#10b981"}
-                  strokeWidth="4"
+                  strokeWidth="8"
                   strokeLinecap="round"
-                  strokeDasharray="283"
-                  initial={{ strokeDashoffset: 283 }}
-                  animate={{ 
-                    strokeDashoffset: 283 - (283 * timerProgress) / 100
+                  transform="rotate(-90 100 100)"
+                  strokeDasharray={`${CIRCLE_CIRCUMFERENCE}`}
+                  strokeDashoffset={CIRCLE_CIRCUMFERENCE * (1 - timerProgress / 100)}
+                  style={{
+                    transition: "stroke-dashoffset 1s linear"
                   }}
-                  transition={{ duration: 0.5 }}
                 />
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-mono font-bold text-7xl text-white">
+              <motion.div 
+                className="absolute inset-0 flex items-center justify-center"
+                // Added countdown pulse animation
+                animate={pomodoro.isActive && !pomodoro.isPaused && remainingSeconds < 60 ? {
+                  scale: [1, 1.05, 1],
+                  opacity: [1, 0.8, 1]
+                } : {}}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <span className="font-mono font-bold text-8xl text-white">
                   {String(pomodoro.minutes).padStart(2, '0')}:{String(pomodoro.seconds).padStart(2, '0')}
                 </span>
-              </div>
+              </motion.div>
             </div>
             
             {/* Timer controls */}
