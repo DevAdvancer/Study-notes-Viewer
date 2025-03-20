@@ -62,9 +62,8 @@
 - Extracting useful information is difficult.
 - Example: AI is needed to analyze customer sentiment from social media comments.
 
-## 5. How to Manage and Process Unstructured Data?
-#### (1) Storage Solutions
-![Sorage Solution](/images/storagesolution.png)
-#### (2) Processing Techniques
+# Replication
+1. Backup
+2. Fasterw
 
-![Processing Techniques](/images/)
+# Transaction in Mongodb
