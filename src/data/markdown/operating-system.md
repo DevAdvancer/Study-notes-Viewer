@@ -252,5 +252,6 @@ Turnaround time = brust time + waiting time + response time
 ## Multilevel Queue Scheduling
 ---
 
+## Memory Management Schemes
 ---
 ##### Contributor Name - Abhirup Kumar
