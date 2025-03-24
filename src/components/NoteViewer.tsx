@@ -12,6 +12,7 @@ interface NoteViewerProps {
 
 export function NoteViewer({ note, onClose }: NoteViewerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const FOOTER_HEIGHT = 48; // in pixels
 
   return (
     <AnimatePresence>
@@ -23,17 +24,17 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ 
-            scale: 1, 
+          animate={{
+            scale: 1,
             opacity: 1,
             width: isFullscreen ? '100%' : 'auto',
             height: isFullscreen ? '100%' : 'auto',
           }}
           transition={{ type: "spring", duration: 0.5 }}
           className={`bg-gray-900/95 backdrop-blur-sm w-full border border-gray-800/50 shadow-xl ${
-            isFullscreen 
-              ? 'fixed inset-0' 
-              : 'rounded-xl max-w-[95%] md:max-w-2xl lg:max-w-4xl max-h-[90vh]'
+            isFullscreen
+              ? 'fixed inset-0 bottom-12' // Add bottom margin for footer
+              : 'rounded-xl max-w-[95%] md:max-w-2xl lg:max-w-4xl max-h-[calc(90vh-48px)]' // Account for footer
           }`}
         >
           <div className="p-6 border-b border-gray-800/50">
@@ -68,8 +69,12 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
               </div>
             </div>
           </div>
-          <div className={`overflow-auto ${isFullscreen ? 'h-[calc(100vh-97px)]' : 'max-h-[calc(90vh-97px)]'}`}>
-            <div className="p-6">
+          <div className={`overflow-auto ${
+            isFullscreen
+              ? 'h-[calc(100vh-97px-48px)]' // Subtract header height (97px) and footer height
+              : 'max-h-[calc(90vh-97px-48px)]' // Account for both in non-fullscreen mode
+          }`}>
+            <div className="p-7">
               <div className="prose prose-invert max-w-none">
                 <ReactMarkdown
                   rehypePlugins={[rehypeRaw]}
@@ -82,7 +87,7 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
                         : src.startsWith('./')
                           ? src.slice(2) // Remove ./ from relative paths
                           : src;
-                      
+
                       // Use public directory for images
                       return <img src={imagePath} alt={alt || ''} className="max-w-full" loading="lazy" />;
                     },

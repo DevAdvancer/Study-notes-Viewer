@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
-import { Note, Progress } from './types';
-import { notes } from './data/notes';
-import { NoteCard } from './components/NoteCard';
-import { NoteViewer } from './components/NoteViewer';
-import { SortControls } from './components/SortControls';
-import { Footer } from './components/Footer';
-import { BookOpen, Sparkles } from 'lucide-react';
-import { StudyThemeProvider } from './components/StudyFeatures';
-import { AddButton } from './components/AddButton';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { Note, Progress } from "./types";
+import { notes } from "./data/notes";
+import { NoteCard } from "./components/NoteCard";
+import { NoteViewer } from "./components/NoteViewer";
+import { SortControls } from "./components/SortControls";
+import { Footer } from "./components/Footer";
+import { BookOpen, Sparkles } from "lucide-react";
+import { StudyThemeProvider } from "./components/StudyFeatures";
+import { AddButton } from "./components/AddButton";
 
 export default function App() {
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
-  const [filter, setFilter] = useState<Progress | 'all'>('all');
+  const [filter, setFilter] = useState<Progress | "all">("all");
   const [isLoaded, setIsLoaded] = useState(false);
   const controls = useAnimation();
 
-  const filteredNotes = notes.filter(note =>
-    filter === 'all' ? true : note.progress === filter
+  const filteredNotes = notes.filter((note) =>
+    filter === "all" ? true : note.progress === filter
   );
 
   // Simulating page load effect
@@ -26,30 +26,30 @@ export default function App() {
       await controls.start({ opacity: 1, y: 0, transition: { duration: 0.6 } });
       setIsLoaded(true);
     };
-    
+
     loadSequence();
   }, [controls]);
 
   return (
     <StudyThemeProvider>
-      <motion.div 
+      <motion.div
         className="min-h-screen bg-gray-900 text-white font-sans"
-        style={{ 
-          background: 'radial-gradient(circle at 10% 10%, rgb(33, 41, 63) 0%, rgb(17, 24, 39) 100%)',
-          overflow: 'hidden'
+        style={{
+          background:
+            "radial-gradient(circle at 10% 10%, rgb(33, 41, 63) 0%, rgb(17, 24, 39) 100%)",
+          overflow: "hidden",
         }}
         animate={{
-          backgroundPosition: ['0% 0%', '100% 100%']
+          backgroundPosition: ["0% 0%", "100% 100%"],
         }}
         transition={{
           backgroundPosition: {
             duration: 20,
-            ease: 'linear',
+            ease: "linear",
             repeat: Infinity,
-            repeatType: 'reverse'
-          }
-        }}
-      >
+            repeatType: "reverse",
+          },
+        }}>
         {/* Floating particles effect */}
         <div className="fixed inset-0 pointer-events-none">
           {[...Array(20)].map((_, i: number) => (
@@ -60,7 +60,7 @@ export default function App() {
                 x: `${Math.random() * 100}%`,
                 y: `${Math.random() * 100}%`,
                 scale: Math.random() * 0.5 + 0.5,
-                opacity: Math.random() * 0.3 + 0.1
+                opacity: Math.random() * 0.3 + 0.1,
               }}
               animate={{
                 y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
@@ -69,8 +69,8 @@ export default function App() {
               transition={{
                 duration: Math.random() * 20 + 10,
                 repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut'
+                repeatType: "reverse",
+                ease: "easeInOut",
               }}
               style={{
                 width: `${Math.random() * 100 + 20}px`,
@@ -80,26 +80,27 @@ export default function App() {
           ))}
         </div>
 
-        <div className="max-w-6xl mx-auto p-8 pb-24 relative z-10">
+        <div className="max-w-6xl mx-auto p-8 pb-32 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center gap-3 mb-8 heading"
-          >
-            <motion.div 
+            className="flex items-center gap-3 mb-8 heading">
+            <motion.div
               className="p-2 bg-blue-500/10 rounded-lg"
-              whileHover={{ 
-                scale: 1.1, 
-                rotate: 5, 
-                backgroundColor: 'rgba(59, 130, 246, 0.2)' 
+              whileHover={{
+                scale: 1.1,
+                rotate: 5,
+                backgroundColor: "rgba(59, 130, 246, 0.2)",
               }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
+              transition={{ type: "spring", stiffness: 300 }}>
               <motion.div
                 animate={{ rotate: [0, 5, 0, -5, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              >
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}>
                 <BookOpen className="w-8 h-8 text-blue-400" />
               </motion.div>
             </motion.div>
@@ -107,21 +108,19 @@ export default function App() {
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-              >
+                transition={{ duration: 1, delay: 0.5 }}>
                 Study Notes
               </motion.span>
-              <motion.span 
+              <motion.span
                 className="inline-block ml-2"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  delay: 1.2, 
-                  type: 'spring',
+                transition={{
+                  delay: 1.2,
+                  type: "spring",
                   stiffness: 300,
-                  damping: 10
-                }}
-              >
+                  damping: 10,
+                }}>
                 <Sparkles className="w-6 h-6 text-yellow-400 inline" />
               </motion.span>
             </h1>
@@ -131,48 +130,44 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="heading"
-          >
+            className="heading">
             <SortControls onSortChange={setFilter} currentFilter={filter} />
           </motion.div>
 
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20" // Added bottom margin
             initial={{ opacity: 0 }}
-            animate={controls}
-          >
+            animate={controls}>
             <AnimatePresence mode="sync">
               {filteredNotes.map((note, index) => (
                 <motion.div
                   key={note.id}
                   initial={{ opacity: 0, y: 50 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0, 
-                    transition: { 
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: {
                       delay: isLoaded ? 0 : 0.2 + index * 0.1,
-                      duration: 0.5
-                    }
+                      duration: 0.5,
+                    },
                   }}
-                  exit={{ 
-                    opacity: 0, 
-                    scale: 0.8, 
-                    transition: { duration: 0.3 } 
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    transition: { duration: 0.3 },
                   }}
-                  whileHover={{ 
-                    y: -5, 
+                  whileHover={{
+                    y: -5,
                     scale: 1.02,
-                    transition: { type: 'spring', stiffness: 300 }
+                    zIndex: 30, // Add z-index for proper stacking
+                    transition: { type: "spring", stiffness: 300 },
                   }}
                   whileTap={{ scale: 0.98 }}
                   layoutId={`note-card-${note.id}`}
-                  className="note-card"
+                  className="note-card relative z-20" // Add positioning context
                 >
-                  <NoteCard
-                    note={note}
-                    onClick={() => setSelectedNote(note)}
-                  />
+                  <NoteCard note={note} onClick={() => setSelectedNote(note)} />
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -185,30 +180,28 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center"
-                onClick={() => setSelectedNote(null)}
-              >
+                onClick={() => setSelectedNote(null)}>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1, 
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
                     y: 0,
-                    transition: { 
-                      type: 'spring',
+                    transition: {
+                      type: "spring",
                       damping: 25,
-                      stiffness: 300
-                    }
+                      stiffness: 300,
+                    },
                   }}
-                  exit={{ 
-                    opacity: 0, 
-                    scale: 0.8, 
-                    y: 20, 
-                    transition: { duration: 0.2 } 
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    y: 20,
+                    transition: { duration: 0.2 },
                   }}
-                  onClick={e => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
                   className="relative"
-                  layoutId={`note-card-${selectedNote.id}`}
-                >
+                  layoutId={`note-card-${selectedNote.id}`}>
                   <NoteViewer
                     note={selectedNote}
                     onClose={() => setSelectedNote(null)}
@@ -220,9 +213,9 @@ export default function App() {
         </div>
 
         {/* Add button with URL redirect */}
-        <AddButton 
-          url="https://forms.gle/q1P3Kk1rzuKPG6qk9" 
-          openInNewTab={true} 
+        <AddButton
+          url="https://forms.gle/q1P3Kk1rzuKPG6qk9"
+          openInNewTab={true}
         />
 
         <Footer />
