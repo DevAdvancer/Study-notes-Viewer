@@ -257,6 +257,6 @@ A non-linear SVM is a type of SVM that uses a non-linear kernel to separate data
 
 
 ## Logistic Regression vs SVM
-w
+
 ---
 ##### Contributor Name - Abhirup Kumar

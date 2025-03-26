@@ -253,5 +253,8 @@ Turnaround time = brust time + waiting time + response time
 ---
 
 ## Memory Management Schemes
+
+
 ---
 ##### Contributor Name - Abhirup Kumar
+  

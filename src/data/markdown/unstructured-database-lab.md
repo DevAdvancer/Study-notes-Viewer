@@ -1,4 +1,4 @@
-# LABs 
+# LABs
 
 ## LAB1
 ### Questions and Answers:-
@@ -11,7 +11,7 @@ use LAB1
 ```mongodb
 db.posts.insertOne({name: 'Post 1', description: 'Hello, this is my first post', date: '2024-12-3', tags: ['a', 'b', 'c']})
 ```
-**Output**: 
+**Output**:
 ```output
 {
   acknowledged: true,
@@ -22,7 +22,7 @@ db.posts.insertOne({name: 'Post 1', description: 'Hello, this is my first post',
 ```mongodb
 db.posts.insertMany([{name: 'Post 2', description: 'Hello, this is my second post', date: '2024-12-10', tags: ['a', 'c']}, {name: 'Post 3', description: 'Hello, this is my third post', date: '2024-12-15', tags: ['b', 'c']}])
 ```
-**Output**: 
+**Output**:
 ```output
 {
   acknowledged: true,
@@ -36,7 +36,7 @@ db.posts.insertMany([{name: 'Post 2', description: 'Hello, this is my second pos
 ```mongodb
 db.posts.find({})
 ```
-**Output**: 
+**Output**:
 ```output
 [
   {
@@ -66,7 +66,7 @@ db.posts.find({})
 ```mongodb
 db.posts.find({tags: 'b'})
 ```
-**Output**: 
+**Output**:
 ```output
 [
   {
@@ -89,7 +89,7 @@ db.posts.find({tags: 'b'})
 ```mongodb
 db.posts.find({$or: [{tags: 'a'}, {tags: 'c'}]})
 ```
-**Output**: 
+**Output**:
 ```output
 [
   {
@@ -120,7 +120,7 @@ db.posts.find({$or: [{tags: 'a'}, {tags: 'c'}]})
 db.posts.aggregate({$sort: {date: 1}})
 db.posts.aggregate({$sort: {date: -1}})
 ```
-**Output**: 
+**Output**:
 ```output
 For 1
 [
@@ -175,7 +175,7 @@ For -1
 ```mongodb
 db.posts.updateMany({},{$set: {likes: 7}})
 ```
-**Output**: 
+**Output**:
 ```output
 {
   acknowledged: true,
@@ -190,7 +190,7 @@ db.posts.updateMany({},{$set: {likes: 7}})
 db.posts.updateOne({name: 'Post 2'},{$set: {likes: 8}})
 db.posts.updateOne({name: 'Post 3'},{$set: {likes: 9}})
 ```
-**Output**: 
+**Output**:
 ```output
 {
   acknowledged: true,
@@ -213,7 +213,7 @@ db.posts.updateMany({},{$set: {dislikes: 2}})
 db.posts.updateOne({name: 'Post 2'},{$set: {dislikes: 3}})
 db.posts.updateOne({name: 'Post 3'},{$set: {dislikes: 1}})
 ```
-**Output**: 
+**Output**:
 ```output
 {
   acknowledged: true,
@@ -242,7 +242,7 @@ db.posts.updateOne({name: 'Post 3'},{$set: {dislikes: 1}})
 db.posts.aggregate({$sort: {like: 1, dislikes: -1}})
 db.posts.aggregate({$sort: {like: -1, dislikes: 1}})
 ```
-**Output**: 
+**Output**:
 ```output
 For 1 & -1
 [
@@ -543,6 +543,7 @@ def delete_todo(id):
 if __name__ == "__main__":
   app.run(port=3000, debug=True)
 ```
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
