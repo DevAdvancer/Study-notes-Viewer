@@ -14,6 +14,11 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const FOOTER_HEIGHT = 48; // in pixels
 
+  // Get the base URL for the deployed environment
+  const baseUrl = process.env.NODE_ENV === 'production'
+    ? window.location.origin
+    : '';
+
   return (
     <AnimatePresence>
       <motion.div
@@ -81,15 +86,42 @@ export function NoteViewer({ note, onClose }: NoteViewerProps) {
                   components={{
                     img: ({ src, alt }) => {
                       if (!src) return null;
-                      // Handle both absolute and relative paths
-                      const imagePath = src.startsWith('/')
-                        ? src // Keep absolute paths as is
-                        : src.startsWith('./')
-                          ? src.slice(2) // Remove ./ from relative paths
-                          : src;
 
-                      // Use public directory for images
-                      return <img src={imagePath} alt={alt || ''} className="max-w-full" loading="lazy" />;
+                      // Process the image source path
+                      let imagePath = src;
+
+                      // Handle relative paths (without leading slash)
+                      if (!src.startsWith('http') && !src.startsWith('/')) {
+                        // Remove ./ prefix if it exists
+                        imagePath = src.startsWith('./') ? src.slice(2) : src;
+                        // Add leading slash for consistent path handling
+                        imagePath = `/${imagePath}`;
+                      }
+
+                      // For absolute paths (starting with /) or converted paths,
+                      // ensure they're properly prefixed in production environments
+                      if (imagePath.startsWith('/')) {
+                        // Remove any duplicate leading slashes
+                        imagePath = imagePath.replace(/^\/+/, '/');
+
+                        // In production, prefix with the site's base URL if needed
+                        // Note: You may need to adjust this depending on your deployment setup
+                        imagePath = `${baseUrl}${imagePath}`;
+                      }
+
+                      return (
+                        <img
+                          src={imagePath}
+                          alt={alt || ''}
+                          className="max-w-full"
+                          loading="lazy"
+                          onError={(e) => {
+                            console.error(`Failed to load image: ${imagePath}`);
+                            // Optionally provide a fallback image
+                            // e.target.src = '/fallback-image.png';
+                          }}
+                        />
+                      );
                     },
                     br: () => <br className="my-2" />,
                   }}
