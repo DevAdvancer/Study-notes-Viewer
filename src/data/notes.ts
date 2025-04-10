@@ -63,6 +63,6 @@ export const notes: Note[] = [
     subject: 'UDB Lab',
     subjectCode: 'CSE12203',
     content: unstructuredDatabaseLab,
-    progress: 'in-progress'
+    progress: 'completed'
   }
 ];
