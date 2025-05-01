@@ -254,6 +254,22 @@ Turnaround time = brust time + waiting time + response time
 
 ## Memory Management Schemes
 
+## Disk Scheduling Algorithm
+1. FCFS
+2. SSTF
+3. SCAN
+4. C-SCAN
+5. LOOK
+6. C-LOOK
+
+Q1. Consider a Disk Queue with request for I/O to blocks on cylinders 98, 183, 37, 122, 14, 124, 65, 67 in that order. The present position of disk head at cylinder 53. <br />
+-> <br />
+Head Moments = From 53 -> 98 -> 183 -> 37 -> 122 -> 14 -> 124 -> 65 -> 67 <br />
+Total = 45 + 85 + 146 + 85 + 108 + 110 + 59 + 2 = 640 cylinders. <br />
+Average Head Movement = 640 / 8 = 80 cylinders. <br />
+
+
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
