@@ -42,7 +42,7 @@ export const notes: Note[] = [
     subject: 'Unstructured DB',
     subjectCode: 'CSE11202',
     content: unstructuredDatabase,
-    progress: 'completed'
+    progress: 'in-progress'
   },
   {
     id: '6',

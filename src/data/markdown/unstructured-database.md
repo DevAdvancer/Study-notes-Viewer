@@ -289,10 +289,166 @@ ELT is a variation ETL where data is first loaded into the target system before 
 3. Exploratory data analysis
 4. Data lake implementations
 
-## Extracting Structured Infromation From Unstructured Data
-Extracting Structured information from unstructured data involves using various techniques to identify, extract, and organize meaningful patterns and entities from freeform text, images, audio, or other unstructured sourses.
+## 2. Extracting Structured Information from Unstructured Data
+Extracting structured information from unstructured data involves using various techniques to identify, extract, and organize meaningful patterns and entities from free-form text, images, audio, or other unstructured sources.
+
+### Text Processing and Natural Language Processing (NLP)
+
+**Techniques:** <br />
+
+1. Named Entity Recognition (NER)
+
+  - Identifies and classifies named entities in text
+  - Extracts entities such as names, organizations, locations, dates
+  - Example: Extracting "Microsoft" (organization), "Seattle" (location), "May 2023" (date) from news articles
+
+
+2. Text Classification
+
+  - Categorizes text documents into predefined classes
+  - Applications include sentiment analysis, topic categorization, spam detection
+  - Example: Classifying customer reviews as positive, negative, or neutral
+
+
+3. Information Extraction
+
+  - Extracts structured information from unstructured text
+  - Identifies relationships between entities
+  - Example: Extracting product features and associated sentiments from reviews
+
+
+4. Tokenization and Part-of-Speech Tagging
+
+  - Breaks text into tokens (words, phrases)
+  - Assigns grammatical categories to tokens
+  - Foundation for more advanced NLP tasks
+
+
+5. Text Summarization
+
+  - Generates concise summaries of longer texts
+  - Can be extractive (selecting key sentences) or abstractive (generating new text)
+  - Useful for document understanding and knowledge extraction
+
+
+
+#### Tools and Libraries:
+
+- NLTK (Natural Language Toolkit)
+- spaCy
+- Stanford NLP
+- Hugging Face Transformers
+- Google Cloud Natural Language API
+- Amazon Comprehend
+
+### Pattern Matching and Regular Expressions
+
+**Techniques:** <br />
+
+1. Regular Expressions (Regex)
+
+  - Formal language for pattern matching in strings
+  - Extracts formatted data like email addresses, phone numbers, dates
+  - Example pattern: \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b for email addresses
+
+
+2. Template Matching
+
+  - Identifies recurring patterns in text
+  - Extracts data with consistent formatting
+  - Example: Extracting invoice numbers that follow a specific pattern
+
+
+3. Rule-Based Systems
+
+  - Uses predefined rules to identify and extract information
+  - Combines patterns, dictionaries, and grammatical rules
+  - Effective for domain-specific data extraction
+
+
+
+##### Applications:
+
+- Log file analysis
+- Web scraping
+- Form data extraction
+- Code analysis
+- Data cleansing
+
+### Machine Learning Approaches
+
+**Techniques:** <br />
+
+1. Supervised Learning
+
+  - Uses labeled data to train extraction models
+  - Models learn patterns associated with specific information types
+  - Examples: Support Vector Machines, Random Forests, Neural Networks
+
+
+2. Deep Learning
+
+  - Uses neural networks with multiple layers
+  - Effective for complex pattern recognition tasks
+  - Examples: Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), Transformers
+
+
+3. Topic Modeling
+
+  - Discovers abstract topics in document collections
+  - Techniques include Latent Dirichlet Allocation (LDA)
+  - Useful for organizing large text collections
+
+
+4. Word Embeddings
+
+  - Represents words as dense vectors in a continuous vector space
+  - Captures semantic relationships between words
+  - Examples: Word2Vec, GloVe, FastText
+
+
+5. Transfer Learning
+
+  - Leverages pre-trained models for specific extraction tasks
+  - Fine-tunes models on domain-specific data
+  - Examples: BERT, GPT, RoBERTa
+
+
+
+#### Tools and Frameworks:
+
+1. TensorFlow
+2. PyTorch
+3. scikit-learn
+4. Gensim
+5. Keras
+6. FastAI
+
+### Hybrid Approaches
+**Techniques:** <br />
+
+1. Ensemble Methods
+
+  - Combines multiple extraction techniques for improved accuracy
+  - Integrates rule-based and machine learning approaches
+  - Example: Using regex for initial extraction and ML for refinement
+
+
+2. Pipeline Processing
+
+  - Sequences multiple extraction techniques
+  - Each stage processes and refines the output of previous stages
+  - Example: Tokenization → NER → Relation Extraction → Knowledge Graph Construction
+
+**Benefits:** <br />
+
+1. Higher accuracy than single-method approaches
+2. Adaptability to diverse data types
+3. Robustness to variations in data format and quality
 
 ## Handling Multimedia (GridFS & Base64)
+
+### GridFS
 **Definition** <br />
 Unstructured databases need specialized mechanisms to store and process binary data such as images and videos  efficiently.
 
@@ -306,3 +462,158 @@ GridFS is a specifications for storing and retieving large files such as images,
 2. Stores each chunks as a sparate document
 3. Uses two collections: fs.files (file metadata) and fs.chunks (file content)
 4. Allows for storing files larger than the document size limit.
+
+**Benifits of GridFS:** <br />
+1. Efficient storage of large binary files
+2. No need for external file storage systems
+3. Automatic load balancing and replication
+4. Ability to access portions of files without loading entire files
+5. Integration with database query capabilities
+
+**Example :-**
+```python
+from pymongo import MongoClient
+import gridfs
+
+def store_image():
+  client = MonogoClient('monogdb://localhost:27017')
+  db = client['imagedb']
+  fs = gridfs.GridFS(db)
+
+  with open('image.jpg', 'rb') as image_file:
+    image_data = image_file.read()
+
+  file_id = fs.put(
+    image_data,
+    filename='image.jpg',
+    contentType='image/jpeg',
+    metadata={'author':'Abhirup Kumar'}
+  )
+
+  print(f'Image Stored Successfully with file ID: {file_id}')
+  client.close()
+
+store_image()
+```
+### Base64: Encoding for Image Storage
+**Difinition** <br />
+Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format, allowing binary data like images to be stored directly in text-based documents.
+
+**How Base64 works:** <br />
+- Converts binary data to a set of 64 printable ASCII characters
+- Increases storage size by approximately 33% (overhead)
+- Allows for embedding images directly to text documents
+
+**Use Cases for Base64** <br />
+- Storing small to medium-sized images in document databases
+- Embedding images in JSON documents
+- Trasmitting images in API responses
+- Avoiding Additional file storage systems for small images
+
+**Example Base64 implemetation**
+```python
+import base64
+from pymongo import MongoClient
+
+def store_image_as_base64():
+  client = MongoClient('monogdb://localhost:27017')
+  db = client('imagedb')
+  collection = db['images']
+
+  with open('image.jpg', 'rb') as image_file:
+    base64_image = base64.b64ncode(image_file.read()).decode('utf-8')
+
+  document = {
+    'name': 'Abhirup Kumar',
+    'description': 'A sample image stored as base64',
+    'contentType': 'image/jpeg',
+    'image': base64_image
+  }
+
+  result = collection.insert_one(document)
+  print(f"Image Stored with doceumnt ID: {result.inserted_id}")
+  client.close()
+
+store_image_as_base64()
+```
+
+#### Differenece Between GridFS and Normal Base64
+![gridfsvsbase64](/images/gridfsvsbase64.png)
+
+### Video Storage and Processing
+
+**Strategies for video storage in UDBs:** <br />
+
+1. Chunked Storage with GridFS
+  - Similar to image storage but with larger files
+  - Divides videos into manageable chunks
+  - Stores metadata separatly from content
+  - Enables efficient retrieval and streamming
+2. External Storage with references
+  - Stores videos in specialized storage systems(S3, Azure Blob Storage)
+  - Maintains references to videos in the database
+  - Optimizes database performance
+  - Leverages specialized videos storage and delivery services
+3. Hybrid Approaches
+  - Stores thumbnails and previews in the database
+  - Keeps full videos in external storage
+  - Maintains comprehensive metadata in the database
+
+**Video Metadata Management: ** <br />
+1. Storage of video properties(duration, resolution, format)
+2. Content tags and categorization
+3. User-generated metadata(comments, ratings)
+4. Processing status and version tracking
+
+**Example :** <br />
+```python
+from pymongo import MongoClient
+from datetime import datetime
+
+client = MonogoClient('monogodb://localhost:21707')
+db = client('videoDB')
+collection = df['video']
+
+video_document = {
+    "title": "Introduction to Databases",
+    "description": "A comprehensive introduction to database concepts",
+    "duration": 1250,  # in seconds
+    "resolution": "1080p",
+    "format": "MP4",
+    "storageLocation": {
+        "type": "s3",
+        "bucket": "educational-videos",
+        "key": "db-intro-v1.mp4",
+        "url": "https://educational-videos.s3.amazonaws.com/db-intro-v1.mp4"
+    },
+    "metadata": {
+        "creator": "Dr. Jane Smith",
+        "created": datetime(2023, 2, 15),
+        "tags": ["database", "education", "introduction"],
+        "chapters": [
+            { "title": "Basic Concepts", "startTime": 0 },
+            { "title": "Relational Databases", "startTime": 320 },
+            { "title": "NoSQL Databases", "startTime": 750 }
+        ]
+    }
+}
+
+result = collection.insert_one(video_document)
+
+client.close()
+```
+
+#### Challenges in Video Handling
+1. Storage Requirements for hight-resolution videos
+2. Processing overhead for video analysis
+3. Bandwidth considerations for streaming
+4. Metadata extraction complexity
+5. Format and codec management
+
+# UNIT - III
+To be done after ML : ) thank for watching till here stay tuned...
+
+
+
+---
+##### Contributor Name - Abhirup Kumar
