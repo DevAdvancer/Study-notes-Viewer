@@ -1,31 +1,31 @@
 # Syllabus
-## Unit-I: Introduction to Unstructured Database
-1. Overview of Unstructured Data
-2. Introduction to Unstructured Databases
-3. Use Cases and Benefits of Unstructured DBMS
-4. Data Models for Unstructured Databases
-5. Choosing the Appropriate Data Model
-## Unit-II: Data Ingestion, Extraction & Querying Unstructured Data
+## UNIT - 1
+1. What is UDB?
+2. Different types of UDB
+3. Use cases and benefits of UDB
+4. Data Models
+5. Difference Between UDB and DB
+6. Semi Structured Data
+7. Adv and Disady of UDB
+## Unit - 2
 1. Data Ingestion Techniques
 2. Extracting Structured Information from Unstructured Data
-3. Pre-processing and Cleaning Unstructured Data
-4. Handling Multimedia and Binary Data
-5. Query Languages for Unstructured Databases
-## Unit-III: Introduction to MongoDB
-1. Overview of MongoDB
-2. Comparison with Relational Databases
-3. Installing and Setting Up MongoDB
-4. MongoDB Data Model
-5. CRUD Operations
-6. Indexing, Aggregation, and Replication
-## Unit-IV: Advanced MongoDB
-1. Relationships and Database References
-2. Advanced Indexing
-3. MapReduce
-4. Text Search and Regular Expressions
-5. MongoDB Atlas
-6. MongoDB-Python Integration
-## Unit-V: Backup, Recovery, Disaster Planning, and Emerging Trends
+3. Handling Images (GridFs && base64) and Videos
+## Unit - 3
+1. What is Mongodb?
+2. Key Features
+3. Mongo Query
+## Unit - 4
+1. Replication
+2. Sharding
+3. Atomic Operations
+4. Relational and Database References.
+5. Indexing Limitation
+6. Text Search Regular Expression **
+7. Studio 3T over Compass.
+8. Configure Mongodb Atlas
+9. MongoDB-Python Integration
+## Unit-5
 1. Backup and Recovery Procedures
 2. Disaster Recovery Planning
 3. MongoDB in Production
