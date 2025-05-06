@@ -74,10 +74,10 @@ export default function App() {
   };
 
   return (
-    <StudyThemeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-950 to-slate-900 text-white font-sans">
+    <StudyThemeProvider hideStudyTools={selectedNote !== null}>
+      <div className="min-h-screen bg-gradient-to-br from-[#4F7C82] via-[#0B2E33] to-[#0B2E33] text-white font-sans overscroll-none">
         {/* Custom Header */}
-        <header className="bg-gradient-to-r from-blue-900/90 to-blue-800/90 border-b border-blue-700/50 sticky top-0 z-40">
+        <header className="bg-gradient-to-r from-[#4F7C82]/90 to-[#0B2E33]/90 border-b border-[#93B1B5]/50 sticky top-0 z-40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
@@ -85,9 +85,9 @@ export default function App() {
                   <motion.div
                     whileHover={{ rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                    className="p-2 rounded-lg bg-blue-500/20"
+                    className="p-2 rounded-lg bg-[#0B2E33] border border-[#4F7C82] shadow-md"
                   >
-                    <GraduationCap className="w-6 h-6 text-blue-400" />
+                    <GraduationCap className="w-6 h-6 text-[#B8E3E9] drop-shadow-sm" />
                   </motion.div>
                   <h1 className="text-xl font-bold">University Study Notes</h1>
                 </div>
@@ -102,7 +102,7 @@ export default function App() {
                   <input
                     type="text"
                     ref={searchInputRef}
-                    className="w-full pl-10 pr-12 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 bg-blue-800/50 text-white border-blue-700 focus:ring-blue-500 transition-colors"
+                    className="w-full pl-10 pr-12 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 bg-[#0B2E33]/50 text-white border-[#4F7C82] focus:ring-[#4F7C82] transition-colors"
                     placeholder="Search notes..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -121,14 +121,14 @@ export default function App() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className={`absolute inset-y-0 right-0 pr-3 flex items-center ${
-                      filter !== "all" ? "text-blue-400" : "text-gray-400 hover:text-gray-300"
+                      filter !== "all" ? "text-[#B8E3E9]" : "text-gray-400 hover:text-gray-300"
                     }`}
                     onClick={() => setShowFilters(!showFilters)}
                     aria-label="Filter notes"
                   >
                     <ListFilter size={18} />
                     {filter !== "all" && (
-                      <span className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 w-2 h-2 bg-blue-500 rounded-full"></span>
+                      <span className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 w-2 h-2 bg-[#B8E3E9] rounded-full"></span>
                     )}
                   </motion.button>
                 </div>
@@ -144,7 +144,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 sm:right-6 lg:right-8 top-16 z-50 mt-2 py-2 px-1 rounded-lg shadow-lg border bg-blue-800 border-blue-700 transition-colors max-w-xs w-[calc(100%-2rem)] sm:w-auto"
+                className="absolute right-4 sm:right-6 lg:right-8 top-16 z-50 mt-2 py-2 px-1 rounded-lg shadow-lg border bg-[#0B2E33] border-[#4F7C82] transition-colors max-w-xs w-[calc(100%-2rem)] sm:w-auto"
               >
                 <div className="w-full sm:w-48">
                   {["all", "completed", "in-progress", "not-started"].map((status) => (
@@ -156,8 +156,8 @@ export default function App() {
                       }}
                       className={`w-full text-left py-2 px-3 text-sm rounded-md flex items-center gap-2 transition-colors mb-1 ${
                         filter === status
-                          ? "bg-blue-600/20 text-blue-400"
-                          : "hover:bg-blue-700"
+                          ? "bg-[#4F7C82]/20 text-[#B8E3E9]"
+                          : "hover:bg-[#0B2E33]/70"
                       }`}
                     >
                       {status === "all"
@@ -186,7 +186,6 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h1 className="text-2xl sm:text-3xl font-bold">My Study Notes</h1>
                       {filter !== "all" && (
                         <div className={`px-3 py-1 rounded-full text-sm ${
                           filter === 'completed'
@@ -240,14 +239,14 @@ export default function App() {
                         <motion.div
                           whileHover={{ y: -5, scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="overflow-hidden rounded-xl h-full cursor-pointer bg-blue-900/30 backdrop-blur-sm border border-blue-800/30 transition-all duration-300 shadow-lg"
+                          className="overflow-hidden rounded-xl h-full cursor-pointer bg-[#0B2E33]/30 backdrop-blur-sm border border-[#4F7C82]/30 transition-all duration-300 shadow-lg"
                           onClick={() => setSelectedNote(note)}
                         >
                           {/* Card Header with Background Image */}
                           <div
                             className="h-28 sm:h-32 relative flex items-end"
                             style={{
-                              backgroundImage: `linear-gradient(to bottom, rgba(30, 58, 138, 0.5), rgba(30, 58, 138, 0.9)), url(${subjectBackgrounds[note.subject as keyof typeof subjectBackgrounds]})`,
+                              backgroundImage: `linear-gradient(to bottom, rgba(79, 124, 130, 0.5), rgba(11, 46, 51, 0.9)), url(${subjectBackgrounds[note.subject as keyof typeof subjectBackgrounds]})`,
                               backgroundSize: 'cover',
                               backgroundPosition: 'center'
                             }}
@@ -266,7 +265,7 @@ export default function App() {
                           {/* Card Body */}
                           <div className="p-3 sm:p-4 flex flex-col flex-grow">
                             <div className="flex justify-between items-center mb-2 sm:mb-3">
-                              <span className="text-xs sm:text-sm font-medium px-2 py-0.5 rounded bg-blue-800/50">
+                              <span className="text-xs sm:text-sm font-medium px-2 py-0.5 rounded bg-[#0B2E33]/50">
                                 {note.subjectCode}
                               </span>
 
@@ -289,7 +288,7 @@ export default function App() {
 
                             {/* Read More Button */}
                             <div className="mt-auto pt-3 sm:pt-4">
-                              <div className="text-xs sm:text-sm font-medium flex items-center gap-1 text-blue-400">
+                              <div className="text-xs sm:text-sm font-medium flex items-center gap-1 text-[#B8E3E9]">
                                 Read Notes
                                 <ChevronRight size={16} />
                               </div>
@@ -305,9 +304,9 @@ export default function App() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center py-16 px-4 rounded-xl text-center bg-blue-800/40"
+                  className="flex flex-col items-center justify-center py-16 px-4 rounded-xl text-center bg-[#0B2E33]/40"
                 >
-                  <div className="p-6 rounded-full mb-4 bg-blue-700/50">
+                  <div className="p-6 rounded-full mb-4 bg-[#4F7C82]/50">
                     <Search className="w-8 h-8 text-gray-400" />
                   </div>
                   <h3 className="text-xl font-medium mb-2 text-gray-300">No notes found</h3>
@@ -319,7 +318,7 @@ export default function App() {
                       setSearchTerm("");
                       setFilter("all");
                     }}
-                    className="mt-6 px-4 py-2 font-medium rounded-lg transition-colors bg-blue-600 hover:bg-blue-700 text-white"
+                    className="mt-6 px-4 py-2 font-medium rounded-lg transition-colors bg-[#4F7C82] hover:bg-[#4F7C82]/80 text-white"
                   >
                     Clear filters
                   </button>
@@ -339,16 +338,18 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Add button with URL redirect - positioned above footer */}
-        <div className="fixed bottom-20 right-6 z-30">
-          <AddButton
-            url="https://forms.gle/q1P3Kk1rzuKPG6qk9"
-            openInNewTab={true}
-          />
-        </div>
+        {/* Add button with URL redirect - only visible when not viewing notes */}
+        {!selectedNote && (
+          <div className="fixed bottom-20 right-6 z-30">
+            <AddButton
+              url="https://forms.gle/q1P3Kk1rzuKPG6qk9"
+              openInNewTab={true}
+            />
+          </div>
+        )}
 
-        {/* Footer with fixed position */}
-        <Footer />
+        {/* Footer with fixed position - hidden when viewing notes */}
+        {!selectedNote && <Footer />}
       </div>
     </StudyThemeProvider>
   );

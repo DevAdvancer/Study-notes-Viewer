@@ -7,12 +7,12 @@ interface AddButtonProps {
   openInNewTab?: boolean;
 }
 
-export const AddButton: React.FC<AddButtonProps> = ({ 
-  url, 
-  openInNewTab = false 
+export const AddButton: React.FC<AddButtonProps> = ({
+  url,
+  openInNewTab = false
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const handleClick = () => {
     if (openInNewTab) {
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -31,10 +31,10 @@ export const AddButton: React.FC<AddButtonProps> = ({
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 10, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-16 bg-gray-800 text-white py-2 px-3 rounded-lg shadow-lg flex items-center"
+            className="absolute right-16 bg-[#0B2E33] text-[#B8E3E9] py-2 px-3 rounded-lg shadow-lg flex items-center border border-[#4F7C82]/50"
           >
             <span className="whitespace-nowrap font-medium text-sm">Add your Notes in .md Format</span>
-            <div className="absolute right-0 transform translate-x-1/2 rotate-45 w-2 h-2 bg-gray-800"></div>
+            <div className="absolute right-0 transform translate-x-1/2 rotate-45 w-2 h-2 bg-[#0B2E33] border-r border-t border-[#4F7C82]/50"></div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -43,28 +43,28 @@ export const AddButton: React.FC<AddButtonProps> = ({
         onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative bg-blue-600 text-white rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 overflow-hidden"
+        className="relative bg-[#4F7C82] text-white rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#93B1B5] focus:ring-offset-2 focus:ring-offset-[#0B2E33] overflow-hidden"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          type: 'spring', 
-          stiffness: 300, 
-          damping: 15 
+        transition={{
+          type: 'spring',
+          stiffness: 300,
+          damping: 15
         }}
         aria-label="Add your docs"
       >
         {/* Background pulse effect */}
-        <motion.div 
-          className="absolute inset-0 bg-blue-500 rounded-full"
+        <motion.div
+          className="absolute inset-0 bg-[#93B1B5] rounded-full"
           initial={{ scale: 1, opacity: 0 }}
-          animate={{ 
+          animate={{
             scale: [1, 1.5, 1],
             opacity: [0, 0.3, 0],
           }}
-          transition={{ 
-            repeat: Infinity, 
+          transition={{
+            repeat: Infinity,
             duration: 2,
             repeatType: 'loop',
             ease: 'easeInOut',

@@ -29,16 +29,16 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.15 }}
         onClick={(e) => e.stopPropagation()}
-        className={`bg-blue-900/95 w-full border border-blue-800/50 shadow-xl ${
+        className={`bg-[#0B2E33]/95 w-full border border-[#4F7C82]/50 shadow-xl ${
           isFullscreen
-            ? 'fixed inset-0 bottom-16 rounded-none'
-            : 'rounded-xl max-w-[98%] sm:max-w-[95%] md:max-w-2xl lg:max-w-4xl max-h-[calc(95vh-56px)]'
+            ? 'fixed inset-0 rounded-none'
+            : 'rounded-xl max-w-[98%] sm:max-w-[95%] md:max-w-2xl lg:max-w-4xl max-h-[calc(95vh)]'
         }`}
       >
-        <div className="px-3 sm:px-4 py-2 border-b border-blue-800/50 bg-blue-900 rounded-t-xl sticky top-0 z-10 flex items-center justify-between">
+        <div className="px-3 sm:px-4 py-2 border-b border-[#4F7C82]/50 bg-[#0B2E33] rounded-t-xl sticky top-0 z-10 flex items-center justify-between">
           <div className="flex items-center gap-2 overflow-hidden">
-            <div className="p-1 rounded-lg bg-blue-700/30 hidden xs:flex">
-              <BookOpen className="w-4 h-4 text-blue-400" />
+            <div className="p-1 rounded-lg bg-[#4F7C82]/30 hidden xs:flex">
+              <BookOpen className="w-4 h-4 text-[#B8E3E9]" />
             </div>
             <div className="flex items-center gap-2 overflow-hidden">
               <h2 className="text-base font-bold text-white truncate">{note.subject}</h2>
@@ -58,14 +58,14 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
           <div className="flex items-center gap-1 ml-2 shrink-0">
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="p-1 hover:bg-blue-800 rounded-lg transition-colors"
+              className="p-1 hover:bg-[#4F7C82] rounded-lg transition-colors"
               title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
             >
               <Maximize2 className="w-4 h-4 text-gray-400" />
             </button>
             <button
               onClick={onClose}
-              className="p-1 hover:bg-blue-800 rounded-lg transition-colors"
+              className="p-1 hover:bg-[#4F7C82] rounded-lg transition-colors"
               title="Close"
             >
               <X className="w-4 h-4 text-gray-400" />
@@ -74,14 +74,14 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
         </div>
 
         <div
-          className={`overflow-auto px-4 py-4 ${
+          className={`overflow-auto overscroll-none px-4 py-4 ${
             isFullscreen
-              ? 'h-[calc(100vh-96px)]'
-              : 'max-h-[calc(95vh-96px)]'
+              ? 'h-[calc(100vh-56px)]'
+              : 'max-h-[calc(95vh-56px)]'
           }`}
           ref={contentRef}
         >
-          <div className="prose prose-invert prose-headings:text-blue-300 prose-a:text-blue-400 prose-code:text-emerald-300 prose-pre:bg-blue-800/70 prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-900/10 prose-blockquote:py-1 prose-blockquote:px-4 max-w-none prose-sm">
+          <div className="prose prose-invert prose-headings:text-[#B8E3E9] prose-a:text-[#B8E3E9] prose-code:text-emerald-300 prose-pre:bg-[#0B2E33]/70 prose-blockquote:border-l-[#4F7C82] prose-blockquote:bg-[#0B2E33]/10 prose-blockquote:py-1 prose-blockquote:px-4 max-w-none prose-sm">
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               components={{
@@ -98,7 +98,7 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                     <img
                       src={imagePath}
                       alt={alt || ''}
-                      className="max-w-full rounded-lg border border-blue-700/50"
+                      className="max-w-full rounded-lg border border-[#4F7C82]/50"
                       loading="lazy"
                     />
                   );
@@ -106,7 +106,7 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                 code: ({ node, inline, className, children, ...props }: { node?: any; inline?: boolean; className?: string; children?: React.ReactNode }) => {
                   if (inline) {
                     return (
-                      <code className="bg-blue-800/80 px-1 py-0.5 rounded-md text-emerald-300" {...props}>
+                      <code className="bg-[#0B2E33]/80 px-1 py-0.5 rounded-md text-emerald-300" {...props}>
                         {children}
                       </code>
                     );
@@ -114,7 +114,7 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                   return (
                     <div className="relative">
                       <button
-                        className="absolute top-2 right-2 p-1 bg-blue-700/80 hover:bg-blue-600/80 rounded-md text-gray-300 hover:text-white transition-colors"
+                        className="absolute top-2 right-2 p-1 bg-[#4F7C82]/80 hover:bg-[#4F7C82] rounded-md text-gray-300 hover:text-white transition-colors"
                         onClick={() => {
                           if (typeof children === 'string') {
                             navigator.clipboard.writeText(children);
@@ -123,7 +123,7 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                       >
                         <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
                       </button>
-                      <pre className="rounded-lg bg-blue-800/70 border border-blue-700/50 p-2 sm:p-3 overflow-x-auto text-xs sm:text-sm">
+                      <pre className="rounded-lg bg-[#0B2E33]/70 border border-[#4F7C82]/50 p-2 sm:p-3 overflow-x-auto text-xs sm:text-sm">
                         <code className={`language-${className?.replace(/language-/, '') || 'text'}`} {...props}>
                           {children}
                         </code>

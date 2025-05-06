@@ -36,7 +36,7 @@ export const StudyFeatures: React.FC = () => {
   // Constants for SVG circle calculations - EXTRA LARGE RADIUS
   const CIRCLE_RADIUS = 85;
   const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
-  
+
   // State for pomodoro timer
   const [pomodoro, setPomodoro] = useState<PomodoroState>(() => {
     // Try to load saved timer settings from localStorage
@@ -53,7 +53,7 @@ export const StudyFeatures: React.FC = () => {
         breakDuration: parsed.breakDuration || 5
       };
     }
-    
+
     // Default settings
     return {
       isActive: false,
@@ -65,14 +65,14 @@ export const StudyFeatures: React.FC = () => {
       breakDuration: 5
     };
   });
-  
+
   // State for timer settings visibility
   const [showTimerSettings, setShowTimerSettings] = useState<boolean>(false);
-  
+
   // State for editing timer durations
   const [editingFocusDuration, setEditingFocusDuration] = useState<number>(pomodoro.focusDuration);
   const [editingBreakDuration, setEditingBreakDuration] = useState<number>(pomodoro.breakDuration);
-  
+
   // State for study streak
   const [streak, setStreak] = useState<StudyStreak>(() => {
     // Initialize from localStorage if available
@@ -83,49 +83,49 @@ export const StudyFeatures: React.FC = () => {
       lastStudyDate: null
     };
   });
-  
+
   // State for focus mode
   const [focusMode, setFocusMode] = useState<boolean>(false);
-  
+
   // State for full-screen timer visibility
   const [isFullScreenTimer, setIsFullScreenTimer] = useState<boolean>(false);
-  
+
   // State for current quote
   const [currentQuote, setCurrentQuote] = useState<string>('');
-  
+
   // State for panel visibility
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
-  
+
   // Calculate remaining time in seconds
-  const totalDurationSeconds = pomodoro.mode === 'focus' 
-    ? pomodoro.focusDuration * 60 
+  const totalDurationSeconds = pomodoro.mode === 'focus'
+    ? pomodoro.focusDuration * 60
     : pomodoro.breakDuration * 60;
   const remainingSeconds = pomodoro.minutes * 60 + pomodoro.seconds;
   const elapsedSeconds = totalDurationSeconds - remainingSeconds;
 
   // Calculate progress percentage (how much time has elapsed)
   const timerProgress = (elapsedSeconds / totalDurationSeconds) * 100;
-  
+
   // Update streak when starting a new study session
   const updateStreak = useCallback(() => {
     const today = new Date().toLocaleDateString();
-    
+
     setStreak(prev => {
       // If already studied today, don't increment
       if (prev.lastStudyDate === today) return prev;
-      
+
       // If studied yesterday, increment streak
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayStr = yesterday.toLocaleDateString();
-      
-      const newStreak = prev.lastStudyDate === yesterdayStr 
+
+      const newStreak = prev.lastStudyDate === yesterdayStr
         ? prev.current + 1
         : 1;
-      
+
       // Update best streak if current is higher
       const newBest = Math.max(newStreak, prev.best);
-      
+
       return {
         current: newStreak,
         best: newBest,
@@ -133,7 +133,7 @@ export const StudyFeatures: React.FC = () => {
       };
     });
   }, []);
-  
+
   // Function to switch between focus and break modes
   const switchMode = useCallback(() => {
     const newMode = pomodoro.mode === 'focus' ? 'break' : 'focus';
@@ -146,7 +146,7 @@ export const StudyFeatures: React.FC = () => {
       mode: newMode
     }));
   }, [pomodoro.mode]);
-  
+
   // Function to toggle pomodoro timer
   const toggleTimer = useCallback(() => {
     if (pomodoro.isActive) {
@@ -155,14 +155,14 @@ export const StudyFeatures: React.FC = () => {
     } else {
       // Start the timer
       setPomodoro(prev => ({ ...prev, isActive: true, isPaused: false }));
-      
+
       // Record study streak when starting a focus session
       if (pomodoro.mode === 'focus') {
         updateStreak();
       }
     }
   }, [pomodoro.isActive, pomodoro.mode, updateStreak]);
-  
+
   // Function to reset timer
   const resetTimer = useCallback(() => {
     setPomodoro(prev => ({
@@ -173,58 +173,58 @@ export const StudyFeatures: React.FC = () => {
       seconds: 0
     }));
   }, []);
-  
+
   // Function to save timer settings
   const saveTimerSettings = useCallback(() => {
     // Validate inputs (minimum 1 minute)
     const validFocusDuration = Math.max(1, editingFocusDuration);
     const validBreakDuration = Math.max(1, editingBreakDuration);
-    
+
     setPomodoro(prev => {
       const newState = {
         ...prev,
         focusDuration: validFocusDuration,
         breakDuration: validBreakDuration,
         // Update current minutes if timer is not active
-        minutes: prev.isActive ? prev.minutes : 
+        minutes: prev.isActive ? prev.minutes :
                 (prev.mode === 'focus' ? validFocusDuration : validBreakDuration)
       };
-      
+
       // Save settings to localStorage
       localStorage.setItem('pomodoroSettings', JSON.stringify({
         focusDuration: validFocusDuration,
         breakDuration: validBreakDuration
       }));
-      
+
       return newState;
     });
-    
+
     // Update editing states with validated values
     setEditingFocusDuration(validFocusDuration);
     setEditingBreakDuration(validBreakDuration);
-    
+
     // Hide settings panel
     setShowTimerSettings(false);
   }, [editingFocusDuration, editingBreakDuration]);
-  
+
   // Toggle full-screen timer
   const toggleFullScreenTimer = useCallback(() => {
     setIsFullScreenTimer(prev => !prev);
-    
+
     // If closing full-screen timer, make sure panel is visible
     if (isFullScreenTimer) {
       setIsPanelOpen(true);
     }
   }, [isFullScreenTimer]);
-  
+
   // Function to toggle focus mode
   const toggleFocusMode = useCallback(() => {
     const newFocusMode = !focusMode;
     setFocusMode(newFocusMode);
-    
+
     // Apply focus mode to body for global effect
     document.body.classList.toggle('focus-mode', newFocusMode);
-    
+
     // If activating focus mode, open full-screen timer
     if (newFocusMode && !isFullScreenTimer) {
       setIsFullScreenTimer(true);
@@ -236,17 +236,17 @@ export const StudyFeatures: React.FC = () => {
       setIsPanelOpen(true);
     }
   }, [focusMode, isFullScreenTimer]);
-  
+
   // Generate a random quote
   const generateRandomQuote = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * STUDY_QUOTES.length);
     setCurrentQuote(STUDY_QUOTES[randomIndex]);
   }, []);
-  
+
   // Timer effect
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
-    
+
     if (pomodoro.isActive && !pomodoro.isPaused) {
       interval = setInterval(() => {
         if (pomodoro.seconds === 0) {
@@ -256,7 +256,7 @@ export const StudyFeatures: React.FC = () => {
             // Play notification sound
             const audio = new Audio('/notification.mp3');
             audio.play().catch(() => console.log('Audio playback failed'));
-            
+
             // Auto switch to the other mode when timer completes
             switchMode();
             return;
@@ -276,39 +276,39 @@ export const StudyFeatures: React.FC = () => {
     } else if (interval) {
       clearInterval(interval);
     }
-    
+
     return () => {
       if (interval) clearInterval(interval);
     };
   }, [pomodoro.isActive, pomodoro.isPaused, pomodoro.minutes, pomodoro.seconds, switchMode]);
-  
+
   // Store streak in localStorage
   useEffect(() => {
     localStorage.setItem('studyStreak', JSON.stringify(streak));
   }, [streak]);
-  
+
   // Initialize with a random quote and change it periodically
   useEffect(() => {
     generateRandomQuote();
     const quoteInterval = setInterval(generateRandomQuote, 60000); // Every minute
-    
+
     return () => clearInterval(quoteInterval);
   }, [generateRandomQuote]);
-  
+
   return (
     <>
       {/* Floating action button to open the panel (hidden when full-screen timer is active) */}
       {!isFullScreenTimer && (
         <motion.button
           onClick={() => setIsPanelOpen(prev => !prev)}
-          className="fixed bottom-6 right-6 z-50 bg-blue-600 text-white rounded-full p-3 shadow-lg"
+          className="fixed bottom-6 right-6 z-50 bg-[#4F7C82] text-white rounded-full p-3 shadow-lg"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
           <BookMarked className="w-6 h-6" />
         </motion.button>
       )}
-      
+
       {/* Main panel with study features */}
       <AnimatePresence>
         {isPanelOpen && !isFullScreenTimer && (
@@ -317,26 +317,26 @@ export const StudyFeatures: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ type: 'spring', damping: 20 }}
-            className="fixed bottom-20 right-6 bg-gray-800 rounded-lg shadow-xl p-4 w-80 z-50 border border-gray-700"
+            className="fixed bottom-20 right-6 bg-[#0B2E33] rounded-lg shadow-xl p-4 w-80 z-50 border border-[#4F7C82]"
           >
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-blue-400" />
+                <BookOpen className="w-5 h-5 text-[#B8E3E9]" />
                 Study Tools
               </h3>
-              <button 
+              <button
                 onClick={() => setIsPanelOpen(false)}
                 className="text-gray-400 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            
+
             {/* Pomodoro Timer */}
-            <div className="bg-gray-900/50 rounded-lg p-3 mb-3">
+            <div className="bg-[#0B2E33]/50 rounded-lg p-3 mb-3 border border-[#4F7C82]/30">
               <div className="flex justify-between items-center mb-2">
-                <h4 className="text-sm font-semibold text-gray-300 flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-blue-400" />
+                <h4 className="text-sm font-semibold text-[#B8E3E9] flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-[#B8E3E9]" />
                   {pomodoro.mode === 'focus' ? 'Focus Timer' : 'Break Timer'}
                 </h4>
                 <div className="flex items-center gap-1">
@@ -344,7 +344,7 @@ export const StudyFeatures: React.FC = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={toggleFullScreenTimer}
-                    className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-700/50"
+                    className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-[#4F7C82]/50"
                   >
                     <Maximize className="w-4 h-4" />
                   </motion.button>
@@ -352,13 +352,13 @@ export const StudyFeatures: React.FC = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setShowTimerSettings(!showTimerSettings)}
-                    className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-700/50"
+                    className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-[#4F7C82]/50"
                   >
                     <Settings className="w-4 h-4" />
                   </motion.button>
                 </div>
               </div>
-              
+
               {/* Timer Settings */}
               <AnimatePresence>
                 {showTimerSettings && (
@@ -366,42 +366,42 @@ export const StudyFeatures: React.FC = () => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden mb-3 bg-gray-800/50 rounded-lg p-2"
+                    className="overflow-hidden mb-3 bg-[#0B2E33]/50 rounded-lg p-2 border border-[#4F7C82]/30"
                   >
                     <div className="grid grid-cols-2 gap-2 mb-2">
                       <div>
-                        <label className="text-xs text-gray-400 block mb-1">Focus Duration (min)</label>
+                        <label className="text-xs text-[#B8E3E9] block mb-1">Focus Duration (min)</label>
                         <input
                           type="number"
                           min={1}
                           value={editingFocusDuration}
                           onChange={(e) => setEditingFocusDuration(Math.max(1, parseInt(e.target.value) || 1))}
-                          className="bg-gray-700 border border-blue-500 rounded px-3 py-1 w-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+                          className="bg-[#0B2E33] border border-[#4F7C82] rounded px-3 py-1 w-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#93B1B5]"
                         />
                       </div>
-                      
+
                       <div>
-                        <label className="text-xs text-gray-400 block mb-1">Break Duration (min)</label>
+                        <label className="text-xs text-[#B8E3E9] block mb-1">Break Duration (min)</label>
                         <input
                           type="number"
                           min={1}
                           value={editingBreakDuration}
                           onChange={(e) => setEditingBreakDuration(Math.max(1, parseInt(e.target.value) || 1))}
-                          className="bg-gray-700 border border-green-500 rounded px-3 py-1 w-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-600"
+                          className="bg-[#0B2E33] border border-[#4F7C82] rounded px-3 py-1 w-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#93B1B5]"
                         />
                       </div>
                     </div>
-                    
+
                     <button
                       onClick={saveTimerSettings}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2 px-3 rounded transition-colors"
+                      className="w-full bg-[#4F7C82] hover:bg-[#4F7C82]/80 text-white text-xs font-semibold py-2 px-3 rounded transition-colors"
                     >
                       Save Settings
                     </button>
                   </motion.div>
                 )}
               </AnimatePresence>
-              
+
               <div className="flex justify-between items-center">
                 {/* INCREASED CIRCLE SIZE - change from w-16 h-16 to w-20 h-20 */}
                 <div className="relative w-20 h-20">
@@ -412,7 +412,7 @@ export const StudyFeatures: React.FC = () => {
                       cy="75"
                       r={CIRCLE_RADIUS}
                       fill="none"
-                      stroke="#1e293b"
+                      stroke="#0B2E33"
                       strokeWidth="10"
                     />
                     <motion.circle
@@ -420,13 +420,13 @@ export const StudyFeatures: React.FC = () => {
                       cy="75"
                       r={CIRCLE_RADIUS}
                       fill="none"
-                      stroke={pomodoro.mode === 'focus' ? "#3b82f6" : "#10b981"}
+                      stroke={pomodoro.mode === 'focus' ? "#4F7C82" : "#93B1B5"}
                       strokeWidth="10"
                       strokeLinecap="round"
                       strokeDasharray={`${CIRCLE_CIRCUMFERENCE}`}
                       // Real-time update with each second
-                      animate={{ 
-                        strokeDashoffset: CIRCLE_CIRCUMFERENCE * (1 - timerProgress / 100) 
+                      animate={{
+                        strokeDashoffset: CIRCLE_CIRCUMFERENCE * (1 - timerProgress / 100)
                       }}
                       // Added smooth transition for countdown
                       transition={{
@@ -435,8 +435,8 @@ export const StudyFeatures: React.FC = () => {
                       }}
                     />
                   </svg>
-                  <motion.div 
-                    className="absolute inset-0 flex items-center justify-center font-mono font-bold text-lg text-white"
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center font-mono font-bold text-lg text-[#B8E3E9]"
                     // Added subtle pulse animation when timer is active
                     animate={pomodoro.isActive && !pomodoro.isPaused ? {
                       scale: [1, 1.05, 1],
@@ -450,14 +450,14 @@ export const StudyFeatures: React.FC = () => {
                     {String(pomodoro.minutes).padStart(2, '0')}:{String(pomodoro.seconds).padStart(2, '0')}
                   </motion.div>
                 </div>
-                
+
                 <div className="flex gap-2">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={toggleTimer}
                     className={`p-2 rounded-full ${
-                      pomodoro.mode === 'focus' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-green-600 hover:bg-green-700'
+                      pomodoro.mode === 'focus' ? 'bg-[#4F7C82] hover:bg-[#4F7C82]/80' : 'bg-[#93B1B5] hover:bg-[#93B1B5]/80'
                     }`}
                   >
                     {pomodoro.isActive && !pomodoro.isPaused ? (
@@ -466,24 +466,24 @@ export const StudyFeatures: React.FC = () => {
                       <Play className="w-5 h-5 text-white" />
                     )}
                   </motion.button>
-                  
+
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={resetTimer}
-                    className="p-2 rounded-full bg-gray-700 hover:bg-gray-600"
+                    className="p-2 rounded-full bg-[#0B2E33] hover:bg-[#0B2E33]/80 border border-[#4F7C82]/30"
                   >
                     <RotateCcw className="w-5 h-5 text-white" />
                   </motion.button>
-                  
+
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={switchMode}
                     className={`p-2 rounded-full ${
-                      pomodoro.mode === 'focus' 
-                        ? 'bg-green-600 hover:bg-green-700' 
-                        : 'bg-blue-600 hover:bg-blue-700'
+                      pomodoro.mode === 'focus'
+                        ? 'bg-[#93B1B5] hover:bg-[#93B1B5]/80'
+                        : 'bg-[#4F7C82] hover:bg-[#4F7C82]/80'
                     }`}
                   >
                     {pomodoro.mode === 'focus' ? (
@@ -494,40 +494,40 @@ export const StudyFeatures: React.FC = () => {
                   </motion.button>
                 </div>
               </div>
-              
+
               {/* Current timer info */}
               <div className="mt-2 text-center">
-                <p className="text-xs text-gray-400">
-                  {pomodoro.mode === 'focus' 
-                    ? `Focus: ${pomodoro.focusDuration} min` 
+                <p className="text-xs text-[#B8E3E9]">
+                  {pomodoro.mode === 'focus'
+                    ? `Focus: ${pomodoro.focusDuration} min`
                     : `Break: ${pomodoro.breakDuration} min`}
                 </p>
               </div>
             </div>
-            
+
             {/* Study Streak */}
-            <motion.div 
-              className="bg-gray-900/50 rounded-lg p-3 mb-3"
+            <motion.div
+              className="bg-[#0B2E33]/50 rounded-lg p-3 mb-3 border border-[#4F7C82]/30"
               whileHover={{ scale: 1.02 }}
             >
-              <h4 className="text-sm font-semibold text-gray-300 flex items-center gap-2 mb-2">
+              <h4 className="text-sm font-semibold text-[#B8E3E9] flex items-center gap-2 mb-2">
                 <Award className="w-4 h-4 text-yellow-400" />
                 Study Streak
               </h4>
-              
+
               <div className="flex justify-between">
                 <div>
                   <div className="text-2xl font-bold text-white">{streak.current}</div>
-                  <div className="text-xs text-gray-400">Current Streak</div>
+                  <div className="text-xs text-[#B8E3E9]">Current Streak</div>
                 </div>
-                
+
                 <div>
                   <div className="text-2xl font-bold text-white">{streak.best}</div>
-                  <div className="text-xs text-gray-400">Best Streak</div>
+                  <div className="text-xs text-[#B8E3E9]">Best Streak</div>
                 </div>
-                
+
                 {streak.current > 2 && (
-                  <motion.div 
+                  <motion.div
                     className="flex items-center"
                     animate={{ rotate: [0, 10, 0, -10, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -537,23 +537,23 @@ export const StudyFeatures: React.FC = () => {
                 )}
               </div>
             </motion.div>
-            
+
             {/* Focus Mode Toggle */}
-            <motion.div 
-              className="bg-gray-900/50 rounded-lg p-3 mb-3 cursor-pointer"
+            <motion.div
+              className="bg-[#0B2E33]/50 rounded-lg p-3 mb-3 cursor-pointer border border-[#4F7C82]/30"
               whileHover={{ scale: 1.02 }}
               onClick={toggleFocusMode}
             >
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <BrainCircuit className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm font-semibold text-gray-300">Focus Mode</span>
+                  <BrainCircuit className="w-4 h-4 text-[#B8E3E9]" />
+                  <span className="text-sm font-semibold text-[#B8E3E9]">Focus Mode</span>
                 </div>
-                
+
                 <div className={`w-12 h-6 rounded-full relative transition-colors ${
-                  focusMode ? 'bg-purple-600' : 'bg-gray-700'
+                  focusMode ? 'bg-[#4F7C82]' : 'bg-[#0B2E33]'
                 }`}>
-                  <motion.div 
+                  <motion.div
                     className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5"
                     animate={{ x: focusMode ? 24 : 0 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
@@ -561,20 +561,20 @@ export const StudyFeatures: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Inspirational Quote */}
-            <motion.div 
-              className="bg-gray-900/50 rounded-lg p-3"
+            <motion.div
+              className="bg-[#0B2E33]/50 rounded-lg p-3 border border-[#4F7C82]/30"
               initial={{ opacity: 0.5 }}
               animate={{ opacity: 1 }}
               key={currentQuote}
             >
-              <p className="text-sm italic text-gray-300">{currentQuote}</p>
+              <p className="text-sm italic text-[#B8E3E9]">{currentQuote}</p>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Full-screen timer overlay */}
       <AnimatePresence>
         {isFullScreenTimer && (
@@ -582,33 +582,33 @@ export const StudyFeatures: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-gray-900/95 backdrop-blur-lg z-50 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-[#0B2E33]/95 backdrop-blur-lg z-50 flex flex-col items-center justify-center"
           >
             {/* Timer info bar */}
             <div className="absolute top-4 left-0 right-0 flex justify-center">
-              <div className="bg-gray-800/50 rounded-full px-6 py-2 flex items-center gap-3">
-                <span className={`text-sm font-medium ${pomodoro.mode === 'focus' ? 'text-blue-400' : 'text-green-400'}`}>
+              <div className="bg-[#0B2E33]/50 rounded-full px-6 py-2 flex items-center gap-3 border border-[#4F7C82]/30">
+                <span className={`text-sm font-medium ${pomodoro.mode === 'focus' ? 'text-[#B8E3E9]' : 'text-[#93B1B5]'}`}>
                   {pomodoro.mode === 'focus' ? 'Focus Time' : 'Break Time'}
                 </span>
-                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                <span className="text-sm text-gray-400">
-                  {pomodoro.mode === 'focus' 
-                    ? `${pomodoro.focusDuration} min session` 
+                <div className="w-1 h-1 bg-[#4F7C82] rounded-full"></div>
+                <span className="text-sm text-[#B8E3E9]">
+                  {pomodoro.mode === 'focus'
+                    ? `${pomodoro.focusDuration} min session`
                     : `${pomodoro.breakDuration} min break`}
                 </span>
               </div>
             </div>
-            
+
             {/* Close button */}
             <motion.button
-              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white bg-gray-800/30 rounded-full"
+              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white bg-[#0B2E33]/30 rounded-full border border-[#4F7C82]/30"
               onClick={toggleFullScreenTimer}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <Minimize className="w-5 h-5" />
             </motion.button>
-            
+
             {/* EXTRA LARGE TIMER DISPLAY */}
             <div className="relative w-[500px] h-[500px]">
               <svg className="w-full h-full" viewBox="0 0 200 200">
@@ -618,17 +618,17 @@ export const StudyFeatures: React.FC = () => {
                   cy="100"
                   r={CIRCLE_RADIUS}
                   fill="none"
-                  stroke="#1e293b"
+                  stroke="#0B2E33"
                   strokeWidth="8"
                 />
-                
+
                 {/* Timer progress indicator - FILLS as time passes */}
                 <circle
                   cx="100"
                   cy="100"
                   r={CIRCLE_RADIUS}
                   fill="none"
-                  stroke={pomodoro.mode === 'focus' ? "#3b82f6" : "#10b981"}
+                  stroke={pomodoro.mode === 'focus' ? "#4F7C82" : "#93B1B5"}
                   strokeWidth="8"
                   strokeLinecap="round"
                   transform="rotate(-90 100 100)"
@@ -639,7 +639,7 @@ export const StudyFeatures: React.FC = () => {
                   }}
                 />
               </svg>
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 flex items-center justify-center"
                 // Added countdown pulse animation
                 animate={pomodoro.isActive && !pomodoro.isPaused && remainingSeconds < 60 ? {
@@ -652,12 +652,12 @@ export const StudyFeatures: React.FC = () => {
                   ease: "easeInOut"
                 }}
               >
-                <span className="font-mono font-bold text-8xl text-white">
+                <span className="font-mono font-bold text-8xl text-[#B8E3E9]">
                   {String(pomodoro.minutes).padStart(2, '0')}:{String(pomodoro.seconds).padStart(2, '0')}
                 </span>
               </motion.div>
             </div>
-            
+
             {/* Timer controls */}
             <div className="mt-8 flex items-center gap-6">
               <motion.button
@@ -665,7 +665,7 @@ export const StudyFeatures: React.FC = () => {
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleTimer}
                 className={`p-4 rounded-full ${
-                  pomodoro.mode === 'focus' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-green-600 hover:bg-green-700'
+                  pomodoro.mode === 'focus' ? 'bg-[#4F7C82] hover:bg-[#4F7C82]/80' : 'bg-[#93B1B5] hover:bg-[#93B1B5]/80'
                 }`}
               >
                 {pomodoro.isActive && !pomodoro.isPaused ? (
@@ -674,24 +674,24 @@ export const StudyFeatures: React.FC = () => {
                   <Play className="w-8 h-8 text-white" />
                 )}
               </motion.button>
-              
+
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={resetTimer}
-                className="p-4 rounded-full bg-gray-700 hover:bg-gray-600"
+                className="p-4 rounded-full bg-[#0B2E33] hover:bg-[#0B2E33]/80 border border-[#4F7C82]/30"
               >
                 <RotateCcw className="w-8 h-8 text-white" />
               </motion.button>
-              
+
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={switchMode}
                 className={`px-6 py-4 rounded-full flex items-center gap-2 ${
-                  pomodoro.mode === 'focus' 
-                    ? 'bg-green-600 hover:bg-green-700' 
-                    : 'bg-blue-600 hover:bg-blue-700'
+                  pomodoro.mode === 'focus'
+                    ? 'bg-[#93B1B5] hover:bg-[#93B1B5]/80'
+                    : 'bg-[#4F7C82] hover:bg-[#4F7C82]/80'
                 }`}
               >
                 <span className="text-base font-bold text-white">
@@ -699,20 +699,20 @@ export const StudyFeatures: React.FC = () => {
                 </span>
               </motion.button>
             </div>
-            
+
             {/* Quote */}
-            <motion.div 
+            <motion.div
               className="absolute bottom-10 left-0 right-0 mx-auto max-w-lg px-6 text-center"
               initial={{ opacity: 0.5 }}
               animate={{ opacity: 0.8 }}
               key={currentQuote}
             >
-              <p className="text-gray-300 italic">{currentQuote}</p>
+              <p className="text-[#B8E3E9] italic">{currentQuote}</p>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Focus mode overlay - only visible when focus mode is on but full-screen timer is off */}
       <AnimatePresence>
         {focusMode && !isFullScreenTimer && (
@@ -735,29 +735,35 @@ const focusModeStyles = `
     filter: grayscale(50%);
     transition: opacity 0.3s ease, filter 0.3s ease;
   }
-  
+
   .focus-mode .heading {
     opacity: 0.7;
   }
 `;
 
 // Provider component to wrap around App
-export const StudyThemeProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+export const StudyThemeProvider: React.FC<{
+  children: React.ReactNode;
+  hideStudyTools?: boolean;
+}> = ({
+  children,
+  hideStudyTools = false
+}) => {
   // Add global styles for focus mode
   useEffect(() => {
     const styleElement = document.createElement('style');
     styleElement.innerHTML = focusModeStyles;
     document.head.appendChild(styleElement);
-    
+
     return () => {
       document.head.removeChild(styleElement);
     };
   }, []);
-  
+
   return (
     <div className="study-theme">
       {children}
-      <StudyFeatures />
+      {!hideStudyTools && <StudyFeatures />}
     </div>
   );
 };
