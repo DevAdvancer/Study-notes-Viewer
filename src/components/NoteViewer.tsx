@@ -10,6 +10,27 @@ interface NoteViewerProps {
   onClose: () => void;
 }
 
+// Helper functions to identify and extract media links
+const isYoutubeLink = (url: string): boolean => {
+  return /youtube\.com\/watch\?v=|youtu\.be\//.test(url);
+};
+
+const isDriveLink = (url: string): boolean => {
+  return /drive\.google\.com\/file\/d\/|drive\.google\.com\/open\?id=/.test(url);
+};
+
+const getYoutubeVideoId = (url: string): string | null => {
+  const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/;
+  const match = url.match(youtubeRegex);
+  return match ? match[1] : null;
+};
+
+const getDriveFileId = (url: string): string | null => {
+  const driveRegex = /drive\.google\.com\/file\/d\/([^/]+)\/|drive\.google\.com\/open\?id=([^&\s]+)/;
+  const match = url.match(driveRegex);
+  return match ? (match[1] || match[2]) : null;
+};
+
 const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -101,6 +122,73 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                       className="max-w-full rounded-lg border border-[#4F7C82]/50"
                       loading="lazy"
                     />
+                  );
+                },
+                a: ({ node, href, children, ...props }) => {
+                  if (!href) return (
+                    <a {...props}>{children}</a>
+                  );
+
+                  // Handle YouTube links
+                  if (isYoutubeLink(href)) {
+                    const videoId = getYoutubeVideoId(href);
+                    if (videoId) {
+                      return (
+                        <div className="my-4">
+                          <div className="relative pt-[56.25%] w-full overflow-hidden rounded-lg border border-[#4F7C82]/50">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${videoId}`}
+                              title="YouTube video player"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="absolute top-0 left-0 w-full h-full"
+                            ></iframe>
+                          </div>
+                          <p className="text-center text-sm text-gray-400 mt-1">
+                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[#B8E3E9] hover:underline">
+                              Open video in YouTube
+                            </a>
+                          </p>
+                        </div>
+                      );
+                    }
+                  }
+
+                  // Handle Google Drive links
+                  if (isDriveLink(href)) {
+                    const fileId = getDriveFileId(href);
+                    if (fileId) {
+                      return (
+                        <div className="my-4">
+                          <div className="relative pt-[75%] w-full overflow-hidden rounded-lg border border-[#4F7C82]/50">
+                            <iframe
+                              src={`https://drive.google.com/file/d/${fileId}/preview`}
+                              title="Google Drive file preview"
+                              allow="autoplay"
+                              className="absolute top-0 left-0 w-full h-full"
+                            ></iframe>
+                          </div>
+                          <p className="text-center text-sm text-gray-400 mt-1">
+                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[#B8E3E9] hover:underline">
+                              Open in Google Drive
+                            </a>
+                          </p>
+                        </div>
+                      );
+                    }
+                  }
+
+                  // Regular link handling
+                  return (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#B8E3E9] hover:underline"
+                      {...props}
+                    >
+                      {children}
+                    </a>
                   );
                 },
                 code: ({ node, inline, className, children, ...props }: { node?: any; inline?: boolean; className?: string; children?: React.ReactNode }) => {

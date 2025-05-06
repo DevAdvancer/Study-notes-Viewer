@@ -479,13 +479,10 @@ GridFS is a specifications for storing and retieving large files such as images,
 from pymongo import MongoClient
 import gridfs
 
-def store_image():
+def store_image(image_data):
   client = MonogoClient('monogdb://localhost:27017')
   db = client['imagedb']
   fs = gridfs.GridFS(db)
-
-  with open('image.jpg', 'rb') as image_file:
-    image_data = image_file.read()
 
   file_id = fs.put(
     image_data,
@@ -519,13 +516,10 @@ Base64 is a binary-to-text encoding scheme that represents binary data in an ASC
 import base64
 from pymongo import MongoClient
 
-def store_image_as_base64():
+def store_image_as_base64(base64_image):
   client = MongoClient('monogdb://localhost:27017')
   db = client('imagedb')
   collection = db['images']
-
-  with open('image.jpg', 'rb') as image_file:
-    base64_image = base64.b64ncode(image_file.read()).decode('utf-8')
 
   document = {
     'name': 'Abhirup Kumar',
@@ -616,7 +610,7 @@ client.close()
 
 # UNIT - III
 ---
-> To be done after ML : ) thank for watching till here stay tuned...
+[MongoDB Tutorial for Queries](https://youtu.be/tww-gbNPOcA?si=8ARwzehV84lEoYMb)
 
 # UNIT - IV
 ---

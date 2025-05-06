@@ -1,8 +1,9 @@
+
 # Study Notes Viewer 📚
 
 ## Overview
 
-Study Notes Viewer is a React-based web application for managing and organizing study notes. The application allows users to view, filter, and interact with study notes across different subjects and progress stages.
+Study Notes Viewer is a React-based web application for managing and organizing study notes. The application allows users to view, filter, and interact with study notes across different subjects and progress stages, with support for embedded multimedia content.
 
 ## Features 🌟
 
@@ -11,6 +12,8 @@ Study Notes Viewer is a React-based web application for managing and organizing 
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **Animated Interactions**: Smooth animations using Framer Motion
 - **Easy Navigation**: Intuitive note viewing and closing mechanism
+- **Embedded Content**: Support for YouTube videos and Google Drive documents directly in notes
+- **Markdown Support**: Rich text formatting with Markdown, including code highlighting
 
 ## Technologies Used 🛠️
 
@@ -20,6 +23,8 @@ Study Notes Viewer is a React-based web application for managing and organizing 
 - Framer Motion
 - Vite
 - Lucide React Icons
+- ReactMarkdown
+- Rehype plugins for enhanced Markdown rendering
 
 ## Getting Started 🚀
 
@@ -68,13 +73,29 @@ The application supports filtering notes by their progress:
 ## Components 🧩
 
 - `NoteCard`: Displays individual note summary
-- `NoteViewer`: Expanded view of a selected note
+- `NoteViewer`: Expanded view of a selected note with support for embedded content
 - `SortControls`: Filtering and sorting interface
 - `Footer`: Application footer
 
+## Embedded Content 🎬
+
+The application supports embedding external content directly in your notes:
+
+### YouTube Videos
+Simply add a YouTube link in your markdown content, and it will automatically be converted to an embedded video player:
+```markdown
+[Video Title](https://www.youtube.com/watch?v=VIDEO_ID)
+```
+
+### Google Drive Documents
+Add Google Drive file links to preview documents, presentations, and PDFs directly in your notes:
+```markdown
+[Document Title](https://drive.google.com/file/d/FILE_ID/view)
+```
+
 ## Customization 🎨
 
-You can easily customize notes by modifying the `notes` array in the `data` directory.
+You can easily customize notes by modifying the `notes` array in the `data` directory. Add YouTube videos and Google Drive document links in your markdown content to enhance your study materials.
 
 ## Contributing 🤝
 
@@ -90,4 +111,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact 📧
 
-Project Link: [https://github.com/DevAdvancer/Study-notes-Viewer](https://github.com/DevAdvancer/Study-notes-Viewer)
+Email: [mailto:theabhirupkumar@gmail.com](theabhriupkuamr@gmail.com)

@@ -954,6 +954,5 @@ Decorators are the functions that modify the behavior of another functuon or met
 
 > For the Notes of Matplotlib, Pandas, Numpy and Scipy Go to this Link [Google Drive](https://drive.google.com/drive/folders/1eLzZ69YWAP3cNgA6cWJg6fn5C2u7VJYL?usp=sharing)
 
-
 ---
 ##### Contributor Name - Abhirup Kumar
