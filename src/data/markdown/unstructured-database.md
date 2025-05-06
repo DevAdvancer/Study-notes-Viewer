@@ -803,9 +803,68 @@ db.users.find({ name: { $regex: "john", $options: "i" } });
 4. Your usage is occasional or for academic purposes.
 
 ## Configure Mongodb Atlas
+1. **Step-1:** Create an Account
+- Visit mongodb.com/cloud/atlas and sign up.
 
+2. **Step-2:** Create a Project and Cluster
+- Create a new project.
+- Build a cluster by selecting cloud provider, region, and cluster tier (M0 for free).
+
+3. **Step-3:** Set Up Access
+- Add a database user with username and password.
+- Whitelist your IP address in "Network Access".
+
+4. **Step-4:** Connect to the Cluster
+- Copy the connection string from "Connect" → "Connect your application".
+- Use it in your app (e.g., with PyMongo or Mongoose) to connect to the database. ("url-mongodb+srv://<username>:<dbpass>@cluster0.mongodb.net/?retryWrites=true&w=majority")
 
 ## MongoDB-Python Integration
+#### CRUD OPERATIONS USING FLASK
+```python
+from flask import Flask, request, jsonify
+from pymongo import MongoClient
+from bson.objectid import ObjectId
+
+app = Flask(__name__)
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client['myDatabase']
+collection = db['myCollection']
+
+# Create
+@app.route('/create', methods=['POST'])
+def create():
+    data = request.json
+    collection.insert_one(data)
+    return "Data inserted", 201
+
+# Read all
+@app.route('/read', methods=['GET'])
+def read():
+    data = []
+    for doc in collection.find():
+        doc['_id'] = str(doc['_id'])  # Convert ObjectId to string
+        data.append(doc)
+    return jsonify(data)
+
+# Update by ID
+@app.route('/update/<id>', methods=['PUT'])
+def update(id):
+    new_data = request.json
+    collection.update_one({"_id": ObjectId(id)}, {"$set": new_data})
+    return "Data updated"
+
+# Delete by ID
+@app.route('/delete/<id>', methods=['DELETE'])
+def delete(id):
+    collection.delete_one({"_id": ObjectId(id)})
+    return "Data deleted"
+
+# Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
 # UNIT - V
 ---
 ## Backup and Recovery procedures in Monogdb
