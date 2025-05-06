@@ -794,6 +794,63 @@ Point-in-Time Recovery allows restoring a database to a specific moment, critica
   - Check for backup size consistency between runs
   - Set up alerts for failed backups or verification issues
 
+## Disaster Recovery in MongoDB
+##### **Definations**:
+When unexpected disruptions strike, the impact on business operations can be immediate and significant. A disaster recovery plan (DRP) is essential for these events, designed to safeguard core IT functions and support recovery when disruptions threaten business continuity.
+
+**Key Metrics:**
+- **Recovery time objective (RTO)**: The maximum acceptable downtime for critical apps, typically measured in hours or minutes. RTO defines the speed at which operations need to be restored to avoid a significant impact on the business.
+- **Recovery point objective (RPO**): The maximum age of data that must be recovered to resume normal operations effectively. RPO determines the allowable data loss measured in time (e.g., last 15 minutes, last hour) to ensure essential data is available post-recovery.
+
+###### Benifites of Disaster Recovery Planning
+- Protects against data loss
+- Mitigates financial impact
+- Preserves customers confidence
+- Ensures regulatory compliance
+- Speeds up recovery time
+- Enhance security preparedness
+- Supports strategic decision-making
+
+###### Key components of a DRP
+1. **Prevension**: A strong prevention plan keeps businesses prepared, reducing the chances that physical disasters or technology issues will disrupt operations. This phase focuses on creating a secure, resilient environment that actively reduces risks before they are known. It involves establishing protocols, designating disaster recovery team members, and setting up secure recovery systems.
+2. **Anticipation and detection**: This phase is focused on spotting potential risks as they happen and preparing for anything that could impact critical business operations. This includes creating a business impact analysis, setting recovery time objectives (RTO) and recovery point objectives (RPO), and developing disaster recovery procedures for specific events. Communication plans should be ready in advance so stakeholders and clients receive timely updates no matter the situation.
+
+## Integration of Unstructured DBMS with other database systems
+1. Polyglot Persistence: Using multiple database types in a single application, choosing the right database for each specific task.
+2. Hybrid Architectures: Combining SQL and NoSQL databases to leverage strengths of each - relational for structured transactions, NoSQL for unstructured data and scaling.
+3. Multi-Model Databases: Systems like CosmosDB and ArangoDB support multiple data models within a single database instance.
+4. Integration Methods: Data pipeline platforms and ETL tools connect SQL and NoSQL systems, transforming data between formats.
+5. Object-Data Mapping: ODM frameworks help work with NoSQL data in object-oriented applications.
+
+## Unstructured Databases for Streaming & Real-time Data
+#### Core Capabilities:
+- Immediate Processing: Process data as it arrives without batch delay
+- Schema Flexibility: Adapt to changing data structures on-the-fly
+- Low Latency: Minimize time between data creation and availability
+- High Throughput: Handle millions of operations per second
+- Horizontal Scaling: Add nodes to distribute processing load
+
+#### Implementation Consideration
+- CAP Theorem Tradeoffs: Often favor availability over consistency
+- Data Enrichment: Combine streams with reference data for context
+- Fault Tolerance: Ensure data durability during node failures
+- Backpressure Handling: Manage overflow during traffic spikes
+- State Management: Track computation state across distributed systems
+
+#### Common Applications
+- IoT Sensor Data: Process telemetry from connected devices
+- Financial Trading: Execute transactions based on market events
+- Network Security: Detect anomalies in network traffic patterns
+- Social Media Analytics: Track trends and sentiment in real-time
+- Microservices Communication: Enable event-driven architecture
+
+#### Technical Implementation
+- In-memory Processing: Keep active data in RAM for faster access
+- Event-driven Architecture: React to data events in real-time
+- Distributed Computing: Process across multiple nodes simultaneously
+- Sliding Window Analysis: Process data in continuous time windows
+- Streaming SQL: Apply SQL-like queries to data in motion
+
 
 ---
 ##### Contributor Name - Abhirup Kumar
