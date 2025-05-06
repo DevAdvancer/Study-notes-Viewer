@@ -1,31 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <!-- Background circle -->
-  <circle cx="32" cy="32" r="32" fill="#1e293b" />
+  <circle cx="32" cy="32" r="30" fill="#0B2E33" />
   
-  <!-- Book base -->
-  <path d="M17 18v26c0 1.1 0.9 2 2 2h26c1.1 0 2-0.9 2-2V18c0-1.1-0.9-2-2-2H19c-1.1 0-2 0.9-2 2z" fill="#3b82f6" />
+  <!-- Outer ring -->
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#4F7C82" stroke-width="2" />
   
-  <!-- Book cover shadow -->
-  <path d="M19 16c-1.1 0-2 0.9-2 2v26c0 1.1 0.9 2 2 2h26c1.1 0 2-0.9 2-2V18c0-1.1-0.9-2-2-2H19z" fill="none" stroke="#1d4ed8" stroke-width="1.5" />
-  
-  <!-- Book pages -->
-  <path d="M19 16h26c1.1 0 2 0.9 2 2v26c0 1.1-0.9 2-2 2H19c-1.1 0-2-0.9-2-2V18c0-1.1 0.9-2 2-2z" fill="none" stroke="white" stroke-width="1" opacity="0.8" />
-  
-  <!-- Book spine line -->
-  <line x1="32" y1="16" x2="32" y2="46" stroke="#1d4ed8" stroke-width="2" />
-  
-  <!-- Page lines -->
-  <line x1="22" y1="24" x2="29" y2="24" stroke="white" stroke-width="1.5" opacity="0.9" />
-  <line x1="22" y1="30" x2="29" y2="30" stroke="white" stroke-width="1.5" opacity="0.9" />
-  <line x1="22" y1="36" x2="29" y2="36" stroke="white" stroke-width="1.5" opacity="0.9" />
-  
-  <line x1="35" y1="24" x2="42" y2="24" stroke="white" stroke-width="1.5" opacity="0.9" />
-  <line x1="35" y1="30" x2="42" y2="30" stroke="white" stroke-width="1.5" opacity="0.9" />
-  <line x1="35" y1="36" x2="42" y2="36" stroke="white" stroke-width="1.5" opacity="0.9" />
-  
-  <!-- Sparkle -->
-  <g transform="translate(46, 18) scale(0.7)">
-    <path d="M10 0L13 6L20 7L15 12L16 20L10 16L4 20L5 12L0 7L7 6Z" fill="#fcd34d" />
-    <path d="M10 3L12 7L17 8L13.5 11.5L14.5 17L10 14L5.5 17L6.5 11.5L3 8L8 7Z" fill="#fef3c7" />
+  <!-- Graduation cap -->
+  <g transform="translate(12, 12) scale(1.25)">
+    <!-- Graduation cap base -->
+    <path d="M16 8L3 14L16 20L29 14L16 8Z" fill="#B8E3E9" />
+    
+    <!-- Tassel -->
+    <path d="M16 20C16 20 9 17 9 17V23C9 25.21 12.15 27 16 27C19.85 27 23 25.21 23 23V17L16 20Z" fill="#B8E3E9" />
+    
+    <!-- Top of cap -->
+    <rect x="15" y="5" width="2" height="6" fill="#B8E3E9" />
+    
+    <!-- Top square -->
+    <rect x="12" y="3" width="8" height="2" fill="#B8E3E9" />
   </g>
 </svg>

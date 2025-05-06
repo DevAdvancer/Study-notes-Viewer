@@ -7,7 +7,7 @@
 4. Data Models
 5. Difference Between UDB and DB
 6. Semi Structured Data
-7. Adv and Disady of UDB
+7. Advantage and DisAdvantage of UDB
 ## Unit - 2
 1. Data Ingestion Techniques
 2. Extracting Structured Information from Unstructured Data
@@ -628,6 +628,7 @@ To be done after ML : ) thank for watching till here stay tuned...
 ### Backup Procedures
 ##### **Definations**:
 Backup in MonogDB refers to the process of creating a copy of the database to prevent data loss in case of hardware failure, corruption, or accidental deletion.
+
 ##### Types of Backup Methods:
 1. monogodump:
   - Command-line utility to export MonogoDB databases as **'.bson'** files.
@@ -637,13 +638,38 @@ Backup in MonogDB refers to the process of creating a copy of the database to pr
   - Involves taking a snapshot of the data directory.
   - Must be done when the databases is either shut down or journaling is enabled.
   - Fast for large dataasets.
-3. MonogoDB atlas Backup (Cloud):
+3. Incremental Backup:
+  - Captures only changes made since the last backup.
+4. Differential Backup:
+  - Backs up all changes since the last full backup.
+5. MonogoDB atlas Backup (Cloud):
   - Automated cloud backups with scheduling and point-in-time restore.
   - useful for managed cloud databases.
-4. Ops Manager / Cloud Manager:
+6. Ops Manager / Cloud Manager:
   - Enterprise tools provided by MongoDB for automation and backup.
   - Allows centralized backup scheduling, monitoring, and encryption.
 
+##### Types of Backup
+1. Full Backup:
+  - Complete copy of the entire database
+  - All collections and documents are backed up.
+  - Largest storage requirements but simplest recovery.
+  - Slower to create than incremenatl or differential backups
+  - Suitable baseline for any backup strategy
+2. Incremental Backup
+  - Only backs up data changed since the last backup (full or incremental)
+  - Significantly smaller than full backups
+  - Faster to create than full backups
+  - Requires all previous incremental backups plus the last full backup for complete recovery
+  - More complex recovery process
+  - Can be implemented in MongoDB using oplog-based approaches
+
+3. Differential Backup
+  - Backs up all changes since the last full backup
+  - Larger than incremental backups but smaller than full backups
+  - Simpler recovery than incremental (only requires last full backup plus the differential)
+  - Balances storage requirements with recovery complexity
+  - Can be implemented through custom scripts leveraging MongoDB change streams
 ###### BEST TO PRATICE
 - Perform regular backups.
 - Store backups in mulitple safe locations (e.g., local + cloud).
@@ -660,7 +686,7 @@ Recovery in MonogoDB is the process of restoring data from backups in case of fa
 2. Manual File Restore(Snapshot):
   - Stop MongoDB service.
   - Replace current data files with snapshot files.
-  - Restrat MonogDB server.
+  - Restart MonogDB server.
 3. Point-in-Time Recovery(MongoDB Atlas):
   - Restores the database to any moment in time within the backup window.
   - Useful for undoing accidental deletes or corruption.
@@ -668,9 +694,110 @@ Recovery in MonogoDB is the process of restoring data from backups in case of fa
   - MongoDB uses a journal to recover from unexpected shutdowns.
   - On startup, it applies journaled operations to ensure consistency.
 
+#### Point-in-Time Recovery (PITR)
+Point-in-Time Recovery allows restoring a database to a specific moment, critical for recovering from logical corruption or accidental data modifications.
+
+###### How PITR Works in MongoDB:
+1. Oplog-Based Recovery:
+  - The oplog (operations log) is a special capped collection that records all write operations
+  - PITR works by replaying operations from the oplog up to a specific timestamp
+  - The process requires a base backup plus all relevant oplog entries
+2. Implementation Process:
+  - Take a full backup (snapshot or mongodump with --oplog)
+  - Capture and store the oplog entries continuously
+  - During recovery, restore the full backup first
+  - Replay oplog entries up to the desired recovery point
+3. Recovery Granularity:
+  - Recovery is possible to any point within the oplog retention window
+  - Timestamps can be specified with second-level precision
+  - Operations can be replayed selectively if needed
+
 ###### BEST TO PRACTICE
 - Verify backup integrity before restoring.
 - Perform recovery in a test environment before applying to production.
 - Monitor database after restore for consistency and errors.
+
+### Backup and Recovery Best Practices
+##### Planning Your Backup Strategy:
+
+1. Define RPO and RTO Requirements:
+  - Recovery Point Objective: Maximum acceptable data loss
+  - Recovery Time Objective: Maximum acceptable downtime
+  - These metrics will inform your backup frequency and method
+2. Documentation:
+  - Maintain detailed documentation of your backup procedures
+  - Create step-by-step recovery runbooks for different failure scenarios
+  - Document backup schedules, retention policies, and verification processes
+
+3. Backup Frequency:
+  - High-value, frequently changing data: Consider continuous backup
+  - Medium-value data: Daily backups may be sufficient
+  - Low-value, rarely changing data: Weekly backups might be adequate
+
+#### Backup Implementation:
+
+1. Automation:
+  - Script your backups using cron jobs, systemd timers, or orchestration tools
+  - For Atlas, configure automated backup policies
+  - Implement monitoring to verify backup completion and integrity
+
+
+2. Storage Considerations:
+  - Follow the 3-2-1 backup rule: 3 copies of data, on 2 different media types, with 1 copy off-site
+  - Use encryption for backups containing sensitive data (AES-256 recommended)
+  - Consider compression to reduce storage costs (especially for BSON dumps)
+
+
+3. mongodump Best Practices:
+  - Always use the --oplog option for consistent backups of replica sets
+  - Label backups with timestamps and database names for easy identification
+  - Consider using --archive and compression options for more efficient storage
+  - Run backups against secondary nodes to minimize impact on primary
+
+
+4. Filesystem Snapshot Best Practices:
+  - Ensure consistent snapshots by using db.fsyncLock() or journaling
+  - Automate snapshot creation, testing, and rotation
+  - Verify snapshot integrity after creation
+
+#### Testing and Verification:
+
+1. Regular Recovery Testing:
+  - Schedule monthly or quarterly recovery drills
+  - Restore to separate testing environments to verify backup integrity
+  - Test different recovery scenarios (full restore, point-in-time, etc.)
+
+
+2. Verification Procedures:
+  - Run data integrity checks after test restorations
+  - Verify document counts match the source database
+  - Test application functionality against restored data
+
+
+3. Performance Impact Assessment:
+  - Monitor database performance during backups
+  - Schedule backups during low-traffic periods when possible
+  - Consider read-only secondary nodes for backup operations
+
+#### Monitoring Backup Systems:
+
+1. Oplog Monitoring:
+  - Ensure oplog size is sufficient for your PITR requirements
+  - Monitor oplog utilization and growth rates
+  - Set alerts for oplog approaching capacity
+
+
+2. Storage Monitoring:
+  - Track backup storage growth over time
+  - Set alerts for approaching storage limits
+  - Implement automated cleanup for expired backups
+
+
+3. Backup Success Verification:
+  - Implement automated verification of backup completion
+  - Check for backup size consistency between runs
+  - Set up alerts for failed backups or verification issues
+
+
 ---
 ##### Contributor Name - Abhirup Kumar
