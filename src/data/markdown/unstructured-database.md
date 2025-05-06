@@ -616,10 +616,101 @@ client.close()
 
 # UNIT - III
 ---
-To be done after ML : ) thank for watching till here stay tuned...
+> To be done after ML : ) thank for watching till here stay tuned...
 
 # UNIT - IV
 ---
+## Relationships in MonogDB
+#### Two Main Approaches:
+1. Embedded Documents
+  - Data is nested within a parent document
+  - Creates denormalized data model
+  - Reduces query complexity
+
+2. References
+  - Store references/IDs linking documents across collections
+  - Creates normalized data model
+  - Similar to foreign keys in relational databases
+
+###### When to Use Embedded Documents ?
+
+- **"Contains"** relationships between entities
+- **One-to-one** relationships (e.g., user and address)
+- **One-to-many** with limited children viewed in parent context
+- When related data is frequently accessed together
+
+###### When to Use References ?
+
+- When embedding would cause excessive data duplication
+- For complex many-to-many relationships
+- When related entities are frequently queried independently
+- For large hierarchical data structures Mongodb
+- Generally better for many-to-many relationships
+- When data in referenced collection changes frequently
+
+###### Technical Limitations
+
+- MongoDB documents must be smaller than 16 MB
+- Large embedded arrays can hit size limits
+- No foreign key constraints in references
+
+## Database References
+Database references connect documents stored in different collections. MongoDB offers two types of references:
+1. Manual References: <br />
+Manual references simply store the **'_id'** field of one document in another document. The application then performs a second query to retrieve the related data. This approach is sufficient for most use cases and is generally recommended.
+2. DBRefs: <br />
+DBRefs are a convention for representing document references that include additional information beyond just the ID. They contain:
+
+- **'$ref'**: Collection name where the referenced document resides
+- **'$id'**: Value of the _id field in the referenced document
+- **'$db'**: (Optional) Database name where the document resides
+
+You should generally use manual references unless you need to reference documents across multiple collections or databases where keeping track of collection and database names would be cumbersome.
+
+## Covered Queries
+A covered query is a query that can be satisfied entirely using an index and does not have to examine any documents. This makes them significantly faster than queries that must access the actual documents
+
+#### Requirements
+For a query to be covered:
+- All fields in the query must be part of an index
+- All fields returned in the results must be in the same index
+- No fields in the query can equal null
+
+#### Benefits
+Covered queries significantly improve performance by reducing disk I/O. Since indexes are typically smaller than documents and often reside in RAM, accessing only the index data is much faster.
+
+#### Limitations:
+Multikey indexes (indexes on array fields) can only cover queries when the array field itself is not included in the query results and the query doesn't use **'$elemMatch'**
+
+## Analyzing Queries
+MongoDB provides tools to analyze query performance and understand how queries interact with indexes. This analysis helps optimize database performance.
+##### explain() Method
+The explain() method returns information about the query plan and execution statistics. It shows how MongoDB would execute a query, including whether indexes are used. Mongodb
+##### Verbosity Modes
+explain() offers three verbosity modes:
+
+1. queryPlanner (default): Shows the query plan selected by the optimizer
+2. executionStats: Shows the plan plus execution statistics like documents examined
+3. allPlansExecution: Shows statistics for both the winning plan and rejected plans
+
+> **'$hint Operator'**: The **'$hint'** operator forces MongoDB to use a specific index for a query. This is useful for testing the performance of different indexes on the same query
+
+## Atomic Operations
+1. **Single-Document Atomicity**: Single-document atomicity is a core principle in MongoDB. Since you can use embedded documents and arrays to capture relationships within a single document structure, this often eliminates the need for multi-document transactions.
+2. **Concurrent Operations**: When multiple update operations happen in parallel, MongoDB ensures that each command verifies that its query condition still matches before making changes. This prevents conflicts during concurrent updates.
+
+#### Data Modeling for Atomicity
+For fields that must be updated together atomically, the recommended approach is to embed them within the same document. This data modeling strategy ensures that related fields can be modified in a single atomic operation
+
+#### Multi-Document Transactions
+For situations requiring atomicity across multiple documents or collections, MongoDB supports distributed transactions. These transactions can span operations, collections, databases, documents, and shards. <br />
+However, multi-document transactions typically have higher performance costs compared to single-document writes. In most cases, effective schema design with embedded documents is still recommended over transactions.
+
+#### Limitations
+MongoDB does not support multi-document atomic transactions in older versions (pre-4.0). Atomicity is maintained only at the document level. <br />
+Even when using the $isolated operator (in older versions), a write operation affecting multiple documents does not provide "all-or-nothing" atomicity. If an error occurs during the operation, MongoDB will not roll back changes that preceded the error.
+
+
 
 # UNIT - V
 ---
