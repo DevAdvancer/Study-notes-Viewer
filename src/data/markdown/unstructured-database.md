@@ -786,8 +786,26 @@ db.users.find({ email: /\.edu$/ });
 db.users.find({ name: { $regex: "john", $options: "i" } });
 ```
 
+## Studio 3T over Compass
+![Studio3TvsCompass](/images/studio3Tvscompass.png)
+
+###### Why to Choose studio 3T
+1. SQL to MongoDB Translation: Ideal for users from a relational DB background who want to transition smoothly.
+2. Advanced Query Editor: Auto-complete, color syntax, multiple result views (tree, table, JSON).
+3. Aggregation Pipeline Helper: Side-by-side view of visual and code-based aggregation – great for learning and debugging.
+4. Data Migration Tools: Supports importing from relational DBs (MySQL, PostgreSQL, Oracle) with field mapping.
+5. Team and Enterprise Support: Project sharing, audit logs, and enterprise features for team workflows.
+
+###### When to Choose MongoDB Compass
+1. You're just getting started with MongoDB and need a simple GUI.
+2. You need a lightweight, free, and official MongoDB GUI tool.
+3. You're not working with SQL or advanced import/export tasks.
+4. Your usage is occasional or for academic purposes.
+
+## Configure Mongodb Atlas
 
 
+## MongoDB-Python Integration
 # UNIT - V
 ---
 ## Backup and Recovery procedures in Monogdb
@@ -1018,6 +1036,13 @@ When unexpected disruptions strike, the impact on business operations can be imm
 - Sliding Window Analysis: Process data in continuous time windows
 - Streaming SQL: Apply SQL-like queries to data in motion
 
+# Tutorial Points Notes
+---
+[tutorialpoint notes](https://drive.google.com/file/d/15wKNFFrKxX3f31Kh3JmtoNbINtWacG7Z/view)
+
+# Prabhat Sir's Question Bank
+---
+[Question Bank](https://drive.google.com/file/d/1J5m9uKdY8CzUMbf7WfKcCC-gvEPrLneb/view)
 
 ---
 ##### Contributor Name - Abhirup Kumar
