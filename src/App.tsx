@@ -14,14 +14,14 @@ import { AddButton } from "./components/AddButton";
 
 // Background images for each subject
 const subjectBackgrounds = {
-  "Intro to Python": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=500",
-  "Full Stack SD": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=500",
+  "Introduction to Python": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=500",
+  "Full Stack Software Development": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=500",
   "Operating System": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?q=80&w=500",
   "Machine Learning": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=500",
-  "Unstructured DB": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=500",
+  "Unstructured Database": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=500",
   "IOT": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500",
-  "OS Lab": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=500",
-  "UDB Lab": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=500"
+  "Operating System Lab": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=500",
+  "Unstructured Database Lab": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=500"
 };
 
 export default function App() {

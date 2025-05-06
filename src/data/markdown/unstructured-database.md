@@ -1,4 +1,5 @@
 # Syllabus
+---
 ## UNIT - 1
 1. What is UDB?
 2. Different types of UDB
@@ -33,8 +34,10 @@
 5. Handling Streaming and Real-time Data
 6. Exploring Cloud-based Unstructured Databases
 
-# UNIT - I
+---
 
+# UNIT - I
+---
 **What is Unstructured Database?** <br />
 An Unstructured database is a data storage system that can effieciently store, retrive, and manage data that lacks a predefiend data model or doesn't fit neatly into relational tables. <br />
 Examples: Mongodb, Neo4j, etc. <br />
@@ -169,6 +172,7 @@ Semi-Structured data is information that doesn't conform to a rigid structure of
 5. Security Concers
 
 # UNIT - II
+---
 ## Data Ingestion Techniques
 
 It is a the process of importing, transfering, loading and processing data for immediate use or storage in a database. This is a critical first step in the data pipeline, especially when dealing with unstructured or semi-structured data.
@@ -611,9 +615,62 @@ client.close()
 5. Format and codec management
 
 # UNIT - III
+---
 To be done after ML : ) thank for watching till here stay tuned...
 
+# UNIT - IV
+---
 
+# UNIT - V
+---
+## Backup and Recovery procedures in Monogdb
 
+### Backup Procedures
+##### **Definations**:
+Backup in MonogDB refers to the process of creating a copy of the database to prevent data loss in case of hardware failure, corruption, or accidental deletion.
+##### Types of Backup Methods:
+1. monogodump:
+  - Command-line utility to export MonogoDB databases as **'.bson'** files.
+  - Syntax: **'monogodump --db <dbname> --out /path/to/backup'**.
+  - Suitable for small to medium-sized deployments.
+2. File System Snapshot:
+  - Involves taking a snapshot of the data directory.
+  - Must be done when the databases is either shut down or journaling is enabled.
+  - Fast for large dataasets.
+3. MonogoDB atlas Backup (Cloud):
+  - Automated cloud backups with scheduling and point-in-time restore.
+  - useful for managed cloud databases.
+4. Ops Manager / Cloud Manager:
+  - Enterprise tools provided by MongoDB for automation and backup.
+  - Allows centralized backup scheduling, monitoring, and encryption.
+
+###### BEST TO PRATICE
+- Perform regular backups.
+- Store backups in mulitple safe locations (e.g., local + cloud).
+- Automate the backup process with scripts or tools.
+
+### Recovery Procedures
+##### **Definations**:
+Recovery in MonogoDB is the process of restoring data from backups in case of faliure, data loss, or corruption.
+##### Common Recovery Methods:
+1. monogorestore:
+  - Restores backups created the **'monogodump'**.
+  - Syntax: **'mongorestore /path/to/backup'**.
+  - Can restore entire database or specific collections.
+2. Manual File Restore(Snapshot):
+  - Stop MongoDB service.
+  - Replace current data files with snapshot files.
+  - Restrat MonogDB server.
+3. Point-in-Time Recovery(MongoDB Atlas):
+  - Restores the database to any moment in time within the backup window.
+  - Useful for undoing accidental deletes or corruption.
+4. Recovery with Journaling:
+  - MongoDB uses a journal to recover from unexpected shutdowns.
+  - On startup, it applies journaled operations to ensure consistency.
+
+###### BEST TO PRACTICE
+- Verify backup integrity before restoring.
+- Perform recovery in a test environment before applying to production.
+- Monitor database after restore for consistency and errors.
 ---
 ##### Contributor Name - Abhirup Kumar

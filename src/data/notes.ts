@@ -11,14 +11,14 @@ import unstructuredDatabaseLab from './markdown/unstructured-database-lab.md?raw
 export const notes: Note[] = [
   {
       id: '1',
-      subject: 'Intro to Python',
+      subject: 'Introduction to Python',
       subjectCode: 'CSE11118',
       content: pythonIntro,
       progress: 'completed'
   },
   {
       id: '2',
-      subject: 'Full Stack SD',
+      subject: 'Full Stack Software Development',
       subjectCode: 'CSE11123',
       content: fullStack,
       progress: 'completed'
@@ -39,7 +39,7 @@ export const notes: Note[] = [
   },
   {
     id: '5',
-    subject: 'Unstructured DB',
+    subject: 'Unstructured Database',
     subjectCode: 'CSE11202',
     content: unstructuredDatabase,
     progress: 'in-progress'
@@ -53,14 +53,14 @@ export const notes: Note[] = [
   },
   {
     id: '7',
-    subject: 'OS Lab',
+    subject: 'Operating System Lab',
     subjectCode: 'CSE12156',
     content: operatingSystemLab,
-    progress: 'not-started'
+    progress: 'in-progress'
   },
   {
     id: '8',
-    subject: 'UDB Lab',
+    subject: 'Unstructured Database Lab',
     subjectCode: 'CSE12203',
     content: unstructuredDatabaseLab,
     progress: 'completed'
