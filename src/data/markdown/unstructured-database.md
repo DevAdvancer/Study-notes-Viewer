@@ -57,7 +57,7 @@ Examples: Mongodb, Neo4j, etc. <br />
 - **Graph databases**:
   1. Use graphs with nodes, edges and properties.
   2. Effiecient for data with complex relationships and interconnections.
-  3. Example: Nep4j.
+  3. Example: Neo4j.
 - **Key-value stores**:
   1. Simpleest form of NoSQL databases.
   2. Data stored in key-value pairs.
@@ -612,6 +612,23 @@ client.close()
 ---
 [MongoDB Tutorial for Queries](https://youtu.be/tww-gbNPOcA?si=8ARwzehV84lEoYMb)
 
+
+## Aggregation
+**Simeple Query => **'db.collection.aggregate(pipeline, options)'** [syntax]**
+1. **$match => db.collection.aggregate([{$match: {gender: "male"}}])**
+2. **$group => db.collection.aggreagte([{$group: {_id: "$age"}}])**
+3. **$push => db.collection.aggreagte([{$group: {_id: "$age", name: { $push: "$name"}}}}])**
+4. **$$ROOT => db.collection.aggreagate([$group: {_id: "$age", fullDocs: { $push: "$$ROOT"}]) -> This values is a reference to the current document being processed in the pipeline, which represents the complete document.**
+5. **Pipeline example and counting => db.collection.aggregate([{$match: {gender: "male"}}, {$group: {_id: "$age", count: {$sum: 1}}}])**
+6. **Count and sort them in desc =>  db.collection.aggregate([{$match: {gender: "male"}}, {$group: {_id: "$age", count: {$sum: 1}}}}, { $sort: {count: -1}}])**
+7. **$ifnull => db.collection.aggregate({$group: {_id: null, count: {$sum: {$size: $ifnull: {["$Hobies", []]}} }})**
+8. **List all Hobies => db.collection.aggregate([{$unwind: "$Hobies"}, {$group: {_id: null, allHobies: { $push: "$Hobbies"}}}}])**
+9. **filter => db.collection.aggregate({$group: {_id: null, avgScore{ $avg: { $filter: {input: "$scores", as: "score", cond: { $gt: ["$age", 20]}}}}}}}}}})**
+
+## Projection
+**Simple Query => db.collection.find({}, {field1: 1, field2: 0, _id: 0})**
+
+
 # UNIT - IV
 ---
 ## Relationships in MonogDB
@@ -1095,13 +1112,17 @@ When unexpected disruptions strike, the impact on business operations can be imm
 - Sliding Window Analysis: Process data in continuous time windows
 - Streaming SQL: Apply SQL-like queries to data in motion
 
-# Tutorial Points Notes
+## Tutorial Points Notes
 ---
 [tutorialpoint notes](https://drive.google.com/file/d/15wKNFFrKxX3f31Kh3JmtoNbINtWacG7Z/view)
 
-# Prabhat Sir's Question Bank
+## Prabhat Sir's Question Bank
 ---
 [Question Bank](https://drive.google.com/file/d/1J5m9uKdY8CzUMbf7WfKcCC-gvEPrLneb/view)
+
+## Answers of Question Bank
+---
+[Answers of Question Bank](https://drive.google.com/file/d/1FP-ew56r9NrZlH4mMtBtanN-35gglCRz/view?usp=sharing)
 
 ---
 ##### Contributor Name - Abhirup Kumar
