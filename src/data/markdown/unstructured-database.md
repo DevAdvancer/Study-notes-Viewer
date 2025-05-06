@@ -696,11 +696,16 @@ explain() offers three verbosity modes:
 > **'$hint Operator'**: The **'$hint'** operator forces MongoDB to use a specific index for a query. This is useful for testing the performance of different indexes on the same query
 
 ## Atomic Operations
+##### **Defination**:
+Atomicity in MongoDB refers to the all-or-nothing property of database operations — ensuring that a group of operations are either fully completed or none are applied at all, maintaining data consistency.
 1. **Single-Document Atomicity**: Single-document atomicity is a core principle in MongoDB. Since you can use embedded documents and arrays to capture relationships within a single document structure, this often eliminates the need for multi-document transactions.
 2. **Concurrent Operations**: When multiple update operations happen in parallel, MongoDB ensures that each command verifies that its query condition still matches before making changes. This prevents conflicts during concurrent updates.
 
 #### Data Modeling for Atomicity
 For fields that must be updated together atomically, the recommended approach is to embed them within the same document. This data modeling strategy ensures that related fields can be modified in a single atomic operation
+
+#### Ensuring Operation Atomicity
+To guarantee that concurrent operations don't conflict, you can specify the expected current value of a field in the update filter. This ensures your update only proceeds if the document is in the expected state
 
 #### Multi-Document Transactions
 For situations requiring atomicity across multiple documents or collections, MongoDB supports distributed transactions. These transactions can span operations, collections, databases, documents, and shards. <br />
@@ -710,6 +715,53 @@ However, multi-document transactions typically have higher performance costs com
 MongoDB does not support multi-document atomic transactions in older versions (pre-4.0). Atomicity is maintained only at the document level. <br />
 Even when using the $isolated operator (in older versions), a write operation affecting multiple documents does not provide "all-or-nothing" atomicity. If an error occurs during the operation, MongoDB will not roll back changes that preceded the error.
 
+#### Indexing
+Indexing in MongoDB is a mechanism that improves the speed and efficiency of query operations (like find, sort, filter) by creating a special data structure that allows the database to locate data without scanning every document in a collection.
+
+#### Types of Indexs
+1. Compound Indexes: These combine multiple fields into a single index structure, containing up to 32 fields maximum. Order of fields matters significantly for performance - indexes store references to documents in the sequence of indexed fields.
+2. Multikey Indexes: Created automatically when you index a field containing array values. MongoDB creates separate index entries for each element of the array, making lookups for individual array items efficient.
+3. Text Indexes: Support text search queries on string content fields. Especially useful for natural language searches across document content.
+4. Geospatial Indexes: MongoDB offers two types: 2d (for planar coordinates) and 2dsphere (for Earth-like spherical coordinates). These optimize location-based queries.
+5. Hashed Indexes: Hash the indexed field values to support equality-based queries. Commonly used for sharding to distribute data evenly.
+6. Wildcard Indexes: Index multiple fields using a wildcard pattern, allowing for dynamic field indexing in document structures that have varied fields.
+
+##### Indexing Limitations
+1. Collection Limits: A single collection can have no more than 64 indexes. This limit is hardcoded and cannot be changed.
+2. Compound Index Limits
+- There can be no more than 32 fields in a compound index.
+- Compound index can have maximum 31 fields indexed. The length of an index name cannot exceed 125 characters. Wisdom Jobs
+3. Multikey Index Restrictions
+- In compound multikey indexes, each document can only have one indexed field that is an array. If one field is an array, other indexed fields must not be.
+- Multikey indexes cannot be used as shard key indexes and don't support the $expr operator.
+4. Size and Memory Limitations: Since indexes are stored in RAM, the total size of indexes should not exceed the available RAM. If index size exceeds RAM, MongoDB will start - deleting some indexes, causing performance degradation.
+5. Query Support Limitations:
+- Indexes may not be efficiently used with regular expressions, negation operators like $nin or $not, or arithmetic operators like $mod.
+- Queries cannot use both text and geospatial indexes simultaneously. You cannot combine $text queries with operators requiring different specialized indexes (like $near).
+6. Wildcard Index Restrictions: Wildcard indexes cannot be used as shard key indexes and can support at most one query predicate field. They also cannot support exact equality matches on arrays or documents.
+7. Index Key Generation Limits: MongoDB limits the maximum number of keys generated for a single document to 100,000 by default to prevent out-of-memory errors, particularly with multikey indexes.
+8. Index Insertion Behavior: MongoDB will not insert a document into an indexed collection if the indexed field value would exceed the index key limit. It will instead return an error.
+
+## ObjectId
+##### Definition
+In MongoDB, the _id field acts as a primary key for documents stored in a collection. By default, MongoDB uses ObjectId for this field if not specified. ObjectIds are designed to be small, unique, fast to generate, and ordered
+
+###### Structure
+An ObjectId is a 12-byte BSON data type composed of:
+
+1. A 4-byte timestamp representing creation time (seconds since Unix epoch)
+2. A 5-byte random value unique to the machine and process
+3. A 3-byte incrementing counter initialized to a random value
+
+
+## MapReduce
+MapReduce is a data processing model in MongoDB used to analyze and transform large volumes of data by dividing the task into two main functions: Map and Reduce. It’s typically used for aggregation operations when more complex logic is needed than the standard aggregation pipeline provides.
+
+###### idea
+1. Map Phase: Extracts key-value pairs from input documents.
+2. Reduce Phase: Groups values by key and performs computations (like sum, count, average).
+
+## Text Search Regular Expression
 
 
 # UNIT - V
