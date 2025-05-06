@@ -715,7 +715,7 @@ However, multi-document transactions typically have higher performance costs com
 MongoDB does not support multi-document atomic transactions in older versions (pre-4.0). Atomicity is maintained only at the document level. <br />
 Even when using the $isolated operator (in older versions), a write operation affecting multiple documents does not provide "all-or-nothing" atomicity. If an error occurs during the operation, MongoDB will not roll back changes that preceded the error.
 
-#### Indexing
+## Indexing
 Indexing in MongoDB is a mechanism that improves the speed and efficiency of query operations (like find, sort, filter) by creating a special data structure that allows the database to locate data without scanning every document in a collection.
 
 #### Types of Indexs
