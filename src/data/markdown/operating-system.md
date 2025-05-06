@@ -29,6 +29,7 @@
 ## Types of Operating Systems
 ### 1. Batch Operating Systems
 ![batchos](/images/batch-os.webp)
+
 This type of operating system does not interact with the computer directly. There is an operator which takes similar jobs having the same requirements and groups them into batches. It is the responsibility of the operator to sort jobs with similar needs. Batch Operating System is designed to manage and execute a large number of jobs efficiently by processing them in groups. <br />
 ###### **Advantages:**
 - Multiple users can share the batch systems.
@@ -41,6 +42,7 @@ This type of operating system does not interact with the computer directly. Ther
 
 ### 2. Multi-Programming Operating Systems
 ![multiprogrammingos](/images/multi-programmingos.webp)
+
 Multiprogramming Operating Systems can be simply illustrated as more than one program is present in the main memory and any one of them can be kept in execution. This is basically used for better utilization of resources. <br />
 ###### **Advantages:**
 - CPU is better utilized and overall performance of the system improves.
@@ -66,6 +68,7 @@ Time Sharing and Multiprogramming systems are also called multitasking sometimes
 
 ### 3. Multi-Processing Operating System
 ![multiprocessingos](/images/multiprocessingos.webp)
+
 Multi-Processing is an approach to improving the efficiency and responsiveness of computing systems by dividing a single core CPU into multiple processes. This approach enables each process to execute its own code, parallelize its computation, and perform tasks concurrently instead of sequentially. <br />
 
 ###### **Advantages:**
@@ -273,4 +276,3 @@ Average Head Movement = 640 / 8 = 80 cylinders. <br />
 
 ---
 ##### Contributor Name - Abhirup Kumar
-  

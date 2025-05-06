@@ -5,7 +5,7 @@ import { notes } from "./data/notes";
 import { NoteViewer } from "./components/NoteViewer";
 import { Footer } from "./components/Footer";
 import {
-  BookOpen, Search, Menu, X, ListFilter,
+  BookOpen, Search, X, ListFilter,
   CheckCircle2, Clock, AlertCircle, ChevronRight,
   GraduationCap
 } from "lucide-react";
@@ -29,35 +29,10 @@ export default function App() {
   const [filter, setFilter] = useState<Progress | "all">("all");
   const [isLoaded, setIsLoaded] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const controls = useAnimation();
   const searchInputRef = useRef<HTMLInputElement>(null);
-
-  // Close sidebar on wider screens
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsSidebarOpen(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Handle body scroll lock when sidebar is open
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isSidebarOpen]);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Filter notes based on progress and search term
   const filteredNotes = notes.filter((note) => {
@@ -69,17 +44,17 @@ export default function App() {
     return progressMatch && searchMatch;
   });
 
-  // Function to focus search input
-  const focusSearch = () => {
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
+  // Scroll to top when a note is closed
+  useEffect(() => {
+    if (!selectedNote && contentRef.current) {
+      contentRef.current.scrollTop = 0;
     }
-  };
+  }, [selectedNote]);
 
   // Simulating page load effect
   useEffect(() => {
     const loadSequence = async () => {
-      await controls.start({ opacity: 1, y: 0, transition: { duration: 0.6 } });
+      await controls.start({ opacity: 1, y: 0, transition: { duration: 0.5 } });
       setIsLoaded(true);
     };
 
@@ -100,20 +75,12 @@ export default function App() {
 
   return (
     <StudyThemeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950/30 to-gray-900 text-white font-sans">
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-950 to-slate-900 text-white font-sans">
         {/* Custom Header */}
-        <header className="bg-gradient-to-r from-gray-800 via-blue-900/40 to-gray-800 border-b border-gray-700/50">
+        <header className="bg-gradient-to-r from-blue-900/90 to-blue-800/90 border-b border-blue-700/50 sticky top-0 z-40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-lg mr-3 lg:hidden hover:bg-gray-700"
-                  onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                >
-                  <Menu size={20} />
-                </motion.button>
                 <div className="flex items-center gap-3">
                   <motion.div
                     whileHover={{ rotate: 5 }}
@@ -122,11 +89,11 @@ export default function App() {
                   >
                     <GraduationCap className="w-6 h-6 text-blue-400" />
                   </motion.div>
-                  <h1 className="text-xl font-bold hidden sm:block">University Study Notes</h1>
+                  <h1 className="text-xl font-bold">University Study Notes</h1>
                 </div>
               </div>
 
-                              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
                 {/* Unified Search Bar with integrated filter button */}
                 <div className="relative flex-1 max-w-md">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -135,7 +102,7 @@ export default function App() {
                   <input
                     type="text"
                     ref={searchInputRef}
-                    className="w-full pl-10 pr-12 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 bg-gray-800/50 text-white border-gray-700 focus:ring-blue-500 transition-colors"
+                    className="w-full pl-10 pr-12 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 bg-blue-800/50 text-white border-blue-700 focus:ring-blue-500 transition-colors"
                     placeholder="Search notes..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -177,7 +144,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 sm:right-6 lg:right-8 top-16 z-50 mt-2 py-2 px-1 rounded-lg shadow-lg border bg-gray-800 border-gray-700 transition-colors max-w-xs w-[calc(100%-2rem)] sm:w-auto"
+                className="absolute right-4 sm:right-6 lg:right-8 top-16 z-50 mt-2 py-2 px-1 rounded-lg shadow-lg border bg-blue-800 border-blue-700 transition-colors max-w-xs w-[calc(100%-2rem)] sm:w-auto"
               >
                 <div className="w-full sm:w-48">
                   {["all", "completed", "in-progress", "not-started"].map((status) => (
@@ -190,7 +157,7 @@ export default function App() {
                       className={`w-full text-left py-2 px-3 text-sm rounded-md flex items-center gap-2 transition-colors mb-1 ${
                         filter === status
                           ? "bg-blue-600/20 text-blue-400"
-                          : "hover:bg-gray-700"
+                          : "hover:bg-blue-700"
                       }`}
                     >
                       {status === "all"
@@ -210,117 +177,11 @@ export default function App() {
           </AnimatePresence>
         </header>
 
-        {/* Mobile sidebar overlay */}
-        <AnimatePresence>
-          {isSidebarOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 lg:hidden"
-              onClick={() => setIsSidebarOpen(false)}
-            >
-              <motion.div
-                initial={{ x: -300 }}
-                animate={{ x: 0 }}
-                exit={{ x: -300 }}
-                transition={{ type: "spring", damping: 25 }}
-                className="w-3/4 max-w-xs h-full bg-gray-900 overflow-y-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="p-4 border-b border-gray-800/50 flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-blue-500/20">
-                      <GraduationCap className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <h2 className="font-bold">Study Notes</h2>
-                  </div>
-                  <button
-                    className="p-2 rounded-lg hover:bg-gray-800"
-                    onClick={() => setIsSidebarOpen(false)}
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-
-                <div className="p-4">
-                  <div className="mb-6">
-                    <h3 className="text-sm font-medium mb-2 text-gray-400">Filter by Status</h3>
-                    <div className="space-y-1">
-                      {["all", "completed", "in-progress", "not-started"].map((status) => (
-                        <button
-                          key={status}
-                          onClick={() => {
-                            setFilter(status as Progress | "all");
-                            setIsSidebarOpen(false);
-                          }}
-                          className={`w-full text-left py-2 px-3 text-sm rounded-lg transition-colors flex items-center gap-2 ${
-                            filter === status
-                              ? "bg-blue-600/20 text-blue-400"
-                              : "hover:bg-gray-800"
-                          }`}
-                        >
-                          {status === "all"
-                            ? <BookOpen size={16} />
-                            : getProgressIcon(status as Progress)}
-
-                          <span>
-                            {status === "all" ? "All Notes" :
-                            status === "completed" ? "Completed" :
-                            status === "in-progress" ? "In Progress" : "Not Started"}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-medium mb-2 text-gray-400">Subjects</h3>
-                    <div className="space-y-1">
-                      {notes.map((note) => (
-                        <button
-                          key={note.id}
-                          onClick={() => {
-                            setSelectedNote(note);
-                            setIsSidebarOpen(false);
-                          }}
-                          className="w-full text-left py-2 px-3 text-sm rounded-lg transition-colors flex items-center gap-2 hover:bg-gray-800"
-                        >
-                          <div className="flex-grow">
-                            <div className="flex justify-between items-center">
-                              <span className="truncate">{note.subject}</span>
-                              <ChevronRight size={14} className="text-gray-500" />
-                            </div>
-                            <div className="flex items-center gap-1 mt-0.5">
-                              <span className="text-xs opacity-60">{note.subjectCode}</span>
-                              <span className="inline-block w-1 h-1 bg-gray-500 rounded-full mx-1"></span>
-                              <div className="flex items-center">
-                                {getProgressIcon(note.progress)}
-                                <span className={`text-xs ml-1 ${
-                                  note.progress === 'completed' ? 'text-emerald-500' :
-                                  note.progress === 'in-progress' ? 'text-amber-500' : 'text-rose-500'
-                                }`}>
-                                  {note.progress.split('-').map(word =>
-                                    word.charAt(0).toUpperCase() + word.slice(1)
-                                  ).join(' ')}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Main Content Area - ONLY THIS SECTION IS SCROLLABLE */}
-        <div className="flex h-[calc(100vh-4rem)] overflow-hidden"> {/* 4rem = h-16 header height */}
-          <main className="flex-1 overflow-y-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-20">
+        {/* Main Content Area with proper padding to avoid footer overlap */}
+        <div className="flex min-h-[calc(100vh-4rem)] overflow-hidden">
+          <main className="flex-1 w-full" ref={contentRef}>
+            {/* Add extra padding at the bottom to avoid footer overlap */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-32">
               <div className="mb-8">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
@@ -379,14 +240,14 @@ export default function App() {
                         <motion.div
                           whileHover={{ y: -5, scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="overflow-hidden rounded-xl h-full cursor-pointer bg-gray-800/50 backdrop-blur-sm border border-gray-700/30 transition-all duration-300"
+                          className="overflow-hidden rounded-xl h-full cursor-pointer bg-blue-900/30 backdrop-blur-sm border border-blue-800/30 transition-all duration-300 shadow-lg"
                           onClick={() => setSelectedNote(note)}
                         >
                           {/* Card Header with Background Image */}
                           <div
                             className="h-28 sm:h-32 relative flex items-end"
                             style={{
-                              backgroundImage: `linear-gradient(to bottom, rgba(17, 24, 39, 0.5), rgba(17, 24, 39, 0.9)), url(${subjectBackgrounds[note.subject as keyof typeof subjectBackgrounds]})`,
+                              backgroundImage: `linear-gradient(to bottom, rgba(30, 58, 138, 0.5), rgba(30, 58, 138, 0.9)), url(${subjectBackgrounds[note.subject as keyof typeof subjectBackgrounds]})`,
                               backgroundSize: 'cover',
                               backgroundPosition: 'center'
                             }}
@@ -405,7 +266,7 @@ export default function App() {
                           {/* Card Body */}
                           <div className="p-3 sm:p-4 flex flex-col flex-grow">
                             <div className="flex justify-between items-center mb-2 sm:mb-3">
-                              <span className="text-xs sm:text-sm font-medium px-2 py-0.5 rounded bg-gray-700/50">
+                              <span className="text-xs sm:text-sm font-medium px-2 py-0.5 rounded bg-blue-800/50">
                                 {note.subjectCode}
                               </span>
 
@@ -422,8 +283,7 @@ export default function App() {
                             </div>
 
                             {/* Preview of note content */}
-                            <div className="text-xs sm:text-sm line-clamp-2 mt-1 sm:mt-2 text-gray-400">
-                              {/* Simple markdown content preview */}
+                            <div className="text-xs sm:text-sm line-clamp-2 mt-1 sm:mt-2 text-gray-300">
                               {note.content.substring(0, 120).replace(/[#*_\[\]\(\)]/g, '') + '...'}
                             </div>
 
@@ -445,9 +305,9 @@ export default function App() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center py-16 px-4 rounded-xl text-center bg-gray-800/40"
+                  className="flex flex-col items-center justify-center py-16 px-4 rounded-xl text-center bg-blue-800/40"
                 >
-                  <div className="p-6 rounded-full mb-4 bg-gray-700/50">
+                  <div className="p-6 rounded-full mb-4 bg-blue-700/50">
                     <Search className="w-8 h-8 text-gray-400" />
                   </div>
                   <h3 className="text-xl font-medium mb-2 text-gray-300">No notes found</h3>
@@ -469,51 +329,25 @@ export default function App() {
           </main>
         </div>
 
-        {/* Note Viewer that appears directly without overlay */}
-        <AnimatePresence>
+        {/* Note Viewer */}
+        <AnimatePresence mode="wait">
           {selectedNote && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4"
-              onClick={() => setSelectedNote(null)}
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  transition: {
-                    type: "spring",
-                    damping: 25,
-                    stiffness: 300,
-                  },
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.9,
-                  transition: { duration: 0.2 },
-                }}
-                onClick={(e) => e.stopPropagation()}
-                className="relative max-w-4xl w-full"
-                layoutId={`note-card-${selectedNote.id}`}
-              >
-                <NoteViewer
-                  note={selectedNote}
-                  onClose={() => setSelectedNote(null)}
-                />
-              </motion.div>
-            </motion.div>
+            <NoteViewer
+              note={selectedNote}
+              onClose={() => setSelectedNote(null)}
+            />
           )}
         </AnimatePresence>
 
-        {/* Add button with URL redirect */}
-        <AddButton
-          url="https://forms.gle/q1P3Kk1rzuKPG6qk9"
-          openInNewTab={true}
-        />
+        {/* Add button with URL redirect - positioned above footer */}
+        <div className="fixed bottom-20 right-6 z-30">
+          <AddButton
+            url="https://forms.gle/q1P3Kk1rzuKPG6qk9"
+            openInNewTab={true}
+          />
+        </div>
 
+        {/* Footer with fixed position */}
         <Footer />
       </div>
     </StudyThemeProvider>
