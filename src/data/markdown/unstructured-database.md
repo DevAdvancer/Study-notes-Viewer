@@ -762,6 +762,36 @@ MapReduce is a data processing model in MongoDB used to analyze and transform la
 2. Reduce Phase: Groups values by key and performs computations (like sum, count, average).
 
 ## Text Search Regular Expression
+Both Text Search and Regular Expression (Regex) are used to search string fields, but they differ in purpose, performance, and syntax.
+
+1. **Text Search**
+Use When:
+- You want full-text search (like Google-style search).
+- You need language-aware token matching (e.g., ignore stopwords, stemming).
+
+2. Requirements:
+You must create a text index first.
+
+###### **Features:**
+- Matches words and phrases
+- Ignores common words (stopwords)
+- Supports "\"exact phrase\"" and -exclude operators
+- Fast with large datasets (when indexed)
+
+###### Regular Expression Search (Regex)
+- You need pattern matching (e.g., starts with, ends with, contains).
+- Useful for complex string patterns.
+```monogdb
+// Find names starting with "A"
+db.users.find({ name: /^A/ });
+
+// Find emails ending in ".edu"
+db.users.find({ email: /\.edu$/ });
+
+// Case-insensitive search
+db.users.find({ name: { $regex: "john", $options: "i" } });
+```
+
 
 
 # UNIT - V
