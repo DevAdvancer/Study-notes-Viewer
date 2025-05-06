@@ -638,14 +638,10 @@ Backup in MonogDB refers to the process of creating a copy of the database to pr
   - Involves taking a snapshot of the data directory.
   - Must be done when the databases is either shut down or journaling is enabled.
   - Fast for large dataasets.
-3. Incremental Backup:
-  - Captures only changes made since the last backup.
-4. Differential Backup:
-  - Backs up all changes since the last full backup.
-5. MonogoDB atlas Backup (Cloud):
+3. MonogoDB atlas Backup (Cloud):
   - Automated cloud backups with scheduling and point-in-time restore.
   - useful for managed cloud databases.
-6. Ops Manager / Cloud Manager:
+4. Ops Manager / Cloud Manager:
   - Enterprise tools provided by MongoDB for automation and backup.
   - Allows centralized backup scheduling, monitoring, and encryption.
 
