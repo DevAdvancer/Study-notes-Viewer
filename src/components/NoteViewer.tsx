@@ -124,7 +124,7 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                     />
                   );
                 },
-                a: ({ node, href, children, ...props }) => {
+                a: ({ href, children, ...props }) => {
                   if (!href) return (
                     <a {...props}>{children}</a>
                   );
@@ -191,7 +191,7 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                     </a>
                   );
                 },
-                code: ({ node, inline, className, children, ...props }: { node?: any; inline?: boolean; className?: string; children?: React.ReactNode }) => {
+                code: ({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode; node?: unknown }) => {
                   if (inline) {
                     return (
                       <code className="bg-[#0B2E33]/80 px-1 py-0.5 rounded-md text-emerald-300" {...props}>
