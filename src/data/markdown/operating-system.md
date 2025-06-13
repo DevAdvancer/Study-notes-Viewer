@@ -118,7 +118,7 @@ A Distributed Operating System (OS) is an operating system that allows multiple 
 3. **Amazon Web Services (AWS)**: A cloud-based platform that uses a distributed operating system to provide scalability, high availability, and fault tolerance.
 
 
-## Master-Slave Relationship Notes
+## Master-Slave Relationship
 
 ###### Definition
 A configuration where one device (master) controls and manages data and resources, while other devices (slaves) replicate and provide backup functionality.
