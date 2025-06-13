@@ -1112,9 +1112,7 @@ When unexpected disruptions strike, the impact on business operations can be imm
 - Sliding Window Analysis: Process data in continuous time windows
 - Streaming SQL: Apply SQL-like queries to data in motion
 
-## Tutorial Points Notes
----
-[tutorialpoint notes](https://drive.google.com/file/d/15wKNFFrKxX3f31Kh3JmtoNbINtWacG7Z/view)
+> **Note:** [Tutorial point notes](https://drive.google.com/file/d/15wKNFFrKxX3f31Kh3JmtoNbINtWacG7Z/view)
 
 ## Prabhat Sir's Question Bank
 ---

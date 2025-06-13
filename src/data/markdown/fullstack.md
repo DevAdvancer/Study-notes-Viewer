@@ -146,7 +146,7 @@ This is used to add image to our page.
 `<sub>` - This is used to add subscript text in our page. <br />
 `<hr>` - This is used to add a horizontal line in our page. <br />
 
-> Notes- For more Information about HTML you can check the [MDN DOCS](https://developer.mozilla.org/en-US/docs)
+> **Note:** For more information about HTML you can check the [MDN Docs](https://developer.mozilla.org/en-US/docs).
 
 ## Important Points
 
@@ -1035,7 +1035,7 @@ Here two things are important remember the class name and also how we are connec
 </html>
 ```
 
-here we have build the card using bootstrap and also remember all of this can be done using normal css also it's just for the exam point of view.
+> **Note:** This card is built using Bootstrap, but you can achieve the same layout with standard CSS. It's included here for exam purposes.
 
 ### Grid System (Using Bootstrap)
 In Bootstrap grid system use 12-column system by default.
@@ -1189,7 +1189,7 @@ Example:
 ```
 let name = "John Doe";
 ```
-> note let is used now instead of var below is the explaination why
+> **Note:** The `let` keyword is preferred over `var`. The following example explains why.
 ```js
 // The let keyword is used to declare a variable, and the variable it declares is only accessible within the block it's declared in.
 let name = "John Doe";
