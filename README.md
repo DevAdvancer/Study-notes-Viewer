@@ -111,4 +111,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact 📧
 
-Email: [mailto:theabhirupkumar@gmail.com](theabhriupkuamr@gmail.com)
+Email: [theabhirupkumar@gmail.com](mailto:theabhirupkumar@gmail.com)
