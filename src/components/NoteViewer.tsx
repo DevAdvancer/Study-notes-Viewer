@@ -204,8 +204,15 @@ const NoteViewer = memo(({ note, onClose }: NoteViewerProps) => {
                       <button
                         className="absolute top-2 right-2 p-1 bg-[#4F7C82]/80 hover:bg-[#4F7C82] rounded-md text-gray-300 hover:text-white transition-colors"
                         onClick={() => {
+                          let text = '';
                           if (typeof children === 'string') {
-                            navigator.clipboard.writeText(children);
+                            text = children;
+                          } else if (Array.isArray(children)) {
+                            text = children.join('');
+                          }
+
+                          if (text) {
+                            navigator.clipboard.writeText(text);
                           }
                         }}
                       >
