@@ -283,7 +283,7 @@ export default function App() {
 
                             {/* Preview of note content */}
                             <div className="text-xs sm:text-sm line-clamp-2 mt-1 sm:mt-2 text-gray-300">
-                              {note.content.substring(0, 120).replace(/[#*_\[\]\(\)]/g, '') + '...'}
+                              {note.content.substring(0, 120).replace(/[\\[\\]#*_()]/g, '') + '...'}
                             </div>
 
                             {/* Read More Button */}
