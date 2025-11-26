@@ -7,6 +7,7 @@ import unstructuredDatabase from './markdown/unstructured-database.md?raw'
 import operatingSystemLab from './markdown/operating-system-lab.md?raw'
 import iot from './markdown/iot.md?raw'
 import unstructuredDatabaseLab from './markdown/unstructured-database-lab.md?raw'
+import cloudcomputing from './markdown/cloudcomputing.md?raw'
 
 export const notes: Note[] = [
   {
@@ -64,5 +65,12 @@ export const notes: Note[] = [
     subjectCode: 'CSE12203',
     content: unstructuredDatabaseLab,
     progress: 'completed'
+  },
+  {
+    id: '9',
+    subject: 'Introduction to Cloud Computing',
+    subjectCode: 'CSE11036',
+    content: cloudcomputing,
+    progress: 'in-progress'
   }
 ];
